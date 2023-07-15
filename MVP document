@@ -1,0 +1,44 @@
+MVP
+Videojuego Reboot
+
+Equipo:
+•	Óscar
+•	Jorge
+
+Nombre del juego: "XXXXXX"
+
+Tipo de juego:
+
+La idea de nuestro juego sería imitar al famoso videojuego de "Pokemon". En nuestra versión, el personaje principal se moverá vertical y horizontalmente por un mundo en el que hay diferentes zonas a las que puede acceder: ciudad, bosque, lago, montaña...
+
+ 
+
+En cada una de estas zonas, nuestro personaje podrá cruzarse de manera aleatoria con un tipo de animal. Cuando ambos se encuentren, se cambiará la pantalla del juego a algo similar a la siguiente imagen:  
+
+En esta pantalla se verá a nuestro personaje de espaldas y al animal que nos hayamos encontrado de frente. Junto al animal, aparecerá un cuadro de texto con su "nombre" y su "salud" (en porcentaje o barra). Debajo, aparecerá un mensaje que indicará que "nos hemos encontrado con X animal".
+
+Seguidamente, aparecerá un menú que nos permitirá elegir entre dos opciones: "luchar" o "huir". Si elegimos la opción de "huir", volveremos a la pantalla del mapa y podremos seguir moviéndonos libremente por el mapa.
+
+Si elegimos la opción de "luchar", aparecerá un pequeño menú en el que podremos elegir al animal que queramos de nuestra colección, iniciándose entonces una lucha entre nuestro animal y el que nos hemos encontrado. Durante la lucha, cada animal tendrá al lado un cuadro de texto con su "nombre" y su barra o porcentaje de "salud", que irá reduciéndose con cada ataque que reciba.
+
+ 
+
+El objetivo del juego es debilitar lo suficiente al animal como para poder capturarlo e incluirlo en nuestra colección.
+
+Tareas:
+•	USBAT moverse por el mapa libremente en cualquier dirección.
+•	USBAT cruzarse con los animales en sus respectivas zonas de manera aleatoria. Es decir, ambas posiciones, la del jugador y la del animal, deben coincidir.
+•	USBAT cambiar la pantalla de "mapa" a la pantalla de "pelea" cuando coincida con el animal.
+•	USBAT ver la pantalla de pelea con un mensaje que indique que nuestro personaje "ha encontrado X animal".
+•	USBAT ver después de unos segundos, un cuadro de texto con un menú de dos opciones: "Luchar" y "Huir".
+•	USBAT elegir entre una de las dos opciones "Pelear" o "Huir".
+•	USBAT en caso de elegir la opción "Pelear", ver una lista con los diferentes animales que tiene en su colección
+•	USBAT elegir uno de los animales de su colección para iniciar la pelea.
+•	USBAT iniciar la pelea entre nuestro animal elegido y el animal que nos hemos encontrado.
+•	USBAT lanzar y recibir ataques.
+•	USBAT causar daño en el animal al atacarle.
+•	USBAT perder salud si recibe un ataque.
+•	USBAT capturar al animal cuando su salud sea inferior de un porcentaje concreto.
+•	USBAT incluir al animal capturado en su colección.  
+•	USBAT volver a la pantalla del "mapa" una vez haya terminado la pelea.
+•	USBAT seguir moviéndose por el mapa libremente hasta que se encuentre con otro animal.
