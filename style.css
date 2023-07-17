@@ -1,0 +1,147 @@
+#combat-board {
+
+    margin: 0 auto;
+    width: 900px;
+    height: 800px;
+    position: relative;
+    background-color: aqua;
+    border: 2px solid black;
+
+}
+
+#message-box {
+
+    margin: 0 auto;
+    width: 900px;
+    height: 300px;
+    position: absolute;
+    bottom: 0;
+    background-color: blue;
+    border: 2px solid brown;
+    color: white;
+}
+
+
+#img-enemigo {
+
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    background-color: red ;
+}
+
+#img-player {
+
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    left: 40px;
+    background-color: red ;
+    bottom: 320px;
+
+}
+
+
+#player-status {
+
+    padding: 5px;
+    height: 100px;
+    width: 350px;
+    background-color: aqua;
+    border: 1px solid pink;
+    position: absolute;
+    background-color: beige;
+    bottom: 320px;
+    right: 20px;
+
+}
+
+#player-status>* {
+
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+
+}
+
+#enemy-status {
+
+    padding: 5px;
+    height: 80px;
+    width: 350px;
+
+    background-color: aqua;
+    border: 1px solid pink;
+    position: absolute;
+    background-color: beige;
+    top: 20px;
+    left: 20px;
+
+}
+
+#enemy-status>* {
+
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+}
+
+.nombre {
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+
+}
+
+.nivel {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+
+}
+
+
+#vida-enemy {
+
+    height: 20px;
+    width: 200px;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+}
+
+#vida-player {
+
+    height: 20px;
+    width: 200px;
+    position: absolute;
+    bottom: 40px;
+    right: 5px;
+}
+
+#vida-numero {
+
+    height: 20px;
+    width: 200px;
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+}
+
+#fight-menu {
+
+
+    background-color: pink;
+    border: 1px solid black;
+    position: absolute;
+    width: 450px;
+    height: 300px;
+    right: 0;
+    bottom: 0;
+    color: black;
+
+}
