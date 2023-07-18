@@ -1,147 +1,175 @@
+
+body{
+    
+}
+
 #combat-board {
-
-    margin: 0 auto;
-    width: 900px;
-    height: 800px;
-    position: relative;
-    background-color: aqua;
     border: 2px solid black;
-
+    margin: 0 auto;
+    position: relative;
+    height: 800px;
+    width: 900px;
+   
+    background-color: aqua;
+    /*background-image: url(./IMG/Fondo.jpeg);
+    background-size: contain;*/
 }
 
 #message-box {
-
+    border: 2px solid brown;
     margin: 0 auto;
-    width: 900px;
-    height: 300px;
     position: absolute;
     bottom: 0;
-    background-color: blue;
-    border: 2px solid brown;
-    color: white;
+    height: 300px;
+    width: 900px;
+
+    background-color: pink;
+    color: black;
 }
 
 
 #img-enemigo {
-
-    height: 200px;
-    width: 200px;
     position: absolute;
-    right: 40px;
-    top: 40px;
-    background-color: red ;
+    right: 100px;
+    top: 100px;
+    height: 200px;
+    width: 200px;    
+    
+    background-color: red;
+    /*background-image: url(./IMG/Bulbasur.png);
+    background-size: contain;
+    background-repeat: no-repeat;*/
 }
 
 #img-player {
-
+    position: absolute;
+    left: 120px;
+    bottom: 350px;
     height: 200px;
     width: 200px;
-    position: absolute;
-    left: 40px;
-    background-color: red ;
-    bottom: 320px;
-
+    
+    background-color: blue;
+    /*background-image: url(./IMG/Charmander-Pokemon-Transparent-Background.png);
+    background-size: contain;
+    background-repeat: no-repeat;*/
 }
 
 
 #player-status {
-
+    position: absolute;
+    bottom: 320px;
+    right: 20px;
     padding: 5px;
     height: 100px;
     width: 350px;
-    background-color: aqua;
-    border: 1px solid pink;
-    position: absolute;
-    background-color: beige;
-    bottom: 320px;
-    right: 20px;
 
+    background-color: beige;
 }
 
 #player-status>* {
-
     border: 1px solid black;
-    width: fit-content;
     height: fit-content;
-
+    width: fit-content;
 }
 
 #enemy-status {
-
+    position: absolute;
+    top: 20px;
+    left: 20px;
     padding: 5px;
     height: 80px;
     width: 350px;
-
-    background-color: aqua;
-    border: 1px solid pink;
-    position: absolute;
+   
     background-color: beige;
-    top: 20px;
-    left: 20px;
-
 }
 
 #enemy-status>* {
-
     border: 1px solid black;
-    width: fit-content;
     height: fit-content;
+    width: fit-content;
 }
 
 .nombre {
-    height: 30px;
     position: absolute;
     top: 10px;
     left: 5px;
-
+    height: 30px;
 }
 
 .nivel {
-    height: 20px;
     position: absolute;
     top: 10px;
     right: 5px;
-
+    height: 20px;
 }
 
 
 #vida-enemy {
-
-    height: 20px;
-    width: 200px;
     position: absolute;
     bottom: 10px;
     right: 5px;
+    height: 20px;
+    width: 200px;
 }
 
 #vida-player {
-
-    height: 20px;
-    width: 200px;
     position: absolute;
     bottom: 40px;
     right: 5px;
+    height: 20px;
+    width: 200px;
 }
 
 #vida-numero {
-
-    height: 20px;
-    width: 200px;
     position: absolute;
     bottom: 15px;
     right: 5px;
+    height: 20px;
+    width: 200px;
 }
 
 #fight-menu {
-
-
-    background-color: pink;
-    border: 1px solid black;
     position: absolute;
-    width: 450px;
-    height: 300px;
-    right: 0;
     bottom: 0;
+    right: 0;
+    height: 300px;
+    width: 450px;
+   
+    background-color: beige;
     color: black;
+}
 
+#option-menu {
+    border: 1px solid red;
+    margin: 0 auto;
+    padding: 10px;
+    height:max-content
+}
+
+#buttons1 {
+    border: 1px solid black;
+    display: flex;
+    height: 100px;
+    width: auto;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+#buttons1 > *{
+    display: inline;
+    flex:1;
+}
+
+#buttons2 {
+    border: 1px solid black;
+    display: flex;
+    height: 100px;
+    width: auto;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+#buttons2 > *{
+    display: inline;
+    flex: 2;
 }
