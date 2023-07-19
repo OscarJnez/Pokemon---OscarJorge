@@ -34,7 +34,7 @@ body{
 }
 
 
-#img-enemigo {
+#img-enemy {
     position: absolute;
     right: 100px;
     top: 100px;
@@ -148,7 +148,7 @@ body{
     width: 200px;
 }
 
-#vida-numero {
+#pp-player {
     position: absolute;
     bottom: 15px;
     right: 10px;
