@@ -13,7 +13,7 @@ body{
     height: 800px;
     width: 900px;
     /* background-color: aqua; */
-    background-image: url(./IMG/Fondo.jpeg);
+    background-image: url(./IMG/OTROS/Fondo.jpeg);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -40,7 +40,7 @@ body{
     top: 100px;
     height: 200px;
     width: 200px;    
-    background-image: url(./IMG/Bulbasur.png);
+    background-image: url(./IMG/ENEMY/PikachuTransparent.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -55,14 +55,13 @@ body{
     background-repeat: no-repeat;
 }
 
-
 #img-player {
     position: absolute;
     left: 120px;
     bottom: 350px;
     height: 200px;
     width: 200px;
-    background-image: url(./IMG/Charmander-Pokemon-Transparent-Background.png);
+    background-image: url(./IMG/PLAYER/Charmander-Pokemon-Transparent-Background.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
