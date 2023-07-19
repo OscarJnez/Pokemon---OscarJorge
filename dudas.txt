@@ -1,2 +1,1 @@
 1. Interfaz grafica de git en VS. (git Graph)
-2. Cómo cambiar la fuente del Body con CSS (Fuente gameboy)

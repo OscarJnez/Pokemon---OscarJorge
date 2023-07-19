@@ -19,7 +19,7 @@ body{
 }
 
 #message-box {
-    border: 2px solid brown;
+
     margin: 0 auto;
     position: absolute;
     bottom: 0;
@@ -115,6 +115,7 @@ body{
     border: 1px solid black;
     height: fit-content;
     width: fit-content;
+    /* text-align: center; */
 }
 
 #nombre-player, #nombre-enemy {
@@ -161,42 +162,40 @@ body{
     right: 0;
     height: 300px;
     width: 450px;
-   
     background-color: beige;
     color: black;
-}
-
-#option-menu {
-    border: 1px solid red;
-    margin: 0 auto;
-    padding: 10px;
-    height:max-content
+    
+    
 }
 
 #buttons1 {
-    border: 1px solid black;
+
     display: flex;
-    height: 100px;
+    height: 150px;
     width: auto;
-    margin-bottom: 5px;
-    margin-right: 5px;
+    margin: 0 auto;
+
 }
 
 #buttons1 > *{
     display: inline;
     flex:1;
+    font-size: x-large;
+
 }
 
 #buttons2 {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
-    height: 100px;
+    height: 150px;
     width: auto;
-    margin-bottom: 5px;
-    margin-right: 5px;
+    margin: 0 auto;
+    /* margin-bottom: 5px;
+    margin-right: 5px; */
 }
 
 #buttons2 > *{
     display: inline;
     flex: 2;
+    font-size: x-large;
 }

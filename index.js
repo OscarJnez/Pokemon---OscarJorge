@@ -3,51 +3,109 @@ function Pokemon(name, type, level) {
     this.name = name
     this.type = type
     this.level = level
-    this.health = 100 //Añadir un número
-    this.strength = 20  //Añadir número
+    this.health = 10 * this.level
+    this.strength = 5 * this.level
+    this.pp = 2 * this.level
 
+    this.basicAttack = [{
+        attackName: "Placaje",       // Todos los pokemon tienen en común el ataque genérico Placaje
+        type: "General",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+    }];
+
+    this.typeAttacks = [];
+
+    //DEFINIMOS LOS ATAQUES DE NUESTROS POKEMON EN ARRAY DE OBJETOS
+
+    let FireAttacks = [{
+        attackName: "Bola de Fuego",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    },
+
+    {
+        attackName: "LLamarada",
+        type: "",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    },
+
+    {
+        attackName: "Volcan",
+        type: "",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    }];
+
+    let LeafAttacks = [{
+        attackName: "Rayo",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    },
+
+    {
+        attackName: "Lluvia de hojas",
+        type: "",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    },
+
+    {
+        attackName: "Lokura",
+        type: "",
+        bonusDamage: this.strength,
+        ppMinus: this.pp - 2
+
+    }];
+
+    //DEFINIMOS LOS ATAQUES DE NUESTROS POKEMON EN ARRAY DE OBJETOS
+
+
+    this.addAttacks = function () {
+
+        if (this.type = "Fire") {
+
+            this.typeAttacks.push(FireAttacks)
+        }
+        else if (this.type = "Leaf") {
+
+            this.typeAttacks.push(LeafAttacks)
+        }
+    }
+
+    
     this.attack1 = function (Pokemon) {
         Pokemon.health -= this.strength
     }
+    this.attackBonus = function (Pokemon) {
+        Pokemon.health -= this.strength * 2
+    }
+    // this.receiveDamage = function (Pokemon) {
+    //     console.log(this.name + " ha recibido un ataque de " + Pokemon.name)
+    // }
 
-    this.attackBonus = function (Pokemon){
-        Pokemon.health -= this.strength*2
-    }
-
-    /*this.attack2= function(Pokemon){
-        console.log(this.name + " ataca a " + Pokemon.name)
-        Pokemon.health -= this.strength
-    }
-    this.attack3 = function(Pokemon){
-        console.log(this.name + " ataca a " + Pokemon.name)
-        Pokemon.health -= this.strength
-    }
-    this.attack4 = function(Pokemon){
-        console.log(this.name + " ataca a " + Pokemon.name)
-        Pokemon.health -= this.strength
-    }
-*/
-    this.receiveDamage = function (Pokemon) {
-        console.log(this.name + " ha recibido un ataque de " + Pokemon.name)
-
-    }
 
 }
 
-let ataquesPlayer = {
-    nombreAtaque: "Llamarada!!!",
-    dañoBonus: 15,
-    tipo: "Fuego"
-}
 
-let ataquesEnemy = {
-    nombreAtaque: "Hoja Afilada!!!",
-    dañoBonus: 12,
-    tipo: "Hoja"
-}
 
-let player = new Pokemon("Charmander", "Fuego", 10)
-let enemy = new Pokemon("Bulbasur", "Hoja", 20)
+let player = new Pokemon("Charmander", "Fire", 10)
+let enemy = new Pokemon("Bulbasur", "Leaf", 20)
+
+player.addAttacks();
+enemy.addAttacks();
+
+console.log(player)
+console.log(enemy)
+
+
+//DOM ACCESING ELEMENTS. 
 
 let messageBox = document.getElementById("attack-message")
 
@@ -66,6 +124,8 @@ let enemyHealth = document.getElementById("vida-enemy")
 
 let enemyDiv = document.getElementById("img-enemigo")
 let enemyBackground = document.getElementById("img-enemy-background")
+
+//DOM ACCESING ELEMENTS. 
 
 
 playerName.innerText = player.name
@@ -102,45 +162,43 @@ attackButton1.addEventListener("click", function () {
                 playerHealth.innerText = player.health
                 messageBox.innerText = enemy.name + " ataca a " + player.name + "\n y le causa " + enemy.strength + " puntos de daño!!!"
                 enemyBackground.style.backgroundImage = ""
-                playerBackground.style.backgroundImage = "url(./IMG/Rayo.gif)"
+                playerBackground.style.backgroundImage = "url(./IMG/RayoBien.gif)"
                 attackAvailable = true;
             }
-        }, 5000)
-    } 
+        }, 3000)
+    }
 })
 
 //Ataque Bonus:
 let attackButton2 = document.getElementById("attackButton2")
 
-attackButton2.addEventListener("click", function(){
-    attackButton2.addEventListener("click", function () {
-        if (enemy.health > 0 && attackAvailable === true) {
-            player.attackBonus(enemy)
-            attackAvailable = false
-            messageBox.innerText = player.name + " ataca a " + enemy.name + "\n y le causa " + player.strength*2 + " puntos de daño!!!"
-            enemyHealth.innerText = enemy.health
-            enemyBackground.style.backgroundImage = "url(./IMG/Fuego.gif)"
-            playerBackground.style.backgroundImage = ""
-    
-            timerEnemyAttack = setTimeout(function () {
-                if (enemy.health <= 0) {
-                    clearTimeout(timerEnemyAttack)
-                    messageBox.innerText = player.name + " ha matado a " + enemy.name + "!!!"
-                } else {
-                    enemy.attackBonus(player)
-                    playerHealth.innerText = player.health
-                    messageBox.innerText = enemy.name + " ataca a " + player.name + "\n y le causa " + enemy.strength*2 + " puntos de daño!!!"
-                    enemyBackground.style.backgroundImage = ""
-                    playerBackground.style.backgroundImage = "url(./IMG/Rayo.gif)"
-                    attackAvailable = true;
-                }
-            }, 1000)
-    
-        } 
-            
-    })
+attackButton2.addEventListener("click", function () {
+    if (enemy.health > 0 && attackAvailable === true) {
+        player.attackBonus(enemy)
+        attackAvailable = false
+        messageBox.innerText = player.name + " ataca a " + enemy.name + "\n y le causa " + player.strength * 2 + " puntos de daño!!!"
+        enemyHealth.innerText = enemy.health
+        enemyBackground.style.backgroundImage = "url(./IMG/Fuego2.gif)"
+        playerBackground.style.backgroundImage = ""
+
+        timerEnemyAttack = setTimeout(function () {
+            if (enemy.health <= 0) {
+                clearTimeout(timerEnemyAttack)
+                messageBox.innerText = player.name + " ha matado a " + enemy.name + "!!!"
+            } else {
+                enemy.attackBonus(player)
+                playerHealth.innerText = player.health
+                messageBox.innerText = enemy.name + " ataca a " + player.name + "\n y le causa " + enemy.strength * 2 + " puntos de daño!!!"
+                enemyBackground.style.backgroundImage = ""
+                playerBackground.style.backgroundImage = "url(./IMG/Hojas1.gif)"
+                attackAvailable = true;
+            }
+        }, 3000)
+
+    }
 
 })
+
 /*
 let attackButton3 = document.getElementById("attackButton3")
 attackButton3.addEventListener("click", function(){
