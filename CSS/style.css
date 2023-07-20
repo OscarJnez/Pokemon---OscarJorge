@@ -5,7 +5,6 @@ body{
     font-size: 18px;
 }
 
-
 #combat-board {
     border: 2px solid black;
     margin: 0 auto;
@@ -197,4 +196,21 @@ body{
     display: inline;
     flex: 2;
     font-size: x-large;
+}
+
+#map-screen {
+    border: 2px solid black;
+    margin: 0 auto;
+    position: relative;
+    height: 500px;
+    width: 500px;
+    background-image: url("../IMG/MAP/fondoBase2.jpg");
+    background-size: 50px;
+    background-repeat: repeat;
+}
+
+.map-element {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

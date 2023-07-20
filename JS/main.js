@@ -1,5 +1,88 @@
 import { Pokemon } from "./pokemonConstructor.js"
 import { randomNum } from "./pokemonConstructor.js"
+import { MapElement } from "./mapConstructor.js"
+
+let mapElementPARENT = document.getElementById("main")
+let mapScreen
+
+function enableMap (){
+    mapScreen = document.createElement("div")
+    mapScreen.setAttribute("id", "map-screen")
+    mapScreen.innerHTML = 
+    `
+
+    `
+    mapElementPARENT.appendChild(mapScreen)
+
+}
+
+function enableFightScreen(){
+    let fightScreen = document.createElement("div")
+    fightScreen.setAttribute("id", "combat-board")
+    fightScreen.innerHTML = 
+    `
+        <div id="enemy-status">
+            <div id="nombre-enemy">Nombre Pokemon</div>
+            <div id="nivel-enemy">Nivel</div>
+            <div id="vida-enemy">VidaBarra</div>
+        </div>
+
+        <div id="img-enemy"> </div>
+        <div id="img-enemy-background"></div>
+
+        <div id="player-status">
+            <div id="nombre-player">Nombre Pokemon</div>
+            <div id="nivel-player">Nivel</div>
+            <div id="vida-player">VidaBarra</div>
+            <div id="pp-player">ppPlayer</div>
+        </div>
+
+        <div id="img-player"> </div>
+        <div id="img-player-background"></div>
+
+        <div id="message-box"> ( Message Box )
+            <h3 id="attack-message">What will your Pokemon do?</h3>
+            <div id="fight-menu">
+                <div id="buttons1">
+                    <button id="attackButton1"> </button>
+                    <button id="attackButton2"> </button>
+                </div>
+                <div id="buttons2">
+                    <button id="attackButton3"> </button>
+                    <button id="attackButton4"> </button>
+                </div>
+            </div>
+        </div>
+    `
+    mapElementPARENT.appendChild(fightScreen)
+}
+
+enableFightScreen()
+
+
+// enableMap()
+// let obstacles = []
+// let arbol1 = new MapElement("Tree")
+// arbol1.insertMapElement(0, 0, mapScreen)
+// let arbol2 = new MapElement("Tree")
+// arbol2.insertMapElement(0, 30, mapScreen)
+// let arbol3 = new MapElement("Tree")
+// arbol3.insertMapElement(0, 60, mapScreen)
+// let arbol4 = new MapElement("Tree")
+// arbol4.insertMapElement(0, 90, mapScreen)
+// let arbol5 = new MapElement("Tree")
+// arbol5.insertMapElement(0, 120, mapScreen)
+// let arbol6 = new MapElement("Tree")
+// arbol6.insertMapElement(0, 150, mapScreen)
+// let arbol7 = new MapElement("Tree")
+// arbol7.insertMapElement(0, 180, mapScreen)
+// let arbol8 = new MapElement("Tree")
+// arbol8.insertMapElement(0, 210, mapScreen)
+
+/*
+obstacles.push(arbol1,arbol2,arbol3,arbol4)
+if(obstacles[i].y && obstacles[i].x)
+*/
 
 
 //DOM ACCESING ELEMENTS. 
