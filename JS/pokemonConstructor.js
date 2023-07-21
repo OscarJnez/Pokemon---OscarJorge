@@ -128,5 +128,8 @@ function Pokemon(name, type, level) {
 }
 //-----SE CIERRA EL CONSTRUCTOR. 
 
+
+
+
 export {Pokemon};
 export {randomNum};

@@ -80,16 +80,12 @@ let playerTimerX
 //Necesario crear este boolean para evitar el delay de las teclas cuando se dejan pulsadas:
 let keyIsPressed = false
 
-let newPlayer = new Player("Karensio", "Fofón", 25, 25)
 
-function start() {
-    newPlayer.insertPlayer(225, 225, main)
-}
 
-start()
+
 
 //Movimiento del personaje:
-window.addEventListener("keydown", function (event) {
+let botonEjemplo = window.addEventListener("keydown", function (event) {
     console.log(event.key)
     switch (event.key) {
         case "ArrowLeft":
@@ -155,3 +151,6 @@ window.addEventListener("keyup", function (event) {
             break
     }
 })
+
+export {botonEjemplo} 
+export {Player}
