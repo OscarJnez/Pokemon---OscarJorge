@@ -1,17 +1,15 @@
 import { Pokemon } from "./pokemonConstructor.js"
 import { randomNum } from "./pokemonConstructor.js"
 import { MapElement } from "./mapConstructor.js"
-import { Player } from "./playerMovement.js"
-
+import { Player } from "./playerConstructor.js"
 
 
 //DOM ACCESING ELEMENTS. --- FOR THE MAP 
-
 let mapElementPARENT = document.getElementById("main")
 let mapScreen;
-
 //<<DOM ACCESING ELEMENTS. --- FOR THE MAP 
 
+//FUNCIÓN PARA INICIAR "MAPA":
 function enableMap() {
     mapScreen = document.createElement("div")
     mapScreen.setAttribute("id", "map-screen")
@@ -20,9 +18,9 @@ function enableMap() {
 
     `
     mapElementPARENT.appendChild(mapScreen)
-
 }
 
+//FUNCIÓN PARA INICIAR "BATALLA":
 function enableFightScreen() {
     let fightScreen = document.createElement("div")
     fightScreen.setAttribute("id", "combat-board")
@@ -61,10 +59,11 @@ function enableFightScreen() {
             </div>
         </div>
     `
-
+    //Añadimos el div que contiene el HTML con la pantalla "fightScreen":
     mapElementPARENT.appendChild(fightScreen)
 
-    //DOM ACCESING ELEMENTS. --- FOR THE FIGHT 
+
+    //DOM ACCESING ELEMENTS. --- FOR THE FIGHT:
 
     let messageBox = document.getElementById("attack-message");
     let playerName = document.getElementById("nombre-player")
@@ -82,7 +81,7 @@ function enableFightScreen() {
     let enemyDiv = document.getElementById("img-enemy")
     let enemyBackground = document.getElementById("img-enemy-background")
 
-
+    //Botones de "ataques":
     let attackButton1 = document.getElementById("attackButton1")
     let attackButton2 = document.getElementById("attackButton2")
     let attackButton3 = document.getElementById("attackButton3")
@@ -90,7 +89,7 @@ function enableFightScreen() {
 
     //<<DOM ACCESING ELEMENTS. --- FOR THE FIGHT 
 
-
+    //Creamos el menú con las opciones "Fight" y "Run":
     let fightRunMenu = document.createElement("div")
     fightRunMenu.setAttribute("id", "fight-run-menu")
     fightRunMenu.innerHTML =
@@ -99,7 +98,7 @@ function enableFightScreen() {
     <button id= "run-button"> RUN </button>
     `
 
-    //Opciones al final de la batalla:
+    //Creamos el menú de opciones tras "GameOver":
     let gameOverDiv = document.createElement("div")
     gameOverDiv.setAttribute("id", "game-over-div")
     gameOverDiv.innerHTML =
@@ -108,27 +107,34 @@ function enableFightScreen() {
     <button> RESTART GAME </button>
     `
 
+    //Primer mensaje que se ve en el "MessageBox" al iniciar la partida:
     function battleStart() {
         messageBox.innerText = "Has encontrado un \n" + enemy.name + "... ¿Qué vas a hacer?"
+        //Se inserta en "MessageBox" el div con el menú "FightRun"
         messageBox.appendChild(fightRunMenu)
     }
 
+    //Ejecutamos función para insertar el menú "FightRun":
     battleStart()
 
+    //Booleano que inhabilita por defecto los botones de ataque hasta que seleccionemos "Fight":
+    let enableButtons = false;
+
+    //Le damos funcionalidad al botón "Fight":
     let fightButton = document.getElementById("fight-button")
     fightButton.addEventListener("click", function () {
-        // Cambiamos el texto de los botones por los ataques del player. 
+        // Cambiamos el texto de los botones de ataque por los ataques del player. 
         attackButton1.innerText = player.attackList[0].attackName;
         attackButton2.innerText = player.attackList[1].attackName;
         attackButton3.innerText = player.attackList[2].attackName;
         attackButton4.innerText = player.attackList[3].attackName;
-        enableButtons = true;
+        enableButtons = true; //y habilitamos los botones de "ataque"
     })
 
-    let enableButtons = false;
 
+    //Función que chequea el estado de la batalla para lanzar condición de "GameOver" o de "WIN":
     function checkBattle() {
-        if (player.health <= 0) {
+        if (player.health <= 0) { //GAME OVER
             messageBox.innerText = "Oh no! " + player.name + " \n.......ha muerto."
             attackAvailable = false;
             clearTimeout(timerEnemyAttack);
@@ -137,7 +143,7 @@ function enableFightScreen() {
                 messageBox.appendChild(gameOverDiv)
             }, 6000)
         }
-        else if (enemy.health <= 0) {
+        else if (enemy.health <= 0) { //WIN
             messageBox.innerText = "Hemos conseguido derrotar a \n" + enemy.name + ". El combate ha terminado. "
             attackAvailable = false;
             clearTimeout(timerEnemyAttack);
@@ -148,21 +154,25 @@ function enableFightScreen() {
 
     }
 
+    //Asignamos las propiedades de "player" y "enemy" a los innerText de cada jugador:
+    //Player:
     playerName.innerText = player.name
     playerLevel.innerText = "Lv." + player.level
     playerHealth.innerText = player.health
     playerPP.innerText = "PP: " + player.pp
-
+    //Enemy:
     enemyName.innerText = enemy.name
     enemyLevel.innerText = "Lv." + enemy.level
     enemyHealth.innerText = enemy.health
 
+    //Boolean que habilita realizar cada uno de los ataques durante la partida:
     let attackAvailable = true
+
+    //ID del timer que ejecuta el ataque del enemigo:
     let timerEnemyAttack;
 
     //Ataque 1: 
     attackButton1.addEventListener("click", function () {
-
         if (enableButtons === true) {
             if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[0].ppMinus) {
                 player.attack(enemy, 0)
@@ -178,6 +188,7 @@ function enableFightScreen() {
                 playerPP.innerText = "PP: " + player.pp
                 messageBox.innerText = player.name + " lanza ataque \n" + "'" + player.attackList[0].attackName + "'" + " a " + enemy.name + "\n y le causa " + "'" + player.attackList[0].bonusDamage + "'" + " puntos de daño!!!"
                 checkBattle()
+                //Una vez atacamos, inhabilitamos los botones de ataque:
                 attackAvailable = false
             }
             else if (attackAvailable === true && player.pp < 3) {
@@ -199,6 +210,7 @@ function enableFightScreen() {
                     enemyBackground.style.backgroundImage = ""
                     playerBackground.style.backgroundImage = enemy.attackList[randomNum].attackImage;
                     checkBattle()
+                    //Una vez nos atacan, se vuelven a habilitar los botones de ataque:
                     attackAvailable = true;
                 }
             }, 2000)
@@ -209,7 +221,12 @@ function enableFightScreen() {
         if (enableButtons === true) {
             if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[1].ppMinus) {
                 player.attack(enemy, 1)
-                enemy.checkEnemyHealth()
+                if (enemy.health > 0) {
+                    enemyHealth.innerText = enemy.health
+                }
+                else {
+                    enemyHealth.innerText = 0
+                }
                 enemyBackground.style.backgroundImage = player.attackList[1].attackImage;
                 playerBackground.style.backgroundImage = ""
                 playerPP.innerText = "PP: " + player.pp
@@ -225,7 +242,11 @@ function enableFightScreen() {
             timerEnemyAttack = setTimeout(function () {
                 if (enemy.health > 0) {
                     enemy.attackRandom(player)
-                    player.checkPlayerHealth()
+                    if (player.health > 0) {
+                        playerHealth.innerText = player.health
+                    } else {
+                        playerHealth.innerText = 0
+                    }
                     messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
                     console.log(enemy.pp)
                     enemyBackground.style.backgroundImage = ""
@@ -241,7 +262,12 @@ function enableFightScreen() {
         if (enableButtons === true) {
             if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[2].ppMinus) {
                 player.attack(enemy, 2)
-                enemy.checkEnemyHealth()
+                if (enemy.health > 0) {
+                    enemyHealth.innerText = enemy.health
+                }
+                else {
+                    enemyHealth.innerText = 0
+                }
                 enemyBackground.style.backgroundImage = player.attackList[2].attackImage;
                 playerBackground.style.backgroundImage = ""
                 playerPP.innerText = "PP: " + player.pp
@@ -257,7 +283,11 @@ function enableFightScreen() {
             timerEnemyAttack = setTimeout(function () {
                 if (enemy.health > 0) {
                     enemy.attackRandom(player)
-                    player.checkPlayerHealth()
+                    if (player.health > 0) {
+                        playerHealth.innerText = player.health
+                    } else {
+                        playerHealth.innerText = 0
+                    }
                     messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
                     console.log(enemy.pp)
                     enemyBackground.style.backgroundImage = ""
@@ -273,7 +303,12 @@ function enableFightScreen() {
         if (enableButtons === true) {
             if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[3].ppMinus) {
                 player.attack(enemy, 3)
-                enemy.checkEnemyHealth()
+                if (enemy.health > 0) {
+                    enemyHealth.innerText = enemy.health
+                }
+                else {
+                    enemyHealth.innerText = 0
+                }
                 enemyBackground.style.backgroundImage = player.attackList[3].attackImage;
                 playerBackground.style.backgroundImage = ""
                 playerPP.innerText = "PP: " + player.pp
@@ -289,7 +324,11 @@ function enableFightScreen() {
             timerEnemyAttack = setTimeout(function () {
                 if (enemy.health > 0) {
                     enemy.attackRandom(player)
-                    player.checkPlayerHealth()
+                    if (player.health > 0) {
+                        playerHealth.innerText = player.health
+                    } else {
+                        playerHealth.innerText = 0
+                    }
                     messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
                     console.log(enemy.pp)
                     enemyBackground.style.backgroundImage = ""
@@ -306,74 +345,113 @@ function enableFightScreen() {
 
 
 
+enableMap()
+
+let arbol1 = new MapElement("Tree")
+arbol1.insertMapElement(0, 0, mapScreen)
+let arbol2 = new MapElement("Tree")
+arbol2.insertMapElement(50, 0, mapScreen)
+let arbol3 = new MapElement("Tree")
+arbol3.insertMapElement(100, 0, mapScreen)
+let arbol4 = new MapElement("Tree")
+arbol4.insertMapElement(100, 50, mapScreen)
+let arbol5 = new MapElement("Tree")
+arbol5.insertMapElement(100, 100, mapScreen)
+
+let newPlayer = new Player("Player", arbol5)
+newPlayer.insertPlayer(250, 250, mapScreen)
+
+// let obstaclesArr = []
+// obstaclesArr.push(arbol1, arbol2, arbol3, arbol4, arbol5)
 
 
 
 
 
 
-//Opciones al inicio de la batalla:
+/////  INICIO DE LA BATALLA  
 
+// let player = new Pokemon("Cubone", "Fire", 30)
+// let enemy = new Pokemon("Pikachu", "Electric", 30)
 
+// player.addAttacks();
+// enemy.addAttacks();
 
-
-
-// enableMap()
-
-// let obstacles = []
-// let arbol1 = new MapElement("Tree")
-// arbol1.insertMapElement(0, 0, mapScreen)
-// let arbol2 = new MapElement("Tree")
-// arbol2.insertMapElement(0, 30, mapScreen)
-// let arbol3 = new MapElement("Tree")
-// arbol3.insertMapElement(0, 60, mapScreen)
-// let arbol4 = new MapElement("Tree")
-// arbol4.insertMapElement(0, 90, mapScreen)
-// let arbol5 = new MapElement("Tree")
-// arbol5.insertMapElement(0, 120, mapScreen)
-// let arbol6 = new MapElement("Tree")
-// arbol6.insertMapElement(0, 150, mapScreen)
-// let arbol7 = new MapElement("Tree")
-// arbol7.insertMapElement(0, 180, mapScreen)
-// let arbol8 = new MapElement("Tree")
-// arbol8.insertMapElement(0, 210, mapScreen)
-
-
-// let newPlayer = new Player("Karensio", "Fofón", 25, 25);
-// newPlayer.insertPlayer(100, 100, mapScreen);
-
-/*
-obstacles.push(arbol1,arbol2,arbol3,arbol4)
-if(obstacles[i].y && obstacles[i].x)
-*/
-
-//Ejecutamos la función "battleStart":
-
-
-//Añadimos los respectivos ataques a cada Pokemon:
-
-
-
-
-//Función para comprobar el estado de la batalla:
-
-
-//DOM ACCESING ACCESING TO THE SPECIFIC OBJECT. 
-
-
-
-
-/////
-
-let player = new Pokemon("Cubone", "Fire", 30)
-let enemy = new Pokemon("Pikachu", "Electric", 30)
-
-player.addAttacks();
-enemy.addAttacks();
-
-enableFightScreen()
+// enableFightScreen()
 
 //////
 
-console.log(player)
-console.log(enemy)
+let playerTimerY
+let playerTimerX
+
+//Necesario crear este boolean para evitar el delay de las teclas cuando se dejan pulsadas:
+let keyIsPressed = false
+
+//Movimiento del personaje:
+window.addEventListener("keydown", function (event) {
+    console.log(event.key)
+    switch (event.key) {
+        case "ArrowLeft":
+            if (!keyIsPressed) {
+                //if(newPlayerobstacles[1].x )
+                keyIsPressed = true
+                newPlayer.directionX = -1
+                newPlayer.sprite.style.backgroundColor = "green"
+                playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+            }
+            break
+        case "ArrowRight":
+            if (!keyIsPressed) {
+                keyIsPressed = true
+                newPlayer.directionX = 1
+                newPlayer.sprite.style.backgroundColor = "green"
+                playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+            }
+            break
+        case "ArrowUp":
+            if (!keyIsPressed) {
+                keyIsPressed = true
+                newPlayer.directionY = -1
+                newPlayer.sprite.style.backgroundColor = "green"
+                playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+            }
+            break
+        case "ArrowDown":
+            if (!keyIsPressed) {
+                keyIsPressed = true
+                newPlayer.directionY = 1
+                newPlayer.sprite.style.backgroundColor = "green"
+                playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+            }
+            break
+    }
+})
+
+window.addEventListener("keyup", function (event) {
+    switch (event.key) {
+        case "ArrowLeft":
+            clearInterval(playerTimerX)
+            newPlayer.directionX = 0
+            newPlayer.sprite.style.backgroundColor = "blue"
+            keyIsPressed = false
+            break
+        case "ArrowRight":
+            clearInterval(playerTimerX)
+            newPlayer.directionX = 0
+            newPlayer.sprite.style.backgroundColor = "blue"
+            keyIsPressed = false
+            break
+        case "ArrowUp":
+            clearInterval(playerTimerY)
+            newPlayer.directionY = 0
+            newPlayer.sprite.style.backgroundColor = "blue"
+            keyIsPressed = false;
+            break
+        case "ArrowDown":
+            clearInterval(playerTimerY)
+            newPlayer.directionY = 0
+            newPlayer.sprite.style.backgroundColor = "blue"
+            keyIsPressed = false
+            break
+    }
+})

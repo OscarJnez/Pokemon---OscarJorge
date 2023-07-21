@@ -94,13 +94,6 @@ function Pokemon(name, type, level) {
     this.attack = function (Pokemon, index) {
         Pokemon.health -= this.attackList[index].bonusDamage
         this.pp -= this.attackList[index].ppMinus
-        //Reformular este método para hacerlo más genérico y ahorrar código más abajo...
-        // enemyBackground.style.backgroundImage = player.attackList[0].attackImage;
-        // playerBackground.style.backgroundImage = ""
-        // enemyHealth.innerText = enemy.health
-        // playerPP.innerText = "PP: " + player.pp
-        // messageBox.innerText = this.name + " lanza ataque \n" + "'" + this.attackList[index].attackName + "'" + " a " + Pokemon.name + "\n y le causa " + "'" + this.attackList[index].bonusDamage + "'" + " puntos de daño!!!"
-        //
     }
 
     //ATAQUE ALEATORIO DEL ENEMIGO. 
