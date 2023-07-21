@@ -3,7 +3,6 @@ import { randomNum } from "./pokemonConstructor.js"
 import { MapElement } from "./mapConstructor.js"
 import { Player } from "./playerConstructor.js"
 
-
 //DOM ACCESING ELEMENTS. --- FOR THE MAP 
 let mapElementPARENT = document.getElementById("main")
 let mapScreen;
@@ -344,7 +343,6 @@ function enableFightScreen() {
 }
 
 
-
 enableMap()
 
 let arbol1 = new MapElement("Tree")
@@ -358,15 +356,12 @@ arbol4.insertMapElement(100, 50, mapScreen)
 let arbol5 = new MapElement("Tree")
 arbol5.insertMapElement(100, 100, mapScreen)
 
-let newPlayer = new Player("Player", arbol5)
-newPlayer.insertPlayer(250, 250, mapScreen)
-
 // let obstaclesArr = []
 // obstaclesArr.push(arbol1, arbol2, arbol3, arbol4, arbol5)
 
 
-
-
+let newPlayer = new Player("Player", arbol5)
+newPlayer.insertPlayer(250, 250, mapScreen)
 
 
 /////  INICIO DE LA BATALLA  
@@ -393,7 +388,6 @@ window.addEventListener("keydown", function (event) {
     switch (event.key) {
         case "ArrowLeft":
             if (!keyIsPressed) {
-                //if(newPlayerobstacles[1].x )
                 keyIsPressed = true
                 newPlayer.directionX = -1
                 newPlayer.sprite.style.backgroundColor = "green"

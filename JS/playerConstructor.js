@@ -1,5 +1,6 @@
 //Función constructora de "Player":
 function Player(name, obstacle) {
+    let movementAvailable = true
     let self = this
     this.name = name
     this.height = 30
@@ -12,7 +13,6 @@ function Player(name, obstacle) {
     this.sprite.style.height = this.height + "px"
     this.sprite.style.width = this.width + "px"
     this.sprite.style.backgroundColor = "blue"
-    let movementAvailable = true
 
     //Método para insertar al personaje en unas coordenadas concretas del tablero ("parent"):
     this.insertPlayer = function (x, y, parent) {
@@ -32,6 +32,7 @@ function Player(name, obstacle) {
             if (newX >= 0 && (newX + self.width) <= 500) {
                 self.x = newX
                 self.sprite.style.left = self.x + "px"
+
             }
         }
 
@@ -46,8 +47,8 @@ function Player(name, obstacle) {
                 self.sprite.style.top = self.y + "px"
             }
         }
-
     }
+
 
 
     this.checkCollision = function () {
@@ -59,6 +60,6 @@ function Player(name, obstacle) {
         }
     }
 
-}
 
+}
 export { Player }
