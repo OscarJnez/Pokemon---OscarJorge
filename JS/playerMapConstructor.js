@@ -1,5 +1,5 @@
 //Función constructora de "Player":
-function Player(name, obstacle) {
+function PlayerMap(name, obstacle) {
     let self = this;
     this.name = name;
     this.height = 30;
@@ -88,4 +88,4 @@ function Player(name, obstacle) {
     }
 }
 
-export { Player }
+export { PlayerMap }

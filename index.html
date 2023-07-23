@@ -11,11 +11,72 @@
 </head>
 
 <body>
-    <main id = "main">
-       
-
-
-    </main>
+        <main id="main">
+            <div id="start-game-screen">
+                <div id="game-title">
+    
+                </div>
+                <div id="main-menu">
+                    <button id="start-game-button"> START GAME </button>
+                </div>
+            </div>
+    
+            <div id="map-screen" class= "hidden">
+                <div id="main-path"></div>
+                 <div id="secondary-path1"></div>
+                <div id="secondary-path2"></div>
+                <button id="start-fight-screen-button"> START FIGHT </button>
+            </div>
+    
+            <div id="fight-screen" class="hidden">
+                <div id="combat-box">
+                    <div id="enemy-img"> </div>
+                    <div id="enemy-background-img"></div>
+    
+                    <div id="enemy-status">
+                        <div id="enemy-name">Enemy Name</div>
+                        <div id="enemy-level">Enemy Level</div>
+                        <div id="enemy-health"> <span id="enemy-health-text">Player Health</span></div>
+                        <div id="enemy-pp"> PP: <span id="enemy-pp-text">Player PP</span></div>
+                    </div>
+    
+                    <div id="player-img" class="hidden"> </div>
+                    <div id="player-background-img"></div>
+    
+                    <div id="player-status" class="hidden">
+                        <div id="player-name">Player Name</div>
+                        <div id="player-level">Player Level</div>
+                        <div id="player-health"> <span id="player-health-text">Player Health</span></div>
+                        <div id="player-pp"> PP: <span id="player-pp-text">Player PP</span></div>
+                    </div>
+    
+                </div>
+                <div id="message-box">
+                    <div id="new-message"> ( New Message Here )</div>
+                    <div id="fight-run-option-menu" class="hidden">
+                        <button id="fight-option-button">FIGHT</button>
+                        <button id="run-option-button">RUN</button>
+                    </div>
+                    <div id="game-over-option-menu" class="hidden">
+                        <button id="return-to-map-option-button">RETURN TO MAP</button>
+                        <button id="restart-game-option-button">RESTART GAME</button>
+                    </div>
+                </div>
+                <div id="buttons-div">
+                    <div id="attack-buttons" class="hidden">
+                        <div id="buttons1">
+                            <button id="attackButton1"> Ataque1 </button>
+                            <button id="attackButton2"> Ataque2</button>
+                        </div>
+                        <div id="buttons2">
+                            <button id="attackButton3">Ataque3 </button>
+                            <button id="attackButton4">Ataque4 </button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </main>
 </body>
 
 </html>

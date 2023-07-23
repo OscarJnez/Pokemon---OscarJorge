@@ -1,351 +1,225 @@
-import { Pokemon } from "./pokemonConstructor.js"
-import { randomNum } from "./pokemonConstructor.js"
+//Importamos las clases que hemos creado:
+import { Player } from "./playerFightConstructor.js"
+import { Enemy } from "./enemyConstructor.js"
 import { MapElement } from "./mapConstructor.js"
-import { Player } from "./playerConstructor.js"
+import { PlayerMap } from "./playerMapConstructor.js"
 
-//DOM ACCESING ELEMENTS. --- FOR THE MAP 
-let mapElementPARENT = document.getElementById("main")
-let mapScreen;
-//<<DOM ACCESING ELEMENTS. --- FOR THE MAP 
 
-//FUNCIÓN PARA INICIAR "MAPA":
-function enableMap() {
-    mapScreen = document.createElement("div")
-    mapScreen.setAttribute("id", "map-screen")
-    mapScreen.innerHTML =
-        `
-        <div id="main-path"></div>
-        <div id="secondary-path1"></div>
-        <div id="secondary-path2"></div>
-        
+//DOM Elementos (Screens):
+let startGameScreen = document.getElementById("start-game-screen")
+let mapScreen = document.getElementById("map-screen")
+let fightScreen = document.getElementById("fight-screen")
 
-    `
-    mapElementPARENT.appendChild(mapScreen)
+//START GAME BUTTON:
+let startGameButton = document.getElementById("start-game-button")
+
+////////BOTÓN DE PRUEBA PARA INICIALIZAR BATALLA!!!!: BOOOORRAAAAAAAR DESPUÉS
+let startFightScreenButton = document.getElementById("start-fight-screen-button")
+
+//Creación de 2 Pokemons: "enemy" y "player"
+let enemy = new Enemy("Bulbasaur", "Leaf", 20)
+let player = new Player("Charmander", "Fire", 20, enemy)
+
+
+//DOM Elementos ("FightScreen"):
+let newMessage = document.getElementById("new-message")
+
+//MENÚS EMERGENTES: 
+//"FIGHT - RUN": 
+let fightRunOptionMenu = document.getElementById("fight-run-option-menu")
+let fightOptionButton = document.getElementById("fight-option-button")
+let runOptionButton = document.getElementById("run-option-button")
+//"RETURN TO MAP - RESTART GAME":
+let gameOverOptionMenu = document.getElementById("game-over-option-menu")
+let returnToMapOptionButton = document.getElementById("return-to-map-option-button")
+let restartGameOptionButton = document.getElementById("restart-game-option-button")
+
+
+//Botones de ataque:
+let attackButtonsDiv = document.getElementById("attack-buttons")
+let attackButton1 = document.getElementById("attackButton1")
+let attackButton2 = document.getElementById("attackButton2")
+let attackButton3 = document.getElementById("attackButton3")
+let attackButton4 = document.getElementById("attackButton4")
+
+//Variable para controlar el ataque del enemigo:
+let timerEnemyAttack;
+
+//Asignación de valores a elementos del DOM:
+let enemyName = document.getElementById("enemy-name")
+enemyName.innerText = enemy.name
+let enemyLevel = document.getElementById("enemy-level")
+enemyLevel.innerText = "Lv. " + enemy.level
+let enemyHealth = document.getElementById("enemy-health-text")
+enemyHealth.innerText = enemy.health
+let enemyPP = document.getElementById("enemy-pp-text")
+enemyPP.innerText = enemy.pp
+
+let playerImg = document.getElementById("player-img")
+let playerBackgroundImg = document.getElementById("player-background-img")
+
+let playerStatus = document.getElementById("player-status")
+let playerName = document.getElementById("player-name")
+playerName.innerText = player.name
+let playerLevel = document.getElementById("player-level")
+playerLevel.innerText = "Lv." + player.level
+let playerHealth = document.getElementById("player-health-text")
+playerHealth.innerText = player.health
+let playerPP = document.getElementById("player-pp-text")
+playerPP.innerText = player.pp
+
+
+//FUNCIÓN PARA VOLVER AL MAPA SI "RUN":
+function returnToMap() {
+    fightScreen.setAttribute("class", "hidden")
+    mapScreen.removeAttribute("class")
 }
 
 //FUNCIÓN PARA INICIAR "BATALLA":
 function enableFightScreen() {
-    let fightScreen = document.createElement("div")
-    fightScreen.setAttribute("id", "combat-board")
-    fightScreen.innerHTML =
-        `
-        <div id="enemy-status">
-            <div id="nombre-enemy">Nombre Pokemon</div>
-            <div id="nivel-enemy">Nivel</div>
-            <div id="vida-enemy">VidaBarra</div>
-        </div>
 
-        <div id="img-enemy"> </div>
-        <div id="img-enemy-background"></div>
+    //Primero, elimnamos del DOM las pantallas "startGameScreen" y "mapScreen"
+    startGameScreen.setAttribute("class", "hidden")
+    mapScreen.setAttribute("class", "hidden")
 
-        <div id="player-status">
-            <div id="nombre-player">Nombre Pokemon</div>
-            <div id="nivel-player">Nivel</div>
-            <div id="vida-player">VidaBarra</div>
-            <div id="pp-player">ppPlayer</div>
-        </div>
+    //Primer mensaje que se ve en el div "newMessage"
+    newMessage.innerText = "Has encontrado un " + enemy.name + "... ¿Qué quieres hacer?"
 
-        <div id="img-player"> </div>
-        <div id="img-player-background"></div>
+    //Aparece el menú "FIGHT-RUN" después de 2 segundos:
+    setTimeout(function () {
+        fightRunOptionMenu.setAttribute("class", "emergent-menu")
+    }, 2000)
 
-        <div id="message-box"> ( Message Box )
-            <h3 id="attack-message">What will your Pokemon do?</h3>
-            <div id="fight-menu">
-                <div id="buttons1">
-                    <button id="attackButton1"> </button>
-                    <button id="attackButton2"> </button>
-                </div>
-                <div id="buttons2">
-                    <button id="attackButton3"> </button>
-                    <button id="attackButton4"> </button>
-                </div>
-            </div>
-        </div>
-    `
-    //Añadimos el div que contiene el HTML con la pantalla "fightScreen":
-    mapElementPARENT.appendChild(fightScreen)
-
-
-    //DOM ACCESING ELEMENTS. --- FOR THE FIGHT:
-
-    let messageBox = document.getElementById("attack-message");
-    let playerName = document.getElementById("nombre-player")
-    let playerLevel = document.getElementById("nivel-player")
-    let playerHealth = document.getElementById("vida-player")
-    let playerPP = document.getElementById("pp-player")
-
-    let playerDiv = document.getElementById("img-player")
-    let playerBackground = document.getElementById("img-player-background")
-
-    let enemyName = document.getElementById("nombre-enemy")
-    let enemyLevel = document.getElementById("nivel-enemy")
-    let enemyHealth = document.getElementById("vida-enemy")
-
-    let enemyDiv = document.getElementById("img-enemy")
-    let enemyBackground = document.getElementById("img-enemy-background")
-
-    //Botones de "ataques":
-    let attackButton1 = document.getElementById("attackButton1")
-    let attackButton2 = document.getElementById("attackButton2")
-    let attackButton3 = document.getElementById("attackButton3")
-    let attackButton4 = document.getElementById("attackButton4")
-
-    //<<DOM ACCESING ELEMENTS. --- FOR THE FIGHT 
-
-    //Creamos el menú con las opciones "Fight" y "Run":
-    let fightRunMenu = document.createElement("div")
-    fightRunMenu.setAttribute("id", "fight-run-menu")
-    fightRunMenu.innerHTML =
-        `
-    <button id= "fight-button"> FIGHT </button>
-    <button id= "run-button"> RUN </button>
-    `
-
-    //Creamos el menú de opciones tras "GameOver":
-    let gameOverDiv = document.createElement("div")
-    gameOverDiv.setAttribute("id", "game-over-div")
-    gameOverDiv.innerHTML =
-        `
-    <button> EXIT GAME </button>
-    <button> RESTART GAME </button>
-    `
-
-    //Primer mensaje que se ve en el "MessageBox" al iniciar la partida:
-    function battleStart() {
-        messageBox.innerText = "Has encontrado un \n" + enemy.name + "... ¿Qué vas a hacer?"
-        //Se inserta en "MessageBox" el div con el menú "FightRun"
-        messageBox.appendChild(fightRunMenu)
+    //Función para mostrar los "AttackButtons":
+    function showAttackButtons() {
+        attackButtonsDiv.removeAttribute("class")
     }
 
-    //Ejecutamos función para insertar el menú "FightRun":
-    battleStart()
-
-    //Booleano que inhabilita por defecto los botones de ataque hasta que seleccionemos "Fight":
-    let enableButtons = false;
-
-    //Le damos funcionalidad al botón "Fight":
-    let fightButton = document.getElementById("fight-button")
-    fightButton.addEventListener("click", function () {
-        // Cambiamos el texto de los botones de ataque por los ataques del player. 
-        attackButton1.innerText = player.attackList[0].attackName;
-        attackButton2.innerText = player.attackList[1].attackName;
-        attackButton3.innerText = player.attackList[2].attackName;
-        attackButton4.innerText = player.attackList[3].attackName;
-        enableButtons = true; //y habilitamos los botones de "ataque"
-    })
-
-
-    //Función que chequea el estado de la batalla para lanzar condición de "GameOver" o de "WIN":
-    function checkBattle() {
-        if (player.health <= 0) { //GAME OVER
-            messageBox.innerText = "Oh no! " + player.name + " \n.......ha muerto."
-            attackAvailable = false;
-            clearTimeout(timerEnemyAttack);
-            setTimeout(function () {
-                messageBox.innerText = "GAME OVER.... \n tu Pokemon está demasiado débil \n como para seguir luchando \n ¿Qué desea hacer a continuación?"
-                messageBox.appendChild(gameOverDiv)
-            }, 6000)
-        }
-        else if (enemy.health <= 0) { //WIN
-            messageBox.innerText = "Hemos conseguido derrotar a \n" + enemy.name + ". El combate ha terminado. "
-            attackAvailable = false;
-            clearTimeout(timerEnemyAttack);
-            setTimeout(function () {
-                messageBox.innerText = "Ganaste la batalla contra " + enemy.name
-            }, 6000)
-        }
-
+    function hideAttackButtons(){
+        attackButtonsDiv.setAttribute("class", "hidden")
     }
 
-    //Asignamos las propiedades de "player" y "enemy" a los innerText de cada jugador:
-    //Player:
-    playerName.innerText = player.name
-    playerLevel.innerText = "Lv." + player.level
-    playerHealth.innerText = player.health
-    playerPP.innerText = "PP: " + player.pp
-    //Enemy:
-    enemyName.innerText = enemy.name
-    enemyLevel.innerText = "Lv." + enemy.level
-    enemyHealth.innerText = enemy.health
-
-    //Boolean que habilita realizar cada uno de los ataques durante la partida:
-    let attackAvailable = true
-
-    //ID del timer que ejecuta el ataque del enemigo:
-    let timerEnemyAttack;
-
-    //Ataque 1: 
-    attackButton1.addEventListener("click", function () {
-        if (enableButtons === true) {
-            if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[0].ppMinus) {
-                player.attack(enemy, 0)
-                // enemy.checkEnemyHealth()
-                if (enemy.health > 0) {
-                    enemyHealth.innerText = enemy.health
-                }
-                else {
-                    enemyHealth.innerText = 0
-                }
-                enemyBackground.style.backgroundImage = player.attackList[0].attackImage;
-                playerBackground.style.backgroundImage = ""
-                playerPP.innerText = "PP: " + player.pp
-                messageBox.innerText = player.name + " lanza ataque \n" + "'" + player.attackList[0].attackName + "'" + " a " + enemy.name + "\n y le causa " + "'" + player.attackList[0].bonusDamage + "'" + " puntos de daño!!!"
-                checkBattle()
-                //Una vez atacamos, inhabilitamos los botones de ataque:
-                attackAvailable = false
-            }
-            else if (attackAvailable === true && player.pp < 3) {
-                messageBox.innerText = "No tienes suficiente PP para lanzar\n '" + player.attackList[0].attackName + "'!!!"
-            }
-            //TERMINA DE ATACAR EL PLAYER Y ATACA EL ENEMIGO iA.
-
-            timerEnemyAttack = setTimeout(function () {
-                if (enemy.health > 0) {
-                    enemy.attackRandom(player)
-                    // player.checkPlayerHealth()
-                    if (player.health > 0) {
-                        playerHealth.innerText = player.health
-                    } else {
-                        playerHealth.innerText = 0
-                    }
-                    messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
-                    console.log(enemy.pp)
-                    enemyBackground.style.backgroundImage = ""
-                    playerBackground.style.backgroundImage = enemy.attackList[randomNum].attackImage;
-                    checkBattle()
-                    //Una vez nos atacan, se vuelven a habilitar los botones de ataque:
-                    attackAvailable = true;
-                }
-            }, 2000)
-
-        }
-    })
-    attackButton2.addEventListener("click", function () {
-        if (enableButtons === true) {
-            if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[1].ppMinus) {
-                player.attack(enemy, 1)
-                if (enemy.health > 0) {
-                    enemyHealth.innerText = enemy.health
-                }
-                else {
-                    enemyHealth.innerText = 0
-                }
-                enemyBackground.style.backgroundImage = player.attackList[1].attackImage;
-                playerBackground.style.backgroundImage = ""
-                playerPP.innerText = "PP: " + player.pp
-                messageBox.innerText = player.name + " lanza ataque \n" + "'" + player.attackList[1].attackName + "'" + " a " + enemy.name + "\n y le causa " + "'" + player.attackList[1].bonusDamage + "'" + " puntos de daño!!!"
-                checkBattle()
-                attackAvailable = false
-            }
-            else if (attackAvailable === true && player.pp < 3) {
-                messageBox.innerText = "No tienes suficiente PP para lanzar\n '" + player.attackList[1].attackName + "'!!!"
-            }
-            //TERMINA DE ATACAR EL PLAYER Y ATACA EL ENEMIGO iA.
-
-            timerEnemyAttack = setTimeout(function () {
-                if (enemy.health > 0) {
-                    enemy.attackRandom(player)
-                    if (player.health > 0) {
-                        playerHealth.innerText = player.health
-                    } else {
-                        playerHealth.innerText = 0
-                    }
-                    messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
-                    console.log(enemy.pp)
-                    enemyBackground.style.backgroundImage = ""
-                    playerBackground.style.backgroundImage = enemy.attackList[randomNum].attackImage
-                    checkBattle()
-                    attackAvailable = true;
-                }
-            }, 5000)
-        }
+    //Si elegimos la opción "FIGHT"...
+    fightOptionButton.addEventListener("click", function () {
+        fightRunOptionMenu.setAttribute("class", "hidden")
+        newMessage.innerText = "Has elegido a " + player.name + "!!!"
+        setTimeout(function () {
+            newMessage.innerText = "Empieza la batalla!!!"
+            //Se muestran los "AttackButtons":
+            showAttackButtons()
+        }, 2000)
+        playerImg.removeAttribute("class")
+        playerStatus.removeAttribute("class")
+        
+        //Se le añaden los respectivos ataques a cada Pokemon:
+        player.addAttacks()
+        enemy.addAttacks()
+        attackButton1.innerText = player.attackList[0].attackName
+        attackButton2.innerText = player.attackList[1].attackName
+        attackButton3.innerText = player.attackList[2].attackName
+        attackButton4.innerText = player.attackList[3].attackName
     })
 
-    attackButton3.addEventListener("click", function () {
-        if (enableButtons === true) {
-            if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[2].ppMinus) {
-                player.attack(enemy, 2)
-                if (enemy.health > 0) {
-                    enemyHealth.innerText = enemy.health
-                }
-                else {
-                    enemyHealth.innerText = 0
-                }
-                enemyBackground.style.backgroundImage = player.attackList[2].attackImage;
-                playerBackground.style.backgroundImage = ""
-                playerPP.innerText = "PP: " + player.pp
-                messageBox.innerText = player.name + " lanza ataque \n" + "'" + player.attackList[2].attackName + "'" + " a " + enemy.name + "\n y le causa " + "'" + player.attackList[2].bonusDamage + "'" + " puntos de daño!!!"
-                checkBattle()
-                attackAvailable = false
-            }
-            else if (attackAvailable === true && player.pp < 3) {
-                messageBox.innerText = "No tienes suficiente PP para lanzar\n '" + player.attackList[2].attackName + "'!!!"
-            }
-            //TERMINA DE ATACAR EL PLAYER Y ATACA EL ENEMIGO iA.
+    //Si elegimos la opción "RUN"...
+    runOptionButton.addEventListener("click", function () {
+        newMessage.innerText = "Corre puto pussy!!!"
+        fightRunOptionMenu.setAttribute("class", "hidden")
+        setTimeout(returnToMap, 2000)
 
-            timerEnemyAttack = setTimeout(function () {
-                if (enemy.health > 0) {
-                    enemy.attackRandom(player)
-                    if (player.health > 0) {
-                        playerHealth.innerText = player.health
-                    } else {
-                        playerHealth.innerText = 0
-                    }
-                    messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
-                    console.log(enemy.pp)
-                    enemyBackground.style.backgroundImage = ""
-                    playerBackground.style.backgroundImage = enemy.attackList[randomNum].attackImage
-                    checkBattle()
-                    attackAvailable = true;
-                }
-            }, 5000)
-        }
     })
 
-    attackButton4.addEventListener("click", function () {
-        if (enableButtons === true) {
-            if (enemy.health > 0 && attackAvailable === true && player.pp >= player.attackList[3].ppMinus) {
-                player.attack(enemy, 3)
-                if (enemy.health > 0) {
-                    enemyHealth.innerText = enemy.health
-                }
-                else {
-                    enemyHealth.innerText = 0
-                }
-                enemyBackground.style.backgroundImage = player.attackList[3].attackImage;
-                playerBackground.style.backgroundImage = ""
-                playerPP.innerText = "PP: " + player.pp
-                messageBox.innerText = player.name + " lanza ataque \n" + "'" + player.attackList[3].attackName + "'" + " a " + enemy.name + "\n y le causa " + "'" + player.attackList[3].bonusDamage + "'" + " puntos de daño!!!"
-                checkBattle()
-                attackAvailable = false
 
-            } else if (attackAvailable === true && player.pp < 3) {
-                messageBox.innerText = "No tienes suficiente PP para lanzar\n '" + player.attackList[3].attackName + "'!!!"
-            }
-            //TERMINA DE ATACAR EL PLAYER Y ATACA EL ENEMIGO iA.
+    //Función que checkea el estado de la batalla:
+    function checkBattleStatus() {
+        if (player.health <= 0) {
+            setTimeout(function () {
+                newMessage.innerText = "GAME OVER \n *" + enemy.name + "* te ha derrotado...\n ¿Qué quieres hacer?"
+                gameOverOptionMenu.setAttribute("class", "emergent-menu")
+            }, 3000)
+        } else if (enemy.health <= 0) {
+            clearTimeout(timerEnemyAttack)
+            setTimeout(function () {
+                newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"
+                gameOverOptionMenu.setAttribute("class", "emergent-menu")
+            }, 3000)
 
-            timerEnemyAttack = setTimeout(function () {
-                if (enemy.health > 0) {
-                    enemy.attackRandom(player)
-                    if (player.health > 0) {
-                        playerHealth.innerText = player.health
-                    } else {
-                        playerHealth.innerText = 0
-                    }
-                    messageBox.innerText = enemy.name + " lanza ataque \n" + "'" + enemy.attackList[randomNum].attackName + "'" + " a " + player.name + "\n y le causa " + "'" + player.attackList[randomNum].bonusDamage + "'" + " puntos de daño!!!"
-                    console.log(enemy.pp)
-                    enemyBackground.style.backgroundImage = ""
-                    playerBackground.style.backgroundImage = enemy.attackList[randomNum].attackImage
-                    checkBattle()
-                    attackAvailable = true;
-                }
-            }, 5000)
         }
-    })
+    }
 
+    //FUNCIÓN DE ATAQUE!!!:
+    function battleAttack(attackIndex) {
+        if (player.pp >= player.attackList[attackIndex].ppMinus) {  //Sólo si el "player" tiene suficientes puntos PP puede atacar...
+        player.attack(enemy, attackIndex)   //"player" ataca a "enemy", seleccionando un ataque u otro en función del "attackButton" clicado, 
+        newMessage.innerText = player.attackInfo    //se muestra en pantalla el ataque elegido, 
+        playerPP.innerText = player.pp //y se actualiza el valor de "playerPP" en pantalla. 
+        hideAttackButtons()  //Se esconden los botones de ataque justo después de atacar. 
+        enemy.checkHealth()    //Se chequea la salud del "enemy" para que nunca pueda < 0...
+        enemyHealth.innerText = enemy.health    //y se actualiza el valor la salud del "enemy" mostrado en pantalla. 
+        //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
+        timerEnemyAttack = setTimeout(function () {
+            enemy.attackRandom(player) //"enemy" ataca a "player", usando un ataque random.
+            newMessage.innerText = enemy.attackInfo  //se muestra en pantalla el ataque elegido,
+            enemyPP.innerText = enemy.pp  //y se actualiza el valor de "enemyPP" en pantalla. 
+            player.checkHealth()  //Se chequea la salud del "player" para que nunca pueda < 0...
+            playerHealth.innerText = player.health  //y se actualiza el valor la salud del "player" mostrado en pantalla. 
+            checkBattleStatus()   //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
+            //y después de 3 segundos (lo que dura el ataque del "enemy") si "player" aún sigue con vida, se vuelven a habilitar los botones de ataque:
+            setTimeout(function(){
+                if(player.health>0){   
+                newMessage.innerText = "Es tu turno. Puedes volver a atacar!!!"
+                showAttackButtons()
+                }
+            }, 3000)
+        }, 3000)
+    }else {  //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP", evita se para el ataque hasta que seleccione uno que sí pueda lanzar:
+        newMessage.innerText = "No tienes suficiente PP para lanzar el ataque *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
+    }
+        checkBattleStatus()  //Y al final de todo el ataque chequeaemos la batalla para ver si alguno ha ganado. 
+    }
+
+    //Eventos para los botones de "AttackButtons":
+        attackButton1.addEventListener("click", function () {
+            battleAttack(0)
+        })
+        attackButton2.addEventListener("click", function () {
+            battleAttack(1)
+        })
+        attackButton3.addEventListener("click", function () {
+            battleAttack(2)
+        })
+        attackButton4.addEventListener("click", function () {
+            battleAttack(3)
+        })
 }
 
-enableMap()
+//Botón START-GAME:
+startGameButton.addEventListener("click", function () {
+    startGameScreen.setAttribute("class", "hidden")
+    mapScreen.removeAttribute("class")
+})
+
+//Botón START-FIGHT-SCREEN: ////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA
+startFightScreenButton.addEventListener("click", function () {
+    mapScreen.setAttribute("class", "hidden")
+    fightScreen.removeAttribute("class")
+    enableFightScreen()
+
+})
+
+//Botón RETURN-TO-MAP:
+returnToMapOptionButton.addEventListener("click", function () {
+    fightScreen.setAttribute("class", "hidden")
+    mapScreen.removeAttribute("class")
+    
+})
+
+//Botón RESTART-GAME:
+restartGameOptionButton.addEventListener("click", function () {
+    fightScreen.setAttribute("class", "hidden")
+    startGameScreen.removeAttribute("class")
+})
+
+
 
 //ELEMENTOS INSERTADOS EN EL MAPA 
 //ARBOLES
@@ -628,21 +502,9 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 
 ]
 
-let newPlayer = new Player("Player", obstaclesArr)
+let newPlayer = new PlayerMap("Player", obstaclesArr)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
-
-/////  INICIO DE LA BATALLA  
-
-// let player = new Pokemon("Cubone", "Fire", 30)
-// let enemy = new Pokemon("Pikachu", "Electric", 30)
-
-// player.addAttacks();
-// enemy.addAttacks();
-
-// enableFightScreen()
-
-//////
 
 let playerTimerY;
 let playerTimerX;
