@@ -1,5 +1,0 @@
-Cronologia de llamadas de funciones 
-
-1. enableFightScreen
-2. battleStart
-3. 
