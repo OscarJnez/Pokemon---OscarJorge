@@ -2,9 +2,9 @@
 
 body {
     font-family: 'gameovercre', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     color: black;
-    line-height: 23px;
+    line-height: 30px;
 }
 
 /* Estilado general para todos los BUTTONS: */
@@ -127,6 +127,22 @@ button:hover {
 
 }
 
+/*TRANSITION SCREEN*/
+#transition-screen {
+
+    height: 700px;
+    width: 900px;
+    margin: 0 auto;
+    background-image:url("../IMG/OTROS/transition2.gif"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 5px solid yellow; 
+    background-color: black;
+
+}
+
+
+
 /*FIGHT SCREEN CSS*/
 #fight-screen {
     margin: 0 auto;
@@ -141,6 +157,10 @@ button:hover {
     height: 450px;
     width: 900px;
     background-color: aquamarine;
+    background-image: url("../IMG/OTROS/Fondo.jpeg");
+    background-size: 100%; 
+    background-repeat: no-repeat;
+
 }
 
 

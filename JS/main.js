@@ -5,6 +5,10 @@ import { MapElement } from "./mapConstructor.js"
 import { PlayerMap } from "./playerMapConstructor.js"
 
 
+//AUDIO 
+
+// let startGameAudio = new Audio(".\AUDIO\pokemon-opening.mp3")
+
 //DOM Main SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
 let mapScreen = document.getElementById("map-screen")
@@ -24,65 +28,69 @@ let startFightScreenButton = document.getElementById("start-fight-screen-button"
 //DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
 
-    //MENÚS EMERGENTES: 
-    //"FIGHT - RUN": 
-    let fightRunOptionMenu = document.getElementById("fight-run-option-menu")
-    let fightOptionButton = document.getElementById("fight-option-button")
-    let runOptionButton = document.getElementById("run-option-button")
+//MENÚS EMERGENTES: 
+//"FIGHT - RUN": 
+let fightRunOptionMenu = document.getElementById("fight-run-option-menu")
+let fightOptionButton = document.getElementById("fight-option-button")
+let runOptionButton = document.getElementById("run-option-button")
 
-    //"RETURN TO MAP - RESTART GAME":
-    let gameOverOptionMenu = document.getElementById("game-over-option-menu")
-    let returnToMapOptionButton = document.getElementById("return-to-map-option-button")
-    let restartGameOptionButton = document.getElementById("restart-game-option-button")
+//"RETURN TO MAP - RESTART GAME":
+let gameOverOptionMenu = document.getElementById("game-over-option-menu")
+let returnToMapOptionButton = document.getElementById("return-to-map-option-button")
+let restartGameOptionButton = document.getElementById("restart-game-option-button")
 
-    //Botones de ataque:
-    let attackButtonsDiv = document.getElementById("attack-buttons")
-    let attackButton1 = document.getElementById("attackButton1")
-    let attackButton2 = document.getElementById("attackButton2")
-    let attackButton3 = document.getElementById("attackButton3")
-    let attackButton4 = document.getElementById("attackButton4")
+//Botones de ataque:
+let attackButtonsDiv = document.getElementById("attack-buttons")
+let attackButton1 = document.getElementById("attackButton1")
+let attackButton2 = document.getElementById("attackButton2")
+let attackButton3 = document.getElementById("attackButton3")
+let attackButton4 = document.getElementById("attackButton4")
 
-    //Creación de 2 Pokemons: "enemy" y "player"
-    let enemy = new Enemy ("Bulbasaur", "Leaf", 20)
-    let player = new Player("Squirtle", "Water", 20)
+//Creación de 2 Pokemons: "enemy" y "player"
+let enemy = new Enemy("Bulbasaur", "Leaf", 20)
+let player = new Player("Squirtle", "Water", 20)
 
-    //Variable para controlar el ataque del enemigo:
-    let timerEnemyAttack;
+//Variable para controlar el ataque del enemigo:
+let timerEnemyAttack;
 
-    //DOM "enemy" Elements:
-    let enemyName = document.getElementById("enemy-name")
-    let enemyLevel = document.getElementById("enemy-level")
-    let enemyHealth = document.getElementById("enemy-health-text")
-    let enemyPP = document.getElementById("enemy-pp-text")
-    
-    //DOM "player" Elements:
-    let playerName = document.getElementById("player-name")
-    let playerLevel = document.getElementById("player-level")
-    let playerHealth = document.getElementById("player-health-text")
-    let playerPP = document.getElementById("player-pp-text")
-    let playerImg = document.getElementById("player-img")
-    let playerStatus = document.getElementById("player-status")
+//DOM "enemy" Elements:
+let enemyName = document.getElementById("enemy-name")
+let enemyLevel = document.getElementById("enemy-level")
+let enemyHealth = document.getElementById("enemy-health-text")
+let enemyPP = document.getElementById("enemy-pp-text")
 
+//DOM "player" Elements:
+let playerName = document.getElementById("player-name")
+let playerLevel = document.getElementById("player-level")
+let playerHealth = document.getElementById("player-health-text")
+let playerPP = document.getElementById("player-pp-text")
+let playerImg = document.getElementById("player-img")
+let playerStatus = document.getElementById("player-status")
+
+//DOM "transition-screen" Elements: 
+
+let transitionScreen = document.getElementById("transition-screen")
 
 
 //FUNCIONES PARA MOSTRAR DIFERENTES PANTALLAS:
 //Función para mostrar "startGameScreen":
-function startGameScreenON () {
+
+function startGameScreenON() {
+    // startGameAudio.play();
     startGameScreen.removeAttribute("class")
     mapScreen.setAttribute("class", "hidden")
     fightScreen.setAttribute("class", "hidden")
 
 }
 
-
 //Función para mostrar "mapScreen":
-function mapScreenON(){
+function mapScreenON() {
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
 
-}
 
+}
 
 //Función para mostrar "fightScreen":
 function fightScreenON() {
@@ -122,14 +130,14 @@ function fightScreenON() {
     //Si elegimos la opción "FIGHT"...
     fightOptionButton.addEventListener("click", function () {
         fightRunOptionMenu.setAttribute("class", "hidden")  //Se esconde el menú de "FIGHT-RUN"
-        newMessage.innerText = "Has elegido a " + player.name + "!!!"  
+        newMessage.innerText = "Has elegido a " + player.name + "!!!"
         playerImg.removeAttribute("class")   //Se muestra la imagen del "player" (se le elimina la clase "hidden")
         playerStatus.removeAttribute("class")  //y se muestra el "playerStatus" (se le elimina la clase "hidden")
         setTimeout(function () {
             newMessage.innerText = "Empieza la batalla!!!"  //Pasados 2 segundos se meustra este mensaje...
             showAttackButtons()   //y se muestran los "AttackButtons".
         }, 2000)
-        
+
         //Se le añaden los respectivos ataques a cada Pokemons:
         player.addAttacks()
         enemy.addAttacks()
@@ -537,9 +545,26 @@ let pokemonEventList = [bulbasaurEvent, squirtleEvent]
 let newPlayer = new PlayerMap("Player", obstaclesArr, pokemonEventList)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
-if (newPlayer.collisionSwitch === true) {
-    console.log("Te estas ejecutando ???")
-    fightScreenON()
+//EJE X
+
+////// INTENTO DE EVENTO AL ENCONTRARNOS UN POKEMON.
+
+let timerFightTransition;
+
+function checkPokeEvent() {
+    if (newPlayer.collisionSwitch === true) {
+
+        transitionScreen.removeAttribute('class');
+        mapScreen.setAttribute('class', 'hidden')
+
+        timerFightTransition = setTimeout(function () {
+
+            transitionScreen.setAttribute('class', 'hidden')
+            fightScreenON()
+
+        }, 4000)
+
+    }
 
 }
 
@@ -560,6 +585,8 @@ window.addEventListener("keydown", function (event) {
                 // newPlayer.sprite.style.backgroundColor = "green"
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerLeft.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+                checkPokeEvent()
+
             }
             break
         case "ArrowRight":
@@ -569,6 +596,7 @@ window.addEventListener("keydown", function (event) {
                 // newPlayer.sprite.style.backgroundColor = "green"
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerRight.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+                checkPokeEvent()
             }
             break
         case "ArrowUp":
@@ -578,6 +606,7 @@ window.addEventListener("keydown", function (event) {
                 // newPlayer.sprite.style.backgroundColor = "green"
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+                checkPokeEvent()
             }
             break
         case "ArrowDown":
@@ -587,6 +616,7 @@ window.addEventListener("keydown", function (event) {
                 // newPlayer.sprite.style.backgroundColor = "green"
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerDown.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+                checkPokeEvent()
             }
             break
     }

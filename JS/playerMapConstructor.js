@@ -21,7 +21,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
     // this.sprite.style.backgroundColor = "blue";
     this.sprite.style.backgroundImage
 
-
     //Atributo para rastrear colisiones:
     this.movementSwitch = true;
 
@@ -44,7 +43,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.x = newX;
             self.sprite.style.left = self.x + "px";
             ///////Añadimos función para comprobar colisión con Pokemon (EjeX):
-            self.checkPokemonCollisionX(newX, MapElement)
+            self.checkPokemonCollisionX(newX)
         }
 
     }
@@ -56,7 +55,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.y = newY;
             self.sprite.style.top = self.y + "px";
             ///////Añadimos función para comprobar colisión con Pokemon (EjeY):
-            self.checkPokemonCollisionY(newY, MapElement)
+            self.checkPokemonCollisionY(newY)
         }
     }
 
@@ -96,43 +95,43 @@ function PlayerMap(name, obstacle, pokeEvents) {
 
     }
 
-    //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
+    ////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
     this.checkPokemonCollisionX = function (newX) {
-        // for (let i = 0; i < pokeEvents.length; i++) {
+
         let randomNum = Math.floor(Math.random() * 10)
+        console.log(self.collisionSwitch)
         if
             (randomNum === 5 &&
             self.y + self.height >= pokeEvents[0].y &&
             self.y <= pokeEvents[0].y + pokeEvents[0].height &&
             newX + self.width >= pokeEvents[0].x &&
-            newX <= pokeEvents[0].x + pokeEvents[0].width) 
-            {
+            newX <= pokeEvents[0].x + pokeEvents[0].width) {
             console.log("Aparece bulbasur por el eje X")
             self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
         }
-       
+
     }
 
-     //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
+    //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
     this.checkPokemonCollisionY = function (newY) {
-        // for (let i = 0; i < pokeEvents.length; i++) {
+
         let randomNum = Math.floor(Math.random() * 10)
+        console.log(self.collisionSwitch)
         if
             (randomNum === 5 &&
             newY + self.height >= pokeEvents[0].y &&
             newY <= pokeEvents[0].y + pokeEvents[0].height &&
             self.x + self.width >= pokeEvents[0].x &&
-            self.x <= pokeEvents[0].x + pokeEvents[0].width) 
-            {
+            self.x <= pokeEvents[0].x + pokeEvents[0].width) {
             console.log("Aparece Bulbasur por el eje Y")
             self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
         }
 
     }
 
 }
-
-
 
 
 export { PlayerMap }

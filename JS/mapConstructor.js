@@ -151,13 +151,14 @@ function MapElement(elementType) {
 
         /////////////Case para añadir "MapElement" que sean Pokemon:
         case "EventPokemonBasico":
-            this.coefAppearence = 10;
+            // this.coefAppearence = 10;
             this.mapElementSprite.style.height = '100px';
             this.mapElementSprite.style.width = '200px';
             this.mapElementSprite.style.border = '1px solid blue'
             break;
+
         case "EventPokemonBasico2":
-            this.coefAppearence = 10;
+            // this.coefAppearence = 10;
             this.mapElementSprite.style.height = '100px';
             this.mapElementSprite.style.width = '100px';
             this.mapElementSprite.style.border = '1px solid blue'
