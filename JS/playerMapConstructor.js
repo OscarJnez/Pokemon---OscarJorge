@@ -1,6 +1,10 @@
+import { MapElement } from "./mapConstructor.js";
+
 //Función constructora de "Player":
-function PlayerMap(name, obstacle) {
+function PlayerMap(name, obstacle, pokeEvents) {
+
     let self = this;
+    this.collisionSwitch = false;
     this.name = name;
     this.height = 30;
     this.width = 30;
@@ -39,7 +43,9 @@ function PlayerMap(name, obstacle) {
         if (!self.checkCollisionX(newX) && newX >= 0 && newX + self.width <= 900) {
             self.x = newX;
             self.sprite.style.left = self.x + "px";
+            self.checkPokemonCollisionX(newX, MapElement)
         }
+
     }
 
     // Métodos de movimiento del personaje en el eje Y 
@@ -48,6 +54,7 @@ function PlayerMap(name, obstacle) {
         if (!self.checkCollisionY(newY) && newY >= 0 && newY + self.height <= 700) {
             self.y = newY;
             self.sprite.style.top = self.y + "px";
+            self.checkPokemonCollisionY(newY, MapElement)
         }
     }
 
@@ -86,6 +93,65 @@ function PlayerMap(name, obstacle) {
         }
 
     }
+
+    // Colisión de eventos aleatorios (por el eje X)
+
+    this.checkPokemonCollisionX = function (newX) {
+
+        // for (let i = 0; i < pokeEvents.length; i++) {
+
+        let randomNum = Math.floor(Math.random() * 10)
+
+        if (
+
+            randomNum === 5 &&
+            self.y + self.height >= pokeEvents[0].y &&
+            self.y <= pokeEvents[0].y + pokeEvents[0].height &&
+            newX + self.width >= pokeEvents[0].x &&
+            newX <= pokeEvents[0].x + pokeEvents[0].width) {
+
+            console.log(self.collisionSwitch)
+            console.log(randomNum)
+            console.log("Aparece bulbasur por el eje X")
+            self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
+        }
+        else {
+            self.collisionSwitch = false;
+        }
+    }
+
+    // Colisión de eventos aleatorios (por el eje Y)
+
+    this.checkPokemonCollisionY = function (newY) {
+
+        let randomNum = Math.floor(Math.random() * 10)
+
+        if (
+
+            randomNum === 5 &&
+            newY + self.height >= pokeEvents[0].y &&
+            newY <= pokeEvents[0].y + pokeEvents[0].height &&
+            self.x + self.width >= pokeEvents[0].x &&
+            self.x <= pokeEvents[0].x + pokeEvents[0].width) {
+
+            console.log(self.collisionSwitch)
+            console.log(randomNum)
+            console.log("Aparece Bulbasur por el eje Y")
+            self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
+
+        }
+
+        else {
+            self.collisionSwitch = false;
+        }
+
+    }
+
 }
+
+
+
 
 export { PlayerMap }

@@ -95,7 +95,7 @@ function enableFightScreen() {
         attackButtonsDiv.removeAttribute("class")
     }
 
-    function hideAttackButtons(){
+    function hideAttackButtons() {
         attackButtonsDiv.setAttribute("class", "hidden")
     }
 
@@ -110,7 +110,7 @@ function enableFightScreen() {
         }, 2000)
         playerImg.removeAttribute("class")
         playerStatus.removeAttribute("class")
-        
+
         //Se le añaden los respectivos ataques a cada Pokemon:
         player.addAttacks()
         enemy.addAttacks()
@@ -149,47 +149,47 @@ function enableFightScreen() {
     //FUNCIÓN DE ATAQUE!!!:
     function battleAttack(attackIndex) {
         if (player.pp >= player.attackList[attackIndex].ppMinus) {  //Sólo si el "player" tiene suficientes puntos PP puede atacar...
-        player.attack(enemy, attackIndex)   //"player" ataca a "enemy", seleccionando un ataque u otro en función del "attackButton" clicado, 
-        newMessage.innerText = player.attackInfo    //se muestra en pantalla el ataque elegido, 
-        playerPP.innerText = player.pp //y se actualiza el valor de "playerPP" en pantalla. 
-        hideAttackButtons()  //Se esconden los botones de ataque justo después de atacar. 
-        enemy.checkHealth()    //Se chequea la salud del "enemy" para que nunca pueda < 0...
-        enemyHealth.innerText = enemy.health    //y se actualiza el valor la salud del "enemy" mostrado en pantalla. 
-        //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
-        timerEnemyAttack = setTimeout(function () {
-            enemy.attackRandom(player) //"enemy" ataca a "player", usando un ataque random.
-            newMessage.innerText = enemy.attackInfo  //se muestra en pantalla el ataque elegido,
-            enemyPP.innerText = enemy.pp  //y se actualiza el valor de "enemyPP" en pantalla. 
-            player.checkHealth()  //Se chequea la salud del "player" para que nunca pueda < 0...
-            playerHealth.innerText = player.health  //y se actualiza el valor la salud del "player" mostrado en pantalla. 
-            checkBattleStatus()   //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
-            //y después de 3 segundos (lo que dura el ataque del "enemy") si "player" aún sigue con vida, se vuelven a habilitar los botones de ataque:
-            setTimeout(function(){
-                if(player.health>0){   
-                newMessage.innerText = "Es tu turno. Puedes volver a atacar!!!"
-                showAttackButtons()
-                }
+            player.attack(enemy, attackIndex)   //"player" ataca a "enemy", seleccionando un ataque u otro en función del "attackButton" clicado, 
+            newMessage.innerText = player.attackInfo    //se muestra en pantalla el ataque elegido, 
+            playerPP.innerText = player.pp //y se actualiza el valor de "playerPP" en pantalla. 
+            hideAttackButtons()  //Se esconden los botones de ataque justo después de atacar. 
+            enemy.checkHealth()    //Se chequea la salud del "enemy" para que nunca pueda < 0...
+            enemyHealth.innerText = enemy.health    //y se actualiza el valor la salud del "enemy" mostrado en pantalla. 
+            //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
+            timerEnemyAttack = setTimeout(function () {
+                enemy.attackRandom(player) //"enemy" ataca a "player", usando un ataque random.
+                newMessage.innerText = enemy.attackInfo  //se muestra en pantalla el ataque elegido,
+                enemyPP.innerText = enemy.pp  //y se actualiza el valor de "enemyPP" en pantalla. 
+                player.checkHealth()  //Se chequea la salud del "player" para que nunca pueda < 0...
+                playerHealth.innerText = player.health  //y se actualiza el valor la salud del "player" mostrado en pantalla. 
+                checkBattleStatus()   //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
+                //y después de 3 segundos (lo que dura el ataque del "enemy") si "player" aún sigue con vida, se vuelven a habilitar los botones de ataque:
+                setTimeout(function () {
+                    if (player.health > 0) {
+                        newMessage.innerText = "Es tu turno. Puedes volver a atacar!!!"
+                        showAttackButtons()
+                    }
+                }, 3000)
             }, 3000)
-        }, 3000)
-    }else {  //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP", evita se para el ataque hasta que seleccione uno que sí pueda lanzar:
-        newMessage.innerText = "No tienes suficiente PP para lanzar el ataque *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
-    }
+        } else {  //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP", evita se para el ataque hasta que seleccione uno que sí pueda lanzar:
+            newMessage.innerText = "No tienes suficiente PP para lanzar el ataque *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
+        }
         checkBattleStatus()  //Y al final de todo el ataque chequeaemos la batalla para ver si alguno ha ganado. 
     }
 
     //Eventos para los botones de "AttackButtons":
-        attackButton1.addEventListener("click", function () {
-            battleAttack(0)
-        })
-        attackButton2.addEventListener("click", function () {
-            battleAttack(1)
-        })
-        attackButton3.addEventListener("click", function () {
-            battleAttack(2)
-        })
-        attackButton4.addEventListener("click", function () {
-            battleAttack(3)
-        })
+    attackButton1.addEventListener("click", function () {
+        battleAttack(0)
+    })
+    attackButton2.addEventListener("click", function () {
+        battleAttack(1)
+    })
+    attackButton3.addEventListener("click", function () {
+        battleAttack(2)
+    })
+    attackButton4.addEventListener("click", function () {
+        battleAttack(3)
+    })
 }
 
 //Botón START-GAME:
@@ -200,6 +200,7 @@ startGameButton.addEventListener("click", function () {
 
 //Botón START-FIGHT-SCREEN: ////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA
 startFightScreenButton.addEventListener("click", function () {
+
     mapScreen.setAttribute("class", "hidden")
     fightScreen.removeAttribute("class")
     enableFightScreen()
@@ -210,7 +211,7 @@ startFightScreenButton.addEventListener("click", function () {
 returnToMapOptionButton.addEventListener("click", function () {
     fightScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
-    
+
 })
 
 //Botón RESTART-GAME:
@@ -306,7 +307,6 @@ arbol40.insertMapElement(800, 600, mapScreen)
 let arbol41 = new MapElement("Tree")
 arbol41.insertMapElement(850, 500, mapScreen)
 
-
 //CASAS
 let house1 = new MapElement("PokeBank")
 house1.insertMapElement(140, 30, mapScreen)
@@ -333,7 +333,7 @@ water1.insertMapElement(697, 0, mapScreen)
 water1.height = 300;
 water1.width = 200;
 let water2 = new MapElement("Lake2")
-water2.insertMapElement(494, 0, mapScreen)
+water2.insertMapElement(495, 0, mapScreen)
 water2.height = 100;
 water2.width = 200;
 
@@ -483,8 +483,22 @@ person.height = 20;
 person.width = 30;
 
 let snorlax = new MapElement("Snorlax")
-snorlax.insertMapElement(0,370,mapScreen)
+snorlax.insertMapElement(0, 370, mapScreen)
 
+
+//EVENTOS DE APARICIÓN POKEMON.
+
+let bulbasaurEvent = new MapElement("EventPokemonBasico")
+bulbasaurEvent.insertMapElement(150, 500, mapScreen);
+bulbasaurEvent.height = 100;
+bulbasaurEvent.width = 200;
+
+let squirtleEvent = new MapElement("EventPokemonBasico2")
+squirtleEvent.insertMapElement(797, 303, mapScreen);
+squirtleEvent.height = 100;
+squirtleEvent.width = 100;
+
+let pokemonEventList = [bulbasaurEvent, squirtleEvent]
 
 //ARRAY DE TODOS LOS OBSTACULOS 
 let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
@@ -494,7 +508,7 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
     arbol32, arbol33, arbol34, arbol35, arbol36, arbol37, arbol38, arbol39, arbol40, arbol41,
 
     house1, house2, house3, house4, house5,
-    water1, water2, fountain, person,snorlax,
+    water1, water2, fountain, person, snorlax,
 
     rock1, rock5, rock6, rock7, rock8, rock9, rock10, rock11, rock12,
     rock13, rock14, rock15, rock16, rock17, rock18, rock19, rock20, rock21, rock22, rock23,
@@ -502,8 +516,23 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 
 ]
 
-let newPlayer = new PlayerMap("Player", obstaclesArr)
+let newPlayer = new PlayerMap("Player", obstaclesArr, pokemonEventList)
 newPlayer.insertPlayer(560, 670, mapScreen)
+
+function checkPokemonEvent() {
+
+    if (newPlayer.collisionSwitch === true) {
+
+        console.log("Te estas ejecutando ???")
+        mapScreen.setAttribute("class", "hidden")
+        fightScreen.removeAttribute("class")
+        enableFightScreen()
+
+    }
+
+}
+
+checkPokemonEvent();
 
 
 let playerTimerY;
@@ -514,7 +543,6 @@ let keyIsPressed = false
 
 //Movimiento del personaje:
 window.addEventListener("keydown", function (event) {
-    console.log(event.key)
     switch (event.key) {
         case "ArrowLeft":
             if (!keyIsPressed) {

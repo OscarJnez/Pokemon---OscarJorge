@@ -7,6 +7,7 @@ function MapElement(elementType) {
     this.mapElementSprite.setAttribute("class", "map-element")
     this.mapElementSprite.style.width = this.width + "px"
     this.mapElementSprite.style.height = this.height + "px"
+    this.coefAppearence;
 
     this.insertMapElement = function (x, y, parent) {
         this.x = x
@@ -146,6 +147,19 @@ function MapElement(elementType) {
 
         case "Rock2":
             this.mapElementSprite.style.backgroundImage = 'url(./IMG/MAP/rock2.png)'
+            break;
+
+        case "EventPokemonBasico":
+            this.coefAppearence = 10;
+            this.mapElementSprite.style.height = '100px';
+            this.mapElementSprite.style.width = '200px';
+            this.mapElementSprite.style.border = '1px solid blue'
+            break;
+        case "EventPokemonBasico2":
+            this.coefAppearence = 10;
+            this.mapElementSprite.style.height = '100px';
+            this.mapElementSprite.style.width = '100px';
+            this.mapElementSprite.style.border = '1px solid blue'
             break;
 
     }
