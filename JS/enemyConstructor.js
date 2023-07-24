@@ -11,6 +11,7 @@ function Enemy(name, type, level) {
     //DIV del Enemy:
     this.enemyImg = document.getElementById("enemy-img")
 
+    //Le agregamos una imagen según el nombre del Pokemon:
     switch (this.name) {
         case "Pikachu":
             this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
@@ -21,7 +22,9 @@ function Enemy(name, type, level) {
         case "Bulbasaur":
             this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/BulbasaurEnemy.gif)"
             break;
-            
+        case "Squirtle":
+            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/SquirtleEnemy.gif)"
+            break;
 
     }
 
@@ -57,7 +60,6 @@ function Enemy(name, type, level) {
         attackImage: 'url(./IMG/PLAYER/Volcano.gif)'
 
     }];
-
 
     let electricAttacks = [{
         attackName: "'Galletassso'",
@@ -117,18 +119,50 @@ function Enemy(name, type, level) {
         attackImage: 'url(./IMG/ENEMY/ExplosionVerde.gif)'
     }];
 
+    let waterAttacks = [{
+        attackName: "'Galletassso'",
+        bonusDamage: this.strength,
+        ppMinus: 3,
+        attackImage: 'url(./IMG/OTROS/SlapPlacaje.gif)'
+    }, {
+
+        attackName: "Tortura China",
+        bonusDamage: this.strength * 2,
+        ppMinus: 5,
+        attackImage: 'url(./IMG/ENEMY/GotaAgua.gif)'
+
+    },
+
+    {
+        attackName: "Inundación",
+        bonusDamage: this.strength * 3,
+        ppMinus: 10,
+        attackImage: 'url(./IMG/ENEMY/InundacionAgua.gif)'
+
+    },
+
+    {
+        attackName: "Tifonazo",
+        bonusDamage: this.strength * 4,
+        ppMinus: 20,
+        attackImage: 'url(./IMG/ENEMY/TifonAgua.gif)'
+    }];
+
     //Función que añade los ataques a cada Pokemon dependiendo de su "type":
     this.addAttacks = function () {
         //Implementar un "switch" para poder ampliar las opciones....
         switch (this.type) {
             case "Fire":
-                self.attackList = fireAttacks
+                this.attackList = fireAttacks
                 break
             case "Electric":
-                self.attackList = electricAttacks
+                this.attackList = electricAttacks
                 break
             case "Leaf":
-                self.attackList = leafAttacks
+                this.attackList = leafAttacks
+                break
+            case "Water":
+                this.attackList = waterAttacks
                 break
         }
     }
@@ -152,7 +186,7 @@ function Enemy(name, type, level) {
             setTimeout(function () {
                 Player.playerBackImg.style.backgroundImage = ""
             }, 3000)
-            this.attackInfo = this.name + " lanza ataque *" + this.attackList[randomNum].attackName + "* a " + Player.name + " y le causa -" + this.attackList[randomNum].bonusDamage + " puntos de daño!!!"
+            this.attackInfo = this.name + " lanza ataque \n *" + this.attackList[randomNum].attackName + "* a " + Player.name + "\n y le causa -" + this.attackList[randomNum].bonusDamage + " puntos de daño!!!"
         }
     }
 }

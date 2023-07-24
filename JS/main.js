@@ -17,8 +17,8 @@ let startGameButton = document.getElementById("start-game-button")
 let startFightScreenButton = document.getElementById("start-fight-screen-button")
 
 //Creación de 2 Pokemons: "enemy" y "player"
-let enemy = new Enemy("Pikachu", "Electric", 20)
-let player = new Player("Charmander", "Fire", 20, enemy)
+let enemy = new Enemy ("Bulbasaur", "Leaf", 20)
+let player = new Player("Squirtle", "Water", 20)
 
 
 //DOM Elementos ("FightScreen"):
@@ -91,7 +91,7 @@ function fightScreenON() {
     fightScreen.removeAttribute("class") //y mostramos (quitamos clase "hidden") a la pantalla "fightScreen"
 
     //Primer mensaje que se ve en el div "newMessage"
-    newMessage.innerText = "Has encontrado un " + enemy.name + "... ¿Qué quieres hacer?"
+    newMessage.innerText = "Has encontrado un " + enemy.name + "...\n ¿Qué quieres hacer?"
 
     //Aparece el menú "FIGHT-RUN" después de 2 segundos:
     setTimeout(function () {
@@ -173,13 +173,13 @@ function fightScreenON() {
                 //y después de 3 segundos (lo que dura el ataque del "enemy") si "player" aún sigue con vida, se vuelven a habilitar los botones de ataque:
                 setTimeout(function () {
                     if (player.health > 0) {
-                        newMessage.innerText = "Es tu turno. Puedes volver a atacar!!!"
+                        newMessage.innerText = "Es tu turno. \n Puedes volver a atacar!!!"
                         showAttackButtons()
                     }
                 }, 3000)
             }, 3000)
         } else {  //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP", evita se para el ataque hasta que seleccione uno que sí pueda lanzar:
-            newMessage.innerText = "No tienes suficiente PP para lanzar el ataque *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
+            newMessage.innerText = "No tienes suficiente PP \n para lanzar el ataque \n *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
         }
         checkBattleStatus()  //Y al final de todo el ataque chequeaemos la batalla para ver si alguno ha ganado. 
     }
@@ -218,12 +218,6 @@ startGameScreenON()
 startGameButton.addEventListener("click", function () {
     mapScreenON()
 })
-
-//Botón START-FIGHT-SCREEN: ////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA
-startFightScreenButton.addEventListener("click", function () {
-    fightScreenON()
-})
-
 
 
 //ELEMENTOS INSERTADOS EN EL MAPA 
@@ -489,21 +483,6 @@ person.width = 30;
 let snorlax = new MapElement("Snorlax")
 snorlax.insertMapElement(0, 370, mapScreen)
 
-
-//EVENTOS DE APARICIÓN POKEMON.
-
-let bulbasaurEvent = new MapElement("EventPokemonBasico")
-bulbasaurEvent.insertMapElement(150, 500, mapScreen);
-bulbasaurEvent.height = 100;
-bulbasaurEvent.width = 200;
-
-let squirtleEvent = new MapElement("EventPokemonBasico2")
-squirtleEvent.insertMapElement(797, 303, mapScreen);
-squirtleEvent.height = 100;
-squirtleEvent.width = 100;
-
-let pokemonEventList = [bulbasaurEvent, squirtleEvent]
-
 //ARRAY DE TODOS LOS OBSTACULOS 
 let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
     arbol7, arbol8, arbol9, arbol10, arbol11, arbol12, arbol13, arbol14,
@@ -520,13 +499,35 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 
 ]
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
+startFightScreenButton.addEventListener("click", function () {
+    fightScreenON()
+})
+/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//EVENTOS DE APARICIÓN POKEMON.
+let bulbasaurEvent = new MapElement("EventPokemonBasico")
+bulbasaurEvent.insertMapElement(150, 500, mapScreen);
+bulbasaurEvent.height = 100;
+bulbasaurEvent.width = 200;
+
+let squirtleEvent = new MapElement("EventPokemonBasico2")
+squirtleEvent.insertMapElement(797, 303, mapScreen);
+squirtleEvent.height = 100;
+squirtleEvent.width = 100;
+
+let pokemonEventList = [bulbasaurEvent, squirtleEvent]
+
+//CREACIÓN DEL PLAYER EN EL MAP:
 let newPlayer = new PlayerMap("Player", obstaclesArr, pokemonEventList)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
 if (newPlayer.collisionSwitch === true) {
     console.log("Te estas ejecutando ???")
-    mapScreen.setAttribute("class", "hidden")
-    fightScreen.removeAttribute("class")
     fightScreenON()
 
 }

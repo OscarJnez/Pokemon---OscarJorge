@@ -9,9 +9,26 @@ function Player(name, type, level) {
     this.pp = this.level * 2
     //DIV del Player:
     this.playerImg = document.getElementById("player-img")
-    this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/CharmanderGif.gif)"
+    
     this.playerBackImg = document.getElementById("player-background-img")
     this.playerHealth = document.getElementById("player-health")
+
+    //Le asignamos una imagen según el nombre del Pokemon:
+    switch (this.name) {
+        case "Pikachu":
+            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/PikachuPlayerGif.gif)"
+            break;
+        case "Charmander":
+            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/CharmanderGif.gif)"
+            break;
+        case "Bulbasaur":
+            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/BulbasaurPlayerGif.gif)"
+            break;
+        case "Squirtle":
+            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/SquirtlePlayerGif.gif)"
+            break;
+
+    }
 
     //DEFINIMOS LOS ATAQUES DE NUESTROS POKEMON EN ARRAY DE OBJETOS
     let fireAttacks = [{
@@ -42,7 +59,6 @@ function Player(name, type, level) {
         attackImage: 'url(./IMG/PLAYER/Volcano.gif)'
 
     }];
-
 
     let electricAttacks = [{
         attackName: "'Galletassso'",
@@ -102,6 +118,35 @@ function Player(name, type, level) {
         attackImage: 'url(./IMG/ENEMY/ExplosionVerde.gif)'
     }];
 
+    let waterAttacks = [{
+        attackName: "'Galletassso'",
+        bonusDamage: this.strength,
+        ppMinus: 3,
+        attackImage: 'url(./IMG/OTROS/SlapPlacaje.gif)'
+    }, {
+
+        attackName: "Tortura China",
+        bonusDamage: this.strength * 2,
+        ppMinus: 5,
+        attackImage: 'url(./IMG/ENEMY/GotaAgua.gif)'
+
+    },
+
+    {
+        attackName: "Inundación",
+        bonusDamage: this.strength * 3,
+        ppMinus: 10,
+        attackImage: 'url(./IMG/ENEMY/InundacionAgua.gif)'
+
+    },
+
+    {
+        attackName: "Tifonazo",
+        bonusDamage: this.strength * 4,
+        ppMinus: 20,
+        attackImage: 'url(./IMG/ENEMY/TifonAgua.gif)'
+    }];
+
     //Función que añade los ataques a cada Pokemon dependiendo de su "type":
     this.addAttacks = function () {
         //Implementar un "switch" para poder ampliar las opciones....
@@ -115,6 +160,9 @@ function Player(name, type, level) {
             case "Leaf":
                 this.attackList = leafAttacks
                 break
+            case "Water":
+                this.attackList = waterAttacks
+                break;
         }
     }
 
@@ -135,7 +183,7 @@ function Player(name, type, level) {
         setTimeout(function () {
             Enemy.enemyBackImg.style.backgroundImage = ""
         }, 3000)
-        this.attackInfo = this.name + " lanza ataque *" + this.attackList[index].attackName + "* a " + Enemy.name + " y le causa -" + this.attackList[index].bonusDamage + " puntos de daño!!!"
+        this.attackInfo = this.name + " lanza ataque \n *" + this.attackList[index].attackName + "* a " + Enemy.name + "\n y le causa -" + this.attackList[index].bonusDamage + " puntos de daño!!!"
 
     }
 
