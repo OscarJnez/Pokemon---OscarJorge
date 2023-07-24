@@ -2,7 +2,7 @@
 
 body {
     font-family: 'gameovercre', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     color: black;
     line-height: 30px;
 }
@@ -122,14 +122,14 @@ button:hover {
 /* Botón provisional START FIGHT */
 #start-fight-screen-button{
     position: absolute;
-    left: 200px;
-    top: 250px;
-
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    
 }
 
 /*TRANSITION SCREEN*/
 #transition-screen {
-
     height: 700px;
     width: 900px;
     margin: 0 auto;
@@ -321,7 +321,7 @@ button:hover {
 }
 
 #new-message {
-    padding: 40px;
+    padding: 30px;
 }
 
 /* Menú emergente ("FIGT-RUN" y "GAMEOVER-MENU") */

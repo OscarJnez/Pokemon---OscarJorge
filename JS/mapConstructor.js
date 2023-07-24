@@ -81,6 +81,7 @@ function MapElement(elementType) {
             this.mapElementSprite.style.borderBottom = '3px solid brown';
             this.mapElementSprite.style.borderRight = '3px solid brown';
             this.mapElementSprite.style.borderBottomLeftRadius = '7px';
+            this.mapElementSprite.style.zIndex = "1"
             break;
 
         case "Lake2":
