@@ -5,86 +5,86 @@ import { MapElement } from "./mapConstructor.js"
 import { PlayerMap } from "./playerMapConstructor.js"
 
 
-//DOM Elementos (Screens):
+//DOM Main SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
 let mapScreen = document.getElementById("map-screen")
 let fightScreen = document.getElementById("fight-screen")
 
-//START GAME BUTTON:
+//DOM "startGameScreen" Elements:
 let startGameButton = document.getElementById("start-game-button")
 
-////////BOTÓN DE PRUEBA PARA INICIALIZAR BATALLA!!!!: BOOOORRAAAAAAAR DESPUÉS
+//DOM "mapScreen" Elements
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
 let startFightScreenButton = document.getElementById("start-fight-screen-button")
-
-//Creación de 2 Pokemons: "enemy" y "player"
-let enemy = new Enemy ("Bulbasaur", "Leaf", 20)
-let player = new Player("Squirtle", "Water", 20)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//DOM Elementos ("FightScreen"):
+//DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
 
-//MENÚS EMERGENTES: 
-//"FIGHT - RUN": 
-let fightRunOptionMenu = document.getElementById("fight-run-option-menu")
-let fightOptionButton = document.getElementById("fight-option-button")
-let runOptionButton = document.getElementById("run-option-button")
-//"RETURN TO MAP - RESTART GAME":
-let gameOverOptionMenu = document.getElementById("game-over-option-menu")
-let returnToMapOptionButton = document.getElementById("return-to-map-option-button")
-let restartGameOptionButton = document.getElementById("restart-game-option-button")
+    //MENÚS EMERGENTES: 
+    //"FIGHT - RUN": 
+    let fightRunOptionMenu = document.getElementById("fight-run-option-menu")
+    let fightOptionButton = document.getElementById("fight-option-button")
+    let runOptionButton = document.getElementById("run-option-button")
+
+    //"RETURN TO MAP - RESTART GAME":
+    let gameOverOptionMenu = document.getElementById("game-over-option-menu")
+    let returnToMapOptionButton = document.getElementById("return-to-map-option-button")
+    let restartGameOptionButton = document.getElementById("restart-game-option-button")
+
+    //Botones de ataque:
+    let attackButtonsDiv = document.getElementById("attack-buttons")
+    let attackButton1 = document.getElementById("attackButton1")
+    let attackButton2 = document.getElementById("attackButton2")
+    let attackButton3 = document.getElementById("attackButton3")
+    let attackButton4 = document.getElementById("attackButton4")
+
+    //Creación de 2 Pokemons: "enemy" y "player"
+    let enemy = new Enemy ("Bulbasaur", "Leaf", 20)
+    let player = new Player("Squirtle", "Water", 20)
+
+    //Variable para controlar el ataque del enemigo:
+    let timerEnemyAttack;
+
+    //DOM "enemy" Elements:
+    let enemyName = document.getElementById("enemy-name")
+    let enemyLevel = document.getElementById("enemy-level")
+    let enemyHealth = document.getElementById("enemy-health-text")
+    let enemyPP = document.getElementById("enemy-pp-text")
+    
+    //DOM "player" Elements:
+    let playerName = document.getElementById("player-name")
+    let playerLevel = document.getElementById("player-level")
+    let playerHealth = document.getElementById("player-health-text")
+    let playerPP = document.getElementById("player-pp-text")
+    let playerImg = document.getElementById("player-img")
+    let playerStatus = document.getElementById("player-status")
 
 
-//Botones de ataque:
-let attackButtonsDiv = document.getElementById("attack-buttons")
-let attackButton1 = document.getElementById("attackButton1")
-let attackButton2 = document.getElementById("attackButton2")
-let attackButton3 = document.getElementById("attackButton3")
-let attackButton4 = document.getElementById("attackButton4")
 
-//Variable para controlar el ataque del enemigo:
-let timerEnemyAttack;
-
-//Asignación de valores a elementos del DOM:
-let enemyName = document.getElementById("enemy-name")
-enemyName.innerText = enemy.name
-let enemyLevel = document.getElementById("enemy-level")
-enemyLevel.innerText = "Lv. " + enemy.level
-let enemyHealth = document.getElementById("enemy-health-text")
-enemyHealth.innerText = enemy.health
-let enemyPP = document.getElementById("enemy-pp-text")
-enemyPP.innerText = enemy.pp
-
-let playerImg = document.getElementById("player-img")
-let playerBackgroundImg = document.getElementById("player-background-img")
-
-let playerStatus = document.getElementById("player-status")
-let playerName = document.getElementById("player-name")
-playerName.innerText = player.name
-let playerLevel = document.getElementById("player-level")
-playerLevel.innerText = "Lv." + player.level
-let playerHealth = document.getElementById("player-health-text")
-playerHealth.innerText = player.health
-let playerPP = document.getElementById("player-pp-text")
-playerPP.innerText = player.pp
-
-
-//FUNCIÓN PARA MOSTRAR PANTALLA "START-GAME"
+//FUNCIONES PARA MOSTRAR DIFERENTES PANTALLAS:
+//Función para mostrar "startGameScreen":
 function startGameScreenON () {
     startGameScreen.removeAttribute("class")
     mapScreen.setAttribute("class", "hidden")
     fightScreen.setAttribute("class", "hidden")
+
 }
 
-//FUNCIÓN PARA MOSTRAR PANTALLA "MAP"
+
+//Función para mostrar "mapScreen":
 function mapScreenON(){
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
+
 }
 
 
-//FUNCIÓN PARA MOSTRAR PANTALLA "FIGHT"
+//Función para mostrar "fightScreen":
 function fightScreenON() {
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
@@ -92,6 +92,18 @@ function fightScreenON() {
 
     //Primer mensaje que se ve en el div "newMessage"
     newMessage.innerText = "Has encontrado un " + enemy.name + "...\n ¿Qué quieres hacer?"
+
+    //Asignamos valores al "enemyStatus":
+    enemyName.innerText = enemy.name
+    enemyLevel.innerText = "Lv. " + enemy.level
+    enemyHealth.innerText = enemy.health
+    enemyPP.innerText = enemy.pp
+
+    //Y también le asignamos valores al "playerStatus":
+    playerName.innerText = player.name
+    playerLevel.innerText = "Lv." + player.level
+    playerHealth.innerText = player.health
+    playerPP.innerText = player.pp
 
     //Aparece el menú "FIGHT-RUN" después de 2 segundos:
     setTimeout(function () {
@@ -109,19 +121,19 @@ function fightScreenON() {
 
     //Si elegimos la opción "FIGHT"...
     fightOptionButton.addEventListener("click", function () {
-        fightRunOptionMenu.setAttribute("class", "hidden")
-        newMessage.innerText = "Has elegido a " + player.name + "!!!"
+        fightRunOptionMenu.setAttribute("class", "hidden")  //Se esconde el menú de "FIGHT-RUN"
+        newMessage.innerText = "Has elegido a " + player.name + "!!!"  
+        playerImg.removeAttribute("class")   //Se muestra la imagen del "player" (se le elimina la clase "hidden")
+        playerStatus.removeAttribute("class")  //y se muestra el "playerStatus" (se le elimina la clase "hidden")
         setTimeout(function () {
-            newMessage.innerText = "Empieza la batalla!!!"
-            //Se muestran los "AttackButtons":
-            showAttackButtons()
+            newMessage.innerText = "Empieza la batalla!!!"  //Pasados 2 segundos se meustra este mensaje...
+            showAttackButtons()   //y se muestran los "AttackButtons".
         }, 2000)
-        playerImg.removeAttribute("class")
-        playerStatus.removeAttribute("class")
-
-        //Se le añaden los respectivos ataques a cada Pokemon:
+        
+        //Se le añaden los respectivos ataques a cada Pokemons:
         player.addAttacks()
         enemy.addAttacks()
+        //y se añaden los nombres de cada ataque a los "attackButtons":
         attackButton1.innerText = player.attackList[0].attackName
         attackButton2.innerText = player.attackList[1].attackName
         attackButton3.innerText = player.attackList[2].attackName
@@ -130,8 +142,8 @@ function fightScreenON() {
 
     //Si elegimos la opción "RUN"...
     runOptionButton.addEventListener("click", function () {
-        newMessage.innerText = "CORRE COBARDEEEEE!!!"
-        fightRunOptionMenu.setAttribute("class", "hidden")
+        newMessage.innerText = "CORRE COBARDEEEEE!!!"    //pasados 2 segundos aparece este mensaje en pantalla...
+        fightRunOptionMenu.setAttribute("class", "hidden")   //y se oculta el menú "FIGHT-RUN"
         setTimeout(mapScreenON, 2000)
 
     })
@@ -212,7 +224,6 @@ function fightScreenON() {
 
 //Encendemos pantalla "START-GAME" (Comienza el juego):
 startGameScreenON()
-
 
 //Botón START-GAME:
 startGameButton.addEventListener("click", function () {

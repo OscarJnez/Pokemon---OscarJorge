@@ -43,6 +43,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
         if (!self.checkCollisionX(newX) && newX >= 0 && newX + self.width <= 900) {
             self.x = newX;
             self.sprite.style.left = self.x + "px";
+            ///////Añadimos función para comprobar colisión con Pokemon (EjeX):
             self.checkPokemonCollisionX(newX, MapElement)
         }
 
@@ -54,6 +55,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
         if (!self.checkCollisionY(newY) && newY >= 0 && newY + self.height <= 700) {
             self.y = newY;
             self.sprite.style.top = self.y + "px";
+            ///////Añadimos función para comprobar colisión con Pokemon (EjeY):
             self.checkPokemonCollisionY(newY, MapElement)
         }
     }
@@ -94,14 +96,10 @@ function PlayerMap(name, obstacle, pokeEvents) {
 
     }
 
-    // Colisión de eventos aleatorios (por el eje X)
-
+    //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
     this.checkPokemonCollisionX = function (newX) {
-
         // for (let i = 0; i < pokeEvents.length; i++) {
-
         let randomNum = Math.floor(Math.random() * 10)
-
         if
             (randomNum === 5 &&
             self.y + self.height >= pokeEvents[0].y &&
@@ -115,12 +113,10 @@ function PlayerMap(name, obstacle, pokeEvents) {
        
     }
 
-    // Colisión de eventos aleatorios (por el eje Y)
-
+     //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
     this.checkPokemonCollisionY = function (newY) {
-
+        // for (let i = 0; i < pokeEvents.length; i++) {
         let randomNum = Math.floor(Math.random() * 10)
-
         if
             (randomNum === 5 &&
             newY + self.height >= pokeEvents[0].y &&

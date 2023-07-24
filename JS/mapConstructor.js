@@ -149,6 +149,7 @@ function MapElement(elementType) {
             this.mapElementSprite.style.backgroundImage = 'url(./IMG/MAP/rock2.png)'
             break;
 
+        /////////////Case para añadir "MapElement" que sean Pokemon:
         case "EventPokemonBasico":
             this.coefAppearence = 10;
             this.mapElementSprite.style.height = '100px';
