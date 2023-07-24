@@ -17,7 +17,7 @@ let startGameButton = document.getElementById("start-game-button")
 let startFightScreenButton = document.getElementById("start-fight-screen-button")
 
 //Creación de 2 Pokemons: "enemy" y "player"
-let enemy = new Enemy("Bulbasaur", "Leaf", 20)
+let enemy = new Enemy("Pikachu", "Electric", 20)
 let player = new Player("Charmander", "Fire", 20, enemy)
 
 
@@ -69,18 +69,26 @@ let playerPP = document.getElementById("player-pp-text")
 playerPP.innerText = player.pp
 
 
-//FUNCIÓN PARA VOLVER AL MAPA SI "RUN":
-function returnToMap() {
+//FUNCIÓN PARA MOSTRAR PANTALLA "START-GAME"
+function startGameScreenON () {
+    startGameScreen.removeAttribute("class")
+    mapScreen.setAttribute("class", "hidden")
     fightScreen.setAttribute("class", "hidden")
-    mapScreen.removeAttribute("class")
 }
 
-//FUNCIÓN PARA INICIAR "BATALLA":
-function enableFightScreen() {
-
-    //Primero, elimnamos del DOM las pantallas "startGameScreen" y "mapScreen"
+//FUNCIÓN PARA MOSTRAR PANTALLA "MAP"
+function mapScreenON(){
     startGameScreen.setAttribute("class", "hidden")
+    mapScreen.removeAttribute("class")
+    fightScreen.setAttribute("class", "hidden")
+}
+
+
+//FUNCIÓN PARA MOSTRAR PANTALLA "FIGHT"
+function fightScreenON() {
+    startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
+    fightScreen.removeAttribute("class") //y mostramos (quitamos clase "hidden") a la pantalla "fightScreen"
 
     //Primer mensaje que se ve en el div "newMessage"
     newMessage.innerText = "Has encontrado un " + enemy.name + "... ¿Qué quieres hacer?"
@@ -122,12 +130,11 @@ function enableFightScreen() {
 
     //Si elegimos la opción "RUN"...
     runOptionButton.addEventListener("click", function () {
-        newMessage.innerText = "Corre puto pussy!!!"
+        newMessage.innerText = "CORRE COBARDEEEEE!!!"
         fightRunOptionMenu.setAttribute("class", "hidden")
-        setTimeout(returnToMap, 2000)
+        setTimeout(mapScreenON, 2000)
 
     })
-
 
     //Función que checkea el estado de la batalla:
     function checkBattleStatus() {
@@ -190,34 +197,31 @@ function enableFightScreen() {
     attackButton4.addEventListener("click", function () {
         battleAttack(3)
     })
+
+    //UNA VEZ TERMINA LA BATALLA TENDREMOS 2 OPCIONES:
+    //Botón RETURN-TO-MAP:
+    returnToMapOptionButton.addEventListener("click", function () {
+        mapScreenON()
+    })
+
+    //Botón RESTART-GAME:
+    restartGameOptionButton.addEventListener("click", function () {
+        startGameScreenON()
+    })
 }
+
+//Encendemos pantalla "START-GAME" (Comienza el juego):
+startGameScreenON()
+
 
 //Botón START-GAME:
 startGameButton.addEventListener("click", function () {
-    startGameScreen.setAttribute("class", "hidden")
-    mapScreen.removeAttribute("class")
+    mapScreenON()
 })
 
 //Botón START-FIGHT-SCREEN: ////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA
 startFightScreenButton.addEventListener("click", function () {
-
-    mapScreen.setAttribute("class", "hidden")
-    fightScreen.removeAttribute("class")
-    enableFightScreen()
-
-})
-
-//Botón RETURN-TO-MAP:
-returnToMapOptionButton.addEventListener("click", function () {
-    fightScreen.setAttribute("class", "hidden")
-    mapScreen.removeAttribute("class")
-
-})
-
-//Botón RESTART-GAME:
-restartGameOptionButton.addEventListener("click", function () {
-    fightScreen.setAttribute("class", "hidden")
-    startGameScreen.removeAttribute("class")
+    fightScreenON()
 })
 
 
@@ -519,22 +523,15 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 let newPlayer = new PlayerMap("Player", obstaclesArr, pokemonEventList)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
-function checkPokemonEvent() {
-
-    if (newPlayer.collisionSwitch === true) {
-
-        console.log("Te estas ejecutando ???")
-        mapScreen.setAttribute("class", "hidden")
-        fightScreen.removeAttribute("class")
-        enableFightScreen()
-
-    }
+if (newPlayer.collisionSwitch === true) {
+    console.log("Te estas ejecutando ???")
+    mapScreen.setAttribute("class", "hidden")
+    fightScreen.removeAttribute("class")
+    fightScreenON()
 
 }
 
-checkPokemonEvent();
-
-
+//Variables con los "timerID" del movimiento del Player por el MAP:
 let playerTimerY;
 let playerTimerX;
 
