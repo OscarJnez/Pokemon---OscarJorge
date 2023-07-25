@@ -25,6 +25,7 @@ let startGameAudioButton = document.getElementById("start-game-audio-button")
 
 //DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
+let combatBackGround = document.getElementById("combat-box")
 
 //MENÚS EMERGENTES: 
 //"FIGHT - RUN": 
@@ -47,17 +48,23 @@ let attackButton3 = document.getElementById("attackButton3")
 let attackButton4 = document.getElementById("attackButton4")
 
 //Creación de Pokemons: "player" y "enemy"
-let player = new Player("Charmander", "Fire", 20)
-
+let player = new Player("Charmander", "Fire", 30)
+player.addAttacks();
 let enemy;
 
 //Más adelante, "enemy" tomará el valor de alguna de las siguientes variables...
 let enemySquirtle = new Enemy("Squirtle", "Water", 20)
+enemySquirtle.addAttacks();
 let enemyBulbasaur = new Enemy("Bulbasaur", "Leaf", 20)
+enemyBulbasaur.addAttacks();
 let enemyCharmander = new Enemy("Charmander", "Fire", 20)
+enemyCharmander.addAttacks();
 let enemyPikachu = new Enemy("Pikachu", "Electric", 20)
+enemyPikachu.addAttacks();
+
 let enemiesArr = [enemyPikachu, enemyCharmander, enemyBulbasaur]  //insertadas en un array: "enemiesArr"
 //y esta variable nos permitirá seleccionar un elemento al azar del "enemiesArr":
+
 let randomPokeEvent;
 
 //Variable para controlar el ataque del enemigo:
@@ -83,6 +90,10 @@ let playerStatus = document.getElementById("player-status")
 let loadingImgStartScreen = document.getElementById("loading-animation-start-screen")
 let transitionScreen = document.getElementById("transition-screen")
 let gameOverScreen = document.getElementById("game-over-screen")  ////////FALTA ASIGNAR IMAGEN PARA GAME OVER
+
+
+
+
 
 //FUNCIONES PARA MOSTRAR DIFERENTES PANTALLAS:
 
@@ -123,6 +134,8 @@ leafZone.insertMapElement(150, 500, mapScreen);
 leafZone.height = 100;
 leafZone.width = 200;
 
+
+
 let waterZone = new MapElement("Zona2")
 waterZone.insertMapElement(797, 303, mapScreen);
 waterZone.height = 100;
@@ -157,7 +170,7 @@ function checkPokeEvent() {
             transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
             enemy = enemiesArr[randomPokeEvent]  //le asignamos a la variable "enemy" el valor de un elemento al azar del array "enemiesArr"...
             console.log(enemy)
-
+            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/Fondo.jpeg)"
             fightScreenON()    //INICIAMOS LA BATALLA CON ESE POKEMON....
             newPlayer.collisionSwitchZone1 = false  //y desactivamos el "collisionSwitchZone1" para evitar volver a colisionar al terminar la batalla.
             console.log(enemiesArr)
@@ -170,6 +183,7 @@ function checkPokeEvent() {
         transitionFightScreenAudio.play() //y play la música de inicio de pelea:
 
         transitionScreen.removeAttribute('class');
+        combatBackGround.style.backgroundImage = "url(../IMG/OTROS/waterBackGround.jpg)"
         mapScreen.setAttribute('class', 'hidden')
         timerFightTransition = setTimeout(function () {
 
@@ -201,14 +215,14 @@ function fightScreenON() {
     function restoreEnemyHealth() {
 
         enemy.health = enemy.level * 10;
-        enemy.pp = enemy.level * 2;
+        enemy.pp = enemy.level * 4;
 
     }
 
     //Función para reiniciar la salud del "player" a los valores originales si se cumple condición "GAME-OVER" y reiniciamos el juego:
     function restorePlayerHealth() {
         player.health = player.level * 10;
-        player.pp = player.level * 2;
+        player.pp = player.level * 4;
     }
 
     //Inicializamos la variable para restaurar la "health" y el "pp " de "player":
@@ -253,13 +267,17 @@ function fightScreenON() {
         }, 2000)
 
         //Se le añaden los respectivos ataques a cada Pokemons:
-        player.addAttacks()
-        enemy.addAttacks()
+
+        console.log(player.attackList)
+        console.log(enemy.attackList)
         //y se añaden los nombres de cada ataque a los "attackButtons":
         attackButton1.innerText = player.attackList[0].attackName
         attackButton2.innerText = player.attackList[1].attackName
         attackButton3.innerText = player.attackList[2].attackName
         attackButton4.innerText = player.attackList[3].attackName
+
+        
+
     })
 
     //Si elegimos la opción "RUN"...
@@ -301,13 +319,17 @@ function fightScreenON() {
 
     //FUNCIÓN DE ATAQUE!!!:
     function battleAttack(attackIndex) {
+        console.log("Atacking!")
+        console.log(player.attackList[attackIndex].bonusDamage)
+        // console.log(attackIndex)
         if (player.pp >= player.attackList[attackIndex].ppMinus) {  //Sólo si el "player" tiene suficientes puntos PP puede atacar...
             player.attack(enemy, attackIndex)   //"player" ataca a "enemy", seleccionando un ataque u otro en función del "attackButton" clicado, 
             newMessage.innerText = player.attackInfo    //se muestra en pantalla el ataque elegido, 
             playerPP.innerText = player.pp //y se actualiza el valor de "playerPP" en pantalla. 
             hideAttackButtons()  //Se esconden los botones de ataque justo después de atacar. 
             enemy.checkHealth()    //Se chequea la salud del "enemy" para que nunca pueda < 0...
-            enemyHealth.innerText = enemy.health    //y se actualiza el valor la salud del "enemy" mostrado en pantalla. 
+            enemyHealth.innerText = enemy.health   //y se actualiza el valor la salud del "enemy" mostrado en pantalla. /////////////////////////////
+            console.log("enemy " + enemy.health);
             //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
             timerEnemyAttack = setTimeout(function () {
                 enemy.attackRandom(player) //"enemy" ataca a "player", usando un ataque random.
@@ -315,6 +337,7 @@ function fightScreenON() {
                 enemyPP.innerText = enemy.pp  //y se actualiza el valor de "enemyPP" en pantalla. 
                 player.checkHealth()  //Se chequea la salud del "player" para que nunca pueda < 0...
                 playerHealth.innerText = player.health  //y se actualiza el valor la salud del "player" mostrado en pantalla. 
+                console.log("Player " + player.health);
                 checkBattleStatus()   //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
                 //y después de 3 segundos (lo que dura el ataque del "enemy") si "player" aún sigue con vida, se vuelven a habilitar los botones de ataque:
                 setTimeout(function () {
@@ -363,8 +386,13 @@ function fightScreenON() {
     //Botón RESTART-GAME (GAME-OVER):
     restartGameOverOptionButton.addEventListener("click", function () {
         startGameScreenON()
+        gameOverOptionMenu.setAttribute("class","hidden");
         restorePlayerHealth()  //iniciamos la "health" y "pp" de "player" a los valores iniciales.
     })
+
+
+    
+
 }
 
 //Encendemos pantalla "START-GAME" (Comienza el juego):

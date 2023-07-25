@@ -7,31 +7,7 @@ function Enemy(name, type, level) {
     this.health = this.level * 10
     this.strength = this.level * 2
     this.attacklist  //propiedad con la lista de ataques que tendrá cada Pokemon creado.
-    this.pp = this.level * 2
-    //DIV del Enemy:
-    console.log(this.enemyImg)
-    //Le agregamos una imagen según el nombre del Pokemon:
-
-    /////////////////////// NO CONSEGUIMOS QUE LA IMAGEN DEL POKEMON CON EL QUE LUCHAMOS, SE REPRODUZCA EN LA PANTALLA, 
-    /////////////////////// AUNQUE EL RESTO DE ATRIBUTOS SI SE APLICAN A CADA POKEMON POR SEPARADO. 
-
-    // switch (this.name) {
-    //     case "Bulbasaur":
-    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/BulbasaurEnemy.gif)"
-    //         break;
-    //     case "Squirtle":
-    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/SquirtleEnemy.gif)"
-    //         break;
-    //     case "Pikachu":
-    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
-    //         break;
-    //     case "Charmander":
-    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/CharmanderEnemy.gif)"
-    //         break;
-    // }
-
-    /////////////////////// NO CONSEGUIMOS QUE LA IMAGEN DEL POKEMON CON EL QUE LUCHAMOS, SE REPRODUZCA EN LA PANTALLA, 
-    /////////////////////// AUNQUE EL RESTO DE ATRIBUTOS SI SE APLICAN A CADA POKEMON POR SEPARADO. 
+    this.pp = this.level * 4
 
     this.enemyBackImg = document.getElementById("enemy-background-img")
     this.enemyHealth = document.getElementById("enemy-health")
@@ -91,7 +67,7 @@ function Enemy(name, type, level) {
     {
         attackName: "Tormenta de Rayos",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/TormentaNube.gif)'
     }];
 
@@ -120,7 +96,7 @@ function Enemy(name, type, level) {
     {
         attackName: "Explosión Verde",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/ExplosionVerde.gif)'
     }];
 
@@ -149,7 +125,7 @@ function Enemy(name, type, level) {
     {
         attackName: "Tifonazo",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/TifonAgua.gif)'
     }];
 
@@ -174,9 +150,7 @@ function Enemy(name, type, level) {
 
     //Función para checkear la salud y no permitir que baje de 0:
     this.checkHealth = function () {
-        if (this.health > 0) {
-            this.health = this.health
-        } else {
+        if (this.health < 0) {
             this.health = 0
         }
     }

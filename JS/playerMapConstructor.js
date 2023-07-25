@@ -69,7 +69,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
                 newX + self.width >= obstacle[i].x &&
                 newX <= obstacle[i].x + obstacle[i].width) {
 
-                console.log("Obstaculo!")
                 return true;
             }
         }
@@ -86,7 +85,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
                 self.x + self.width >= obstacle[i].x &&
                 self.x <= obstacle[i].x + obstacle[i].width) {
 
-                console.log("Obstaculo!")
                 return true;
 
             }
@@ -106,7 +104,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.y <= pokeEvents[0].y + pokeEvents[0].height &&
             newX + self.width >= pokeEvents[0].x &&
             newX <= pokeEvents[0].x + pokeEvents[0].width) {
-            console.log("Aparece Pokeomn en ZONA1")
             self.collisionSwitchZone1 = true;
         }
 
@@ -123,7 +120,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.y <= pokeEvents[1].y + pokeEvents[1].height &&
             newX + self.width >= pokeEvents[1].x &&
             newX <= pokeEvents[1].x + pokeEvents[1].width) {
-            console.log("Aparece Squirtle!")
             self.collisionSwitchZone2 = true;
         }
 
@@ -134,14 +130,13 @@ function PlayerMap(name, obstacle, pokeEvents) {
         //let randomIndex = Math.floor(Math.random() * pokeEvents.length)   --- esto elegiria aleatoriamente el pokemon que nos aparece. 
 
         let randomNum = Math.floor(Math.random() * 50)
-        console.log(self.collisionSwitch)
         if
             (randomNum === 5 &&
             newY + self.height >= pokeEvents[0].y &&
             newY <= pokeEvents[0].y + pokeEvents[0].height &&
             self.x + self.width >= pokeEvents[0].x &&
             self.x <= pokeEvents[0].x + pokeEvents[0].width) {
-            console.log("Aparece Pokeomn en ZONA1")
+
             self.collisionSwitchZone1 = true;
         }
 
@@ -152,7 +147,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.x + self.width >= pokeEvents[1].x &&
             self.x <= pokeEvents[1].x + pokeEvents[1].width) {
             
-                console.log("Aparece Squirtle!")
             self.collisionSwitchZone2 = true;
         }
 

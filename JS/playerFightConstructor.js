@@ -6,10 +6,10 @@ function Player(name, type, level) {
     this.health = this.level * 10
     this.strength = this.level * 2
     this.attacklist  //propiedad con la lista de ataques que tendrá cada Pokemon creado.
-    this.pp = this.level * 2
+    this.pp = this.level * 4
     //DIV del Player:
     this.playerImg = document.getElementById("player-img")
-    
+
     this.playerBackImg = document.getElementById("player-background-img")
     this.playerHealth = document.getElementById("player-health")
 
@@ -85,7 +85,7 @@ function Player(name, type, level) {
     {
         attackName: "Tormenta de Rayos",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/TormentaNube.gif)'
     }];
 
@@ -114,7 +114,7 @@ function Player(name, type, level) {
     {
         attackName: "Explosión Verde",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/ExplosionVerde.gif)'
     }];
 
@@ -143,7 +143,7 @@ function Player(name, type, level) {
     {
         attackName: "Tifonazo",
         bonusDamage: this.strength * 4,
-        ppMinus: 20,
+        ppMinus: 50,
         attackImage: 'url(./IMG/ENEMY/TifonAgua.gif)'
     }];
 
@@ -168,13 +168,10 @@ function Player(name, type, level) {
 
     //Función para checkear la salud y no permitir que baje de 0:
     this.checkHealth = function () {
-        if (this.health > 0) {
-            this.health = this.health
-        } else {
+        if (this.health < 0) {
             this.health = 0
         }
     }
-
     //Función genérica de ataque del Player:
     this.attack = function (Enemy, index) {
         Enemy.health -= this.attackList[index].bonusDamage
