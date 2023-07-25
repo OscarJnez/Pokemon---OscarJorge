@@ -23,7 +23,6 @@ let startFightScreenButton = document.getElementById("start-fight-screen-button"
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 //DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
 
@@ -39,7 +38,6 @@ let returnToMapOptionButton = document.getElementById("return-to-map-option-butt
 let restartGameOptionButton = document.getElementById("restart-game-option-button")
 let gameOverOptionMenu = document.getElementById("game-over-option-menu")
 let restartGameOverOptionButton = document.getElementById("restart-game-over-option-button")
-
 
 //Botones de ataque:
 let attackButtonsDiv = document.getElementById("attack-buttons")
@@ -71,8 +69,8 @@ let playerStatus = document.getElementById("player-status")
 
 //DOM "transition-screen" Elements: 
 
+let loadingImgStartScreen = document.getElementById("loading-animation-start-screen")
 let transitionScreen = document.getElementById("transition-screen")
-
 
 //FUNCIONES PARA MOSTRAR DIFERENTES PANTALLAS:
 //Función para mostrar "startGameScreen":
@@ -87,10 +85,11 @@ function startGameScreenON() {
 
 //Función para mostrar "mapScreen":
 function mapScreenON() {
+
+
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
-
 
 }
 
@@ -233,7 +232,7 @@ function fightScreenON() {
     })
 
     //Botón RESTART-GAME (GAME-OVER):
-    restartGameOverOptionButton.addEventListener("click", function(){
+    restartGameOverOptionButton.addEventListener("click", function () {
         startGameScreenON()
     })
 }
@@ -242,10 +241,19 @@ function fightScreenON() {
 startGameScreenON()
 
 //Botón START-GAME:
+let timerIdMapScreen;
 startGameButton.addEventListener("click", function () {
-    mapScreenON()
-})
 
+    let createLoadingDiv = document.createElement("div")
+    createLoadingDiv.setAttribute("id","loading-animation-start-screen")
+    startGameScreen.appendChild(createLoadingDiv)
+
+    timerIdMapScreen = setTimeout(function () {
+        mapScreenON()
+    }, 3000)
+
+
+})
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
@@ -255,22 +263,29 @@ startFightScreenButton.addEventListener("click", function () {
 /////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 //EVENTOS DE APARICIÓN POKEMON.
-let bulbasaurEvent = new MapElement("EventPokemonBasico")
-bulbasaurEvent.insertMapElement(150, 500, mapScreen);
-bulbasaurEvent.height = 100;
-bulbasaurEvent.width = 200;
 
-let squirtleEvent = new MapElement("EventPokemonBasico2")
-squirtleEvent.insertMapElement(797, 303, mapScreen);
-squirtleEvent.height = 100;
-squirtleEvent.width = 100;
+let leafZone = new MapElement("Zona1")
+leafZone.insertMapElement(150, 500, mapScreen);
+leafZone.height = 100;
+leafZone.width = 200;
 
-let pokemonEventList = [bulbasaurEvent, squirtleEvent]
+// Como metemos a bulbasur y a pikachu???
+
+let waterZone = new MapElement("Zona2")
+waterZone.insertMapElement(797, 303, mapScreen);
+waterZone.height = 100;
+waterZone.width = 100;
+
+// Como metemos a squirtle ???
+
+// let leafZone = [bulbasaurEvent];
+// let waterZone = [squirtleEvent];
+
+let pokeEvents = [leafZone, waterZone];
 
 //CREACIÓN DEL PLAYER EN EL MAP:
-let newPlayer = new PlayerMap("Player", obstaclesArr, pokemonEventList)
+let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
 //EJE X

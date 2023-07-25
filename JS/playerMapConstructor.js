@@ -111,10 +111,29 @@ function PlayerMap(name, obstacle, pokeEvents) {
             console.log(self.collisionSwitch)
         }
 
-    }
+        // Para hacerlo escalable podemos crear otro 'RandomNum para que se eligan los pokemon que 
+        // en cada zona, de forma aleatoria. Este random num sería el 'indice' de posición en cada pokeEvents
+        // En lugar de pokeEvents Generico podemos poner un tipo de evento por
+        // cada Zona. Aunque tal y como lo tenemos hecho ahora, habría que pasarle un constructor 
+        // nuevo con otro array de otra zona, o anidar los arrays de los tipos de zonas en el array 
+        // generico 'pokeEvents'. 
+        
+        else if
+            (randomNum === 5 &&
+            self.y + self.height >= pokeEvents[1].y &&
+            self.y <= pokeEvents[1].y + pokeEvents[1].height &&
+            newX + self.width >= pokeEvents[1].x &&
+            newX <= pokeEvents[1].x + pokeEvents[1].width) {
+            console.log("Aparece Squirtle por el eje X")
+            self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
+        }
 
+    }
     //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
     this.checkPokemonCollisionY = function (newY) {
+
+        //let randomIndex = Math.floor(Math.random() * pokeEvents.length)   --- esto elegiria aleatoriamente el pokemon que nos aparece. 
 
         let randomNum = Math.floor(Math.random() * 50)
         console.log(self.collisionSwitch)
@@ -129,9 +148,21 @@ function PlayerMap(name, obstacle, pokeEvents) {
             console.log(self.collisionSwitch)
         }
 
+        else if
+            (randomNum === 5 &&
+            newY + self.height >= pokeEvents[1].y &&
+            newY <= pokeEvents[1].y + pokeEvents[1].height &&
+            self.x + self.width >= pokeEvents[1].x &&
+            self.x <= pokeEvents[1].x + pokeEvents[1].width) {
+            
+                console.log("Aparece Squirtle por el eje Y")
+            self.collisionSwitch = true;
+            console.log(self.collisionSwitch)
+        }
+
     }
 
-}
 
+}
 
 export { PlayerMap }

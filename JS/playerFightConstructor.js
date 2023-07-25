@@ -187,8 +187,6 @@ function Player(name, type, level) {
 
     }
 
-
 }
-
 
 export { Player }

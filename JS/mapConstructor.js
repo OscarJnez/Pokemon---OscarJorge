@@ -90,9 +90,7 @@ function MapElement(elementType) {
             this.mapElementSprite.style.backgroundRepeat = 'repeat';
             this.mapElementSprite.style.height = '100px';
             this.mapElementSprite.style.width = '200px';
-            // this.mapElementSprite.style.borderBottom = '3px solid brown';
             this.mapElementSprite.style.borderLeft = '3px solid brown';
-            // this.mapElementSprite.style.borderBottom = '5px solid brown';
             this.mapElementSprite.style.borderBottomLeftRadius = '7px';
             break;
 
