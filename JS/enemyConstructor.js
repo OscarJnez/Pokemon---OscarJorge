@@ -9,27 +9,26 @@ function Enemy(name, type, level) {
     this.attacklist  //propiedad con la lista de ataques que tendrá cada Pokemon creado.
     this.pp = this.level * 2
     //DIV del Enemy:
-    this.enemyImg = document.getElementById("enemy-img")
-
+    console.log(this.enemyImg)
     //Le agregamos una imagen según el nombre del Pokemon:
 
     /////////////////////// NO CONSEGUIMOS QUE LA IMAGEN DEL POKEMON CON EL QUE LUCHAMOS, SE REPRODUZCA EN LA PANTALLA, 
     /////////////////////// AUNQUE EL RESTO DE ATRIBUTOS SI SE APLICAN A CADA POKEMON POR SEPARADO. 
 
-    switch (this.name) {
-        case "Bulbasaur":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/BulbasaurEnemy.gif)"
-            break;
-        case "Squirtle":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/SquirtleEnemy.gif)"
-            break;
-        case "Pikachu":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
-            break;
-        case "Charmander":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/CharmanderEnemy.gif)"
-            break;
-    }
+    // switch (this.name) {
+    //     case "Bulbasaur":
+    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/BulbasaurEnemy.gif)"
+    //         break;
+    //     case "Squirtle":
+    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/SquirtleEnemy.gif)"
+    //         break;
+    //     case "Pikachu":
+    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
+    //         break;
+    //     case "Charmander":
+    //         this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/CharmanderEnemy.gif)"
+    //         break;
+    // }
 
     /////////////////////// NO CONSEGUIMOS QUE LA IMAGEN DEL POKEMON CON EL QUE LUCHAMOS, SE REPRODUZCA EN LA PANTALLA, 
     /////////////////////// AUNQUE EL RESTO DE ATRIBUTOS SI SE APLICAN A CADA POKEMON POR SEPARADO. 

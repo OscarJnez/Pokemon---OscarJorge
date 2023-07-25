@@ -44,7 +44,7 @@ button:hover {
     background-image: url("../IMG/OTROS/startScreenPokeBack.gif");
     background-repeat: no-repeat;
     background-size: 120%;
-    
+
 }
 
 #pikachu-start-screen {
@@ -80,6 +80,20 @@ button:hover {
     background-image: url("../IMG/OTROS/loading3.gif");
     background-size: 70%;
     background-repeat: no-repeat;
+}
+
+#start-game-audio-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../IMG/OTROS/speakerImg.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
 }
 
 #game-title {
@@ -160,16 +174,6 @@ button:hover {
 
 }
 
-/*BORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR*/
-/* Botón provisional START FIGHT */
-#start-fight-screen-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 2;
-
-}
-
 /*TRANSITION SCREEN*/
 #transition-screen {
     height: 700px;
@@ -178,7 +182,7 @@ button:hover {
     background-image: url("../IMG/OTROS/transition2.gif");
     background-size: contain;
     background-repeat: no-repeat;
-    border: 2px solid red; 
+    border: 2px solid red;
     border-radius: 3px;
     background-color: black;
 
@@ -373,9 +377,13 @@ button:hover {
     height: 700px;
     width: 900px;
     background-color: rgb(163, 155, 155);
+    background-image: url("../IMG/OTROS/gameOverBackGround.gif");
+    background-size: 140%;
+    background-repeat: no-repeat;
+
 }
 
-#game-over-screen > *{
+#game-over-screen>* {
     position: absolute;
     top: 45%;
     left: 35%;

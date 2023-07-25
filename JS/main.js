@@ -1,4 +1,5 @@
 //Importamos las clases que hemos creado:
+
 import { Player } from "./playerFightConstructor.js"
 import { Enemy } from "./enemyConstructor.js"
 import { MapElement } from "./mapConstructor.js"
@@ -8,8 +9,8 @@ import { obstaclesArr } from "./mapGenerator.js"
 //AUDIO 
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/map1Song.mp3")
-let fightScreenAudio = new Audio("./AUDIO/fightScreenAudio.mp3")
-let transitionFightScreenAudio = new Audio("./AUDIO/pokemon-battle.mp3")
+// let fightScreenAudio = new Audio("./AUDIO/fightScreenAudio.mp3")
+let transitionFightScreenAudio = new Audio("AUDIO/audioTransCombat.mp3")
 
 //DOM Main SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
@@ -18,18 +19,12 @@ let fightScreen = document.getElementById("fight-screen")
 
 //DOM "startGameScreen" Elements:
 let startGameButton = document.getElementById("start-game-button")
+let startGameAudioButton = document.getElementById("start-game-audio-button")
 
 //DOM "mapScreen" Elements
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
-let startFightScreenButton = document.getElementById("start-fight-screen-button")
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
-
-
 
 //MENÚS EMERGENTES: 
 //"FIGHT - RUN": 
@@ -53,16 +48,17 @@ let attackButton4 = document.getElementById("attackButton4")
 
 //Creación de Pokemons: "player" y "enemy"
 let player = new Player("Charmander", "Fire", 20)
+
 let enemy;
+
 //Más adelante, "enemy" tomará el valor de alguna de las siguientes variables...
 let enemySquirtle = new Enemy("Squirtle", "Water", 20)
 let enemyBulbasaur = new Enemy("Bulbasaur", "Leaf", 20)
-let enemyPikachu = new Enemy("Pikachu", "Electric", 20)
 let enemyCharmander = new Enemy("Charmander", "Fire", 20)
+let enemyPikachu = new Enemy("Pikachu", "Electric", 20)
 let enemiesArr = [enemyPikachu, enemyCharmander, enemyBulbasaur]  //insertadas en un array: "enemiesArr"
 //y esta variable nos permitirá seleccionar un elemento al azar del "enemiesArr":
 let randomPokeEvent;
-
 
 //Variable para controlar el ataque del enemigo:
 let timerEnemyAttack;
@@ -88,15 +84,14 @@ let loadingImgStartScreen = document.getElementById("loading-animation-start-scr
 let transitionScreen = document.getElementById("transition-screen")
 let gameOverScreen = document.getElementById("game-over-screen")  ////////FALTA ASIGNAR IMAGEN PARA GAME OVER
 
-
 //FUNCIONES PARA MOSTRAR DIFERENTES PANTALLAS:
 
 //Función para mostrar "startGameScreen":
 function startGameScreenON() {
     //Audios:
-    startGameAudio.play()
+    
     mapScreenAudio.pause()
-    fightScreenAudio.pause()
+    transitionFightScreenAudio.pause()
 
     startGameScreen.removeAttribute("class")
     mapScreen.setAttribute("class", "hidden")
@@ -104,12 +99,18 @@ function startGameScreenON() {
 
 }
 
+startGameAudioButton.addEventListener("click", function () {
+    startGameAudio.play();
+    // startGameAudio.load();
+})
+
 //Función para mostrar "mapScreen":
 function mapScreenON() {
-    //Audios:
+    //Audios: 
+
     startGameAudio.pause()
+    transitionFightScreenAudio.pause()
     mapScreenAudio.play()
-    fightScreenAudio.pause()
 
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
@@ -140,6 +141,7 @@ let timerFightTransition;
 function checkPokeEvent() {
 
     randomPokeEvent = Math.floor(Math.random() * enemiesArr.length)
+
     if (newPlayer.collisionSwitchZone1 === true) {   //Si nos encontramos con un Pokemon en la Zona1 ("leafZone")...
         //Audios:
         mapScreenAudio.pause()  //pausamos el audio de "mapScreenAudio"
@@ -149,28 +151,13 @@ function checkPokeEvent() {
         transitionScreen.removeAttribute('class')    //mostramos la pantalla de transición....
         mapScreen.setAttribute('class', 'hidden')    //ocultamos la pantalla de MAP....
         timerFightTransition = setTimeout(function () {   //y pasados 5 segundos...
-            
-            //pausamos el audio de "transitionFightScreenAudio" al comenzar la pelea:
-            transitionFightScreenAudio.pause() 
-            
-            
-            transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
-            
-            ///////////////DUDA: Cuando especificamos un nuevo Pokemon sí funciona!!!
-                ////// POSIBLE SOLUCIÓN PROVISIONAL....
-                // switch (randomPokeEvent) {
-                //     case 0:
-                //         enemy = new Enemy("Charmander", "Fire", 20)
-                //         break;
-                //     case 1:
-                //         enemy = new Enemy("Pikachu", "Electric", 20)
-                //         break;
-                //     case 2:
-                //         enemy = new Enemy("Bulbasaur", "Leaf", 20)
-                //         break;
-                // }
 
+
+
+            transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
             enemy = enemiesArr[randomPokeEvent]  //le asignamos a la variable "enemy" el valor de un elemento al azar del array "enemiesArr"...
+            console.log(enemy)
+
             fightScreenON()    //INICIAMOS LA BATALLA CON ESE POKEMON....
             newPlayer.collisionSwitchZone1 = false  //y desactivamos el "collisionSwitchZone1" para evitar volver a colisionar al terminar la batalla.
             console.log(enemiesArr)
@@ -186,9 +173,6 @@ function checkPokeEvent() {
         mapScreen.setAttribute('class', 'hidden')
         timerFightTransition = setTimeout(function () {
 
-            //pausamos el audio de "transitionFightScreenAudio" al comenzar la pelea:
-            transitionFightScreenAudio.pause()  
-
             transitionScreen.setAttribute('class', 'hidden')
             enemy = enemySquirtle    //Pero aquí pelearemos únicamente con "enemySquirtle".
             fightScreenON()
@@ -203,9 +187,8 @@ function checkPokeEvent() {
 //Función para mostrar "fightScreen":
 function fightScreenON() {
     //Audios:
+
     startGameAudio.pause()
-    mapScreenAudio.pause()
-    fightScreenAudio.play()
 
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
@@ -230,8 +213,9 @@ function fightScreenON() {
 
     //Inicializamos la variable para restaurar la "health" y el "pp " de "player":
     restoreEnemyHealth();
-
     //Asignamos valores al "enemyStatus":
+
+    enemyImg.style.backgroundImage = `url(../IMG/ENEMY/${enemy.name}Enemy.gif)`
     enemyName.innerText = enemy.name
     enemyLevel.innerText = "Lv. " + enemy.level
     enemyHealth.innerText = enemy.health
@@ -295,13 +279,13 @@ function fightScreenON() {
                 fightScreen.setAttribute("class", "hidden")
             }, 2000)
 
-            //y 1 segundos después (3segs-2segs), aparecerá de nuevo la pantalla "fightScreen" con el mensaje de que "GAME-OVER....":
+            //y 6 segundos después (3segs-2segs), aparecerá de nuevo la pantalla "fightScreen" con el mensaje de que "GAME-OVER....":
             setTimeout(function () {
                 gameOverScreen.setAttribute("class", "hidden")  //Escondemos la pantalla "GAME-OVER"....
                 fightScreen.removeAttribute("class")     //y mostramos la pantalla "fightScreen" con el siguiente mensaje:
                 newMessage.innerText = "GAME OVER \n *" + enemy.name + "* te ha derrotado...\n ¿Qué quieres hacer?"
                 gameOverOptionMenu.setAttribute("class", "emergent-menu")
-            }, 3000)
+            }, 8000)
 
         } else if (enemy.health <= 0) {
             clearTimeout(timerEnemyAttack)
@@ -389,7 +373,7 @@ startGameScreenON()
 //Función que traslada al player a la posición inicial, para cuando volvamos a la pantalla de inicio poder empezar de cero. 
 function initialPosition() {
     newPlayer.insertPlayer(560, 670, mapScreen)
-
+    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)';
 }
 
 //ID del Timer que cotrolará el botón de "startGameButton":
@@ -408,15 +392,6 @@ startGameButton.addEventListener("click", function () {
 
 
 })
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
-startFightScreenButton.addEventListener("click", function () {
-    fightScreenON()
-})
-/////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 //Variables con los "timerID" del movimiento del Player por el MAP:
