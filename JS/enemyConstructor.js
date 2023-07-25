@@ -8,26 +8,25 @@ function Enemy(name, type, level) {
     this.strength = this.level * 2
     this.attacklist  //propiedad con la lista de ataques que tendrá cada Pokemon creado.
     this.pp = this.level * 2
-    //DIV del Enemy:
+      //DIV del Enemy:
     this.enemyImg = document.getElementById("enemy-img")
 
     //Le agregamos una imagen según el nombre del Pokemon:
     switch (this.name) {
-        case "Pikachu":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
-            break;
-        case "Charmander":
-            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/CharmanderEnemy.gif)"
-            break;
         case "Bulbasaur":
             this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/BulbasaurEnemy.gif)"
             break;
         case "Squirtle":
             this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/SquirtleEnemy.gif)"
             break;
-
+        case "Pikachu":
+            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/PikachuGif.gif)"
+            break;
+        case "Charmander":
+            this.enemyImg.style.backgroundImage = "url(../IMG/ENEMY/CharmanderEnemy.gif)"
+            break;
     }
-
+  
     this.enemyBackImg = document.getElementById("enemy-background-img")
     this.enemyHealth = document.getElementById("enemy-health")
 

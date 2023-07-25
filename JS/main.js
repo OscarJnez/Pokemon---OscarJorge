@@ -47,8 +47,14 @@ let attackButton3 = document.getElementById("attackButton3")
 let attackButton4 = document.getElementById("attackButton4")
 
 //Creación de 2 Pokemons: "enemy" y "player"
-let enemy = new Enemy("Pikachu", "Electric", 20)
 let player = new Player("Charmander", "Fire", 20)
+///////////CREACIÓN DE ENEMIGOS:
+let enemySquirtle = new Enemy ("Squirtle", "Water", 20)
+let enemyBulbasaur = new Enemy ("Bulbasaur", "Leaf", 20)
+let enemyPikachu = new Enemy ("Pikachu", "Electric", 20)
+let enemyCharmander = new Enemy ("Charmander", "Fire", 20)
+let enemiesArr = [ enemyPikachu, enemyCharmander, enemyBulbasaur, enemySquirtle ]
+let enemy 
 
 //Variable para controlar el ataque del enemigo:
 let timerEnemyAttack;
@@ -58,6 +64,8 @@ let enemyName = document.getElementById("enemy-name")
 let enemyLevel = document.getElementById("enemy-level")
 let enemyHealth = document.getElementById("enemy-health-text")
 let enemyPP = document.getElementById("enemy-pp-text")
+//////////NUEVO
+let enemyImg = document.getElementById("enemy-img")
 
 //DOM "player" Elements:
 let playerName = document.getElementById("player-name")
@@ -93,8 +101,70 @@ function mapScreenON() {
 
 }
 
+
+//EVENTOS DE APARICIÓN POKEMON.
+
+let leafZone = new MapElement("Zona1")
+leafZone.insertMapElement(150, 500, mapScreen);
+leafZone.height = 100;
+leafZone.width = 200;
+
+// Como metemos a bulbasur y a pikachu???
+
+let waterZone = new MapElement("Zona2")
+waterZone.insertMapElement(797, 303, mapScreen);
+waterZone.height = 100;
+waterZone.width = 100;
+
+// Como metemos a squirtle ???
+
+// let leafZone = [bulbasaurEvent];
+// let waterZone = [squirtleEvent];
+
+let pokeEvents = [leafZone, waterZone];
+
+//CREACIÓN DEL PLAYER EN EL MAP:
+let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
+newPlayer.insertPlayer(560, 670, mapScreen)
+
+//EJE X
+
+////// INTENTO DE EVENTO AL ENCONTRARNOS UN POKEMON.
+
+let timerFightTransition;
+
+
+function checkPokeEvent() {
+    let randomPokeEvent = Math.floor(Math.random()*3)
+    if (newPlayer.collisionSwitchZone1 === true) {
+        transitionScreen.removeAttribute('class');
+        mapScreen.setAttribute('class', 'hidden')
+        timerFightTransition = setTimeout(function () {
+            transitionScreen.setAttribute('class', 'hidden')
+            ///////////////DUDA: Cuando especificamos un nuevo Pokemon sí funciona!!!
+            enemy = enemiesArr[randomPokeEvent]
+            console.log(enemy)
+            fightScreenON()
+            newPlayer.collisionSwitch = false
+
+        }, 5000)
+    }else if(newPlayer.collisionSwitchZone2 ===true){
+        transitionScreen.removeAttribute('class');
+        mapScreen.setAttribute('class', 'hidden')
+        timerFightTransition = setTimeout(function () {
+            transitionScreen.setAttribute('class', 'hidden')
+            enemy = enemiesArr[3]
+            fightScreenON()
+            newPlayer.collisionSwitch = false
+
+        }, 5000)
+    }
+
+}
+
 //Función para mostrar "fightScreen":
 function fightScreenON() {
+       
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
     fightScreen.removeAttribute("class") //y mostramos (quitamos clase "hidden") a la pantalla "fightScreen"
@@ -263,54 +333,64 @@ startFightScreenButton.addEventListener("click", function () {
 /////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EVENTOS DE APARICIÓN POKEMON.
+// //EVENTOS DE APARICIÓN POKEMON.
 
-let leafZone = new MapElement("Zona1")
-leafZone.insertMapElement(150, 500, mapScreen);
-leafZone.height = 100;
-leafZone.width = 200;
+// let leafZone = new MapElement("Zona1")
+// leafZone.insertMapElement(150, 500, mapScreen);
+// leafZone.height = 100;
+// leafZone.width = 200;
 
-// Como metemos a bulbasur y a pikachu???
+// // Como metemos a bulbasur y a pikachu???
 
-let waterZone = new MapElement("Zona2")
-waterZone.insertMapElement(797, 303, mapScreen);
-waterZone.height = 100;
-waterZone.width = 100;
+// let waterZone = new MapElement("Zona2")
+// waterZone.insertMapElement(797, 303, mapScreen);
+// waterZone.height = 100;
+// waterZone.width = 100;
 
-// Como metemos a squirtle ???
+// // Como metemos a squirtle ???
 
-// let leafZone = [bulbasaurEvent];
-// let waterZone = [squirtleEvent];
+// // let leafZone = [bulbasaurEvent];
+// // let waterZone = [squirtleEvent];
 
-let pokeEvents = [leafZone, waterZone];
+// let pokeEvents = [leafZone, waterZone];
 
-//CREACIÓN DEL PLAYER EN EL MAP:
-let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
-newPlayer.insertPlayer(560, 670, mapScreen)
+// //CREACIÓN DEL PLAYER EN EL MAP:
+// let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
+// newPlayer.insertPlayer(560, 670, mapScreen)
 
-//EJE X
+// //EJE X
 
-////// INTENTO DE EVENTO AL ENCONTRARNOS UN POKEMON.
+// ////// INTENTO DE EVENTO AL ENCONTRARNOS UN POKEMON.
 
-let timerFightTransition;
+// let timerFightTransition;
 
-function checkPokeEvent() {
-    if (newPlayer.collisionSwitch === true) {
 
-        transitionScreen.removeAttribute('class');
-        mapScreen.setAttribute('class', 'hidden')
+// function checkPokeEvent() {
+//     let randomPokeEvent = Math.floor(Math.random()*3)
+//     if (newPlayer.collisionSwitchZone1 === true) {
+//         transitionScreen.removeAttribute('class');
+//         mapScreen.setAttribute('class', 'hidden')
+//         timerFightTransition = setTimeout(function () {
+//             transitionScreen.setAttribute('class', 'hidden')
+//             enemy = enemiesArr[randomPokeEvent]
+//             console.log(enemy)
+//             fightScreenON()
+//             newPlayer.collisionSwitch = false
 
-        timerFightTransition = setTimeout(function () {
+//         }, 5000)
+//     }else if(newPlayer.collisionSwitchZone2 ===true){
+//         transitionScreen.removeAttribute('class');
+//         mapScreen.setAttribute('class', 'hidden')
+//         timerFightTransition = setTimeout(function () {
+//             transitionScreen.setAttribute('class', 'hidden')
+//             enemy = enemiesArr[3]
+//             fightScreenON()
+//             newPlayer.collisionSwitch = false
 
-            transitionScreen.setAttribute('class', 'hidden')
-            fightScreenON()
-            newPlayer.collisionSwitch = false
+//         }, 5000)
+//     }
 
-        }, 5000)
-
-    }
-
-}
+// }
 
 //Variables con los "timerID" del movimiento del Player por el MAP:
 let playerTimerY;

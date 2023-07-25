@@ -106,8 +106,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.y <= pokeEvents[0].y + pokeEvents[0].height &&
             newX + self.width >= pokeEvents[0].x &&
             newX <= pokeEvents[0].x + pokeEvents[0].width) {
-            console.log("Aparece bulbasur por el eje X")
-            self.collisionSwitch = true;
+            console.log("Aparece Pokeomn en ZONA1")
+            self.collisionSwitchZone1 = true;
             console.log(self.collisionSwitch)
         }
 
@@ -124,8 +124,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.y <= pokeEvents[1].y + pokeEvents[1].height &&
             newX + self.width >= pokeEvents[1].x &&
             newX <= pokeEvents[1].x + pokeEvents[1].width) {
-            console.log("Aparece Squirtle por el eje X")
-            self.collisionSwitch = true;
+            console.log("Aparece Squirtle!")
+            self.collisionSwitchZone2 = true;
             console.log(self.collisionSwitch)
         }
 
@@ -143,8 +143,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
             newY <= pokeEvents[0].y + pokeEvents[0].height &&
             self.x + self.width >= pokeEvents[0].x &&
             self.x <= pokeEvents[0].x + pokeEvents[0].width) {
-            console.log("Aparece Bulbasur por el eje Y")
-            self.collisionSwitch = true;
+            console.log("Aparece Pokeomn en ZONA1")
+            self.collisionSwitchZone1 = true;
             console.log(self.collisionSwitch)
         }
 
@@ -155,8 +155,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.x + self.width >= pokeEvents[1].x &&
             self.x <= pokeEvents[1].x + pokeEvents[1].width) {
             
-                console.log("Aparece Squirtle por el eje Y")
-            self.collisionSwitch = true;
+                console.log("Aparece Squirtle!")
+            self.collisionSwitchZone2 = true;
             console.log(self.collisionSwitch)
         }
 
