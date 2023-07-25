@@ -25,6 +25,8 @@ let startFightScreenButton = document.getElementById("start-fight-screen-button"
 
 //DOM "FightScreen" Elements:
 let newMessage = document.getElementById("new-message")
+let randomPokeEvent;
+
 
 //MENÚS EMERGENTES: 
 //"FIGHT - RUN": 
@@ -49,12 +51,13 @@ let attackButton4 = document.getElementById("attackButton4")
 //Creación de 2 Pokemons: "enemy" y "player"
 let player = new Player("Charmander", "Fire", 20)
 ///////////CREACIÓN DE ENEMIGOS:
-let enemySquirtle = new Enemy ("Squirtle", "Water", 20)
-let enemyBulbasaur = new Enemy ("Bulbasaur", "Leaf", 20)
-let enemyPikachu = new Enemy ("Pikachu", "Electric", 20)
-let enemyCharmander = new Enemy ("Charmander", "Fire", 20)
-let enemiesArr = [ enemyPikachu, enemyCharmander, enemyBulbasaur, enemySquirtle ]
-let enemy 
+let enemySquirtle = new Enemy("Squirtle", "Water", 20)
+let enemyBulbasaur = new Enemy("Bulbasaur", "Leaf", 20)
+let enemyPikachu = new Enemy("Pikachu", "Electric", 20)
+let enemyCharmander = new Enemy("Charmander", "Fire", 20)
+let enemiesArr = [enemyPikachu, enemyCharmander, enemyBulbasaur]
+
+let enemy;
 
 //Variable para controlar el ataque del enemigo:
 let timerEnemyAttack;
@@ -94,7 +97,6 @@ function startGameScreenON() {
 //Función para mostrar "mapScreen":
 function mapScreenON() {
 
-
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
@@ -133,9 +135,9 @@ newPlayer.insertPlayer(560, 670, mapScreen)
 
 let timerFightTransition;
 
-
 function checkPokeEvent() {
-    let randomPokeEvent = Math.floor(Math.random()*3)
+
+    randomPokeEvent = Math.floor(Math.random() * enemiesArr.length)
     if (newPlayer.collisionSwitchZone1 === true) {
         transitionScreen.removeAttribute('class');
         mapScreen.setAttribute('class', 'hidden')
@@ -145,26 +147,27 @@ function checkPokeEvent() {
             enemy = enemiesArr[randomPokeEvent]
             console.log(enemy)
             fightScreenON()
-            newPlayer.collisionSwitch = false
-
+            newPlayer.collisionSwitchZone1 = false
+            console.log(enemiesArr)
         }, 5000)
-    }else if(newPlayer.collisionSwitchZone2 ===true){
+    } else if (newPlayer.collisionSwitchZone2 === true) {
         transitionScreen.removeAttribute('class');
         mapScreen.setAttribute('class', 'hidden')
         timerFightTransition = setTimeout(function () {
             transitionScreen.setAttribute('class', 'hidden')
-            enemy = enemiesArr[3]
+            enemy = enemySquirtle
             fightScreenON()
-            newPlayer.collisionSwitch = false
+            newPlayer.collisionSwitchZone2 = false
 
         }, 5000)
+
     }
 
 }
 
 //Función para mostrar "fightScreen":
 function fightScreenON() {
-       
+
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
     fightScreen.removeAttribute("class") //y mostramos (quitamos clase "hidden") a la pantalla "fightScreen"
@@ -172,11 +175,27 @@ function fightScreenON() {
     //Primer mensaje que se ve en el div "newMessage"
     newMessage.innerText = "Has encontrado un " + enemy.name + "...\n ¿Qué quieres hacer?"
 
-    //Asignamos valores al "enemyStatus":
+
+    function restoreEnemyHealth() {
+
+        enemy.health = enemy.level * 10;
+        enemy.pp = enemy.level * 2;
+
+    }
+    function restorePlayerHealth() {
+
+        player.health = player.level * 10;
+        player.pp = player.level * 2;
+
+    }
+
+    restoreEnemyHealth();
+
     enemyName.innerText = enemy.name
     enemyLevel.innerText = "Lv. " + enemy.level
     enemyHealth.innerText = enemy.health
     enemyPP.innerText = enemy.pp
+    //Asignamos valores al "enemyStatus":
 
     //Y también le asignamos valores al "playerStatus":
     playerName.innerText = player.name
@@ -241,9 +260,11 @@ function fightScreenON() {
                 newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"
                 winOptionMenu.setAttribute("class", "emergent-menu")
                 //newPlayer.collisionSwitch = false
+                enemiesArr.splice(randomPokeEvent, 1)
             }, 3000)
 
         }
+
     }
 
     //FUNCIÓN DE ATAQUE!!!:
@@ -294,32 +315,53 @@ function fightScreenON() {
     //UNA VEZ TERMINA LA BATALLA TENDREMOS 2 OPCIONES:
     //Botón RETURN-TO-MAP:
     returnToMapOptionButton.addEventListener("click", function () {
+
         mapScreenON()
+        winOptionMenu.setAttribute("class", "hidden")
+        gameOverOptionMenu.setAttribute("class", "hidden")
     })
     //Botón RESTART-GAME (WIN):
     restartGameOptionButton.addEventListener("click", function () {
         startGameScreenON()
+
     })
 
     //Botón RESTART-GAME (GAME-OVER):
     restartGameOverOptionButton.addEventListener("click", function () {
         startGameScreenON()
+        restorePlayerHealth()
+
     })
 }
 
 //Encendemos pantalla "START-GAME" (Comienza el juego):
 startGameScreenON()
 
+
+//Función que traslada al player a la posición inicial, para cuando volvamos a la pantalla de inicio poder empezar de cero. 
+function initialPosition() {
+
+
+    newPlayer.insertPlayer(560, 670, mapScreen)
+
+}
+
 //Botón START-GAME:
 let timerIdMapScreen;
+
 startGameButton.addEventListener("click", function () {
 
-    let createLoadingDiv = document.createElement("div")
-    createLoadingDiv.setAttribute("id","loading-animation-start-screen")
-    startGameScreen.appendChild(createLoadingDiv)
+    loadingImgStartScreen.removeAttribute("class")
+    // createLoadingDiv.setAttribute("id","loading-animation-start-screen")
+    // startGameScreen.appendChild(createLoadingDiv)
+
 
     timerIdMapScreen = setTimeout(function () {
+
         mapScreenON()
+        initialPosition()
+        loadingImgStartScreen.setAttribute("class", "hidden")
+
     }, 3000)
 
 
@@ -330,67 +372,11 @@ startGameButton.addEventListener("click", function () {
 startFightScreenButton.addEventListener("click", function () {
     fightScreenON()
 })
+
 /////////BORRAR ESTE BOTÓN. SUSTITUIRLO POR EL EVENTO QUE SE DA AL ENCONTRAR UN NUEVO POKEMON EN EL MAPA///////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// //EVENTOS DE APARICIÓN POKEMON.
 
-// let leafZone = new MapElement("Zona1")
-// leafZone.insertMapElement(150, 500, mapScreen);
-// leafZone.height = 100;
-// leafZone.width = 200;
-
-// // Como metemos a bulbasur y a pikachu???
-
-// let waterZone = new MapElement("Zona2")
-// waterZone.insertMapElement(797, 303, mapScreen);
-// waterZone.height = 100;
-// waterZone.width = 100;
-
-// // Como metemos a squirtle ???
-
-// // let leafZone = [bulbasaurEvent];
-// // let waterZone = [squirtleEvent];
-
-// let pokeEvents = [leafZone, waterZone];
-
-// //CREACIÓN DEL PLAYER EN EL MAP:
-// let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
-// newPlayer.insertPlayer(560, 670, mapScreen)
-
-// //EJE X
-
-// ////// INTENTO DE EVENTO AL ENCONTRARNOS UN POKEMON.
-
-// let timerFightTransition;
-
-
-// function checkPokeEvent() {
-//     let randomPokeEvent = Math.floor(Math.random()*3)
-//     if (newPlayer.collisionSwitchZone1 === true) {
-//         transitionScreen.removeAttribute('class');
-//         mapScreen.setAttribute('class', 'hidden')
-//         timerFightTransition = setTimeout(function () {
-//             transitionScreen.setAttribute('class', 'hidden')
-//             enemy = enemiesArr[randomPokeEvent]
-//             console.log(enemy)
-//             fightScreenON()
-//             newPlayer.collisionSwitch = false
-
-//         }, 5000)
-//     }else if(newPlayer.collisionSwitchZone2 ===true){
-//         transitionScreen.removeAttribute('class');
-//         mapScreen.setAttribute('class', 'hidden')
-//         timerFightTransition = setTimeout(function () {
-//             transitionScreen.setAttribute('class', 'hidden')
-//             enemy = enemiesArr[3]
-//             fightScreenON()
-//             newPlayer.collisionSwitch = false
-
-//         }, 5000)
-//     }
-
-// }
 
 //Variables con los "timerID" del movimiento del Player por el MAP:
 let playerTimerY;
@@ -410,7 +396,6 @@ window.addEventListener("keydown", function (event) {
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerLeft.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                 checkPokeEvent()
-
             }
             break
         case "ArrowRight":

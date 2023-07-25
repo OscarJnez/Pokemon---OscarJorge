@@ -108,7 +108,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             newX <= pokeEvents[0].x + pokeEvents[0].width) {
             console.log("Aparece Pokeomn en ZONA1")
             self.collisionSwitchZone1 = true;
-            console.log(self.collisionSwitch)
         }
 
         // Para hacerlo escalable podemos crear otro 'RandomNum para que se eligan los pokemon que 
@@ -126,7 +125,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             newX <= pokeEvents[1].x + pokeEvents[1].width) {
             console.log("Aparece Squirtle!")
             self.collisionSwitchZone2 = true;
-            console.log(self.collisionSwitch)
         }
 
     }
@@ -145,7 +143,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             self.x <= pokeEvents[0].x + pokeEvents[0].width) {
             console.log("Aparece Pokeomn en ZONA1")
             self.collisionSwitchZone1 = true;
-            console.log(self.collisionSwitch)
         }
 
         else if
@@ -157,7 +154,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
             
                 console.log("Aparece Squirtle!")
             self.collisionSwitchZone2 = true;
-            console.log(self.collisionSwitch)
         }
 
     }
