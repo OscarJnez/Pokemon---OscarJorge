@@ -365,7 +365,24 @@ button:hover {
     padding: 30px;
 }
 
-/* Menú emergente ("FIGT-RUN" y "GAMEOVER-MENU") */
+/* GAME-OVER SCREEN: */
+#game-over-screen {
+    border: 3px solid rgb(14, 15, 14);
+    margin: 0 auto;
+    position: relative;
+    height: 700px;
+    width: 900px;
+    background-color: rgb(163, 155, 155);
+}
+
+#game-over-screen > *{
+    position: absolute;
+    top: 45%;
+    left: 35%;
+
+}
+
+/* Menús emergentes ("FIGT-RUN" y "GAMEOVER-MENU") */
 .emergent-menu {
     position: absolute;
     top: auto;
