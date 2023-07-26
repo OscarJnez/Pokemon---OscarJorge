@@ -24,7 +24,7 @@ let fightScreen = document.getElementById("fight-screen")
     //Botón play para la música de startGameScreen:
     startGameAudioButton.addEventListener("click", function () {
         startGameAudio.play();
-        startGameAudio.volume = 0.10;
+        startGameAudio.volume = 0.08;
     })
 
     //ID del Timer que cotrolará el botón de "startGameButton":
@@ -250,7 +250,7 @@ function mapScreenON() {
     startGameAudio.pause()
     transitionFightScreenAudio.pause()
     mapScreenAudio.play()
-    mapScreenAudio.volume = 0.10;
+    mapScreenAudio.volume = 0.08;
 
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
@@ -268,7 +268,7 @@ function checkPokeEvent() {
         mapScreenAudio.pause()  
         transitionFightScreenAudio.load()  
         transitionFightScreenAudio.play() 
-        transitionFightScreenAudio.volume = 0.10;
+        transitionFightScreenAudio.volume = 0.08;
 
         transitionScreen.removeAttribute('class')    //mostramos la pantalla de transición....
         mapScreen.setAttribute('class', 'hidden')    //ocultamos la pantalla de MAP....
@@ -288,7 +288,7 @@ function checkPokeEvent() {
         mapScreenAudio.pause()  
         transitionFightScreenAudio.load()  
         transitionFightScreenAudio.play()
-        transitionFightScreenAudio.volume = 0.15;
+        transitionFightScreenAudio.volume = 0.08;
 
         transitionScreen.removeAttribute('class');
         mapScreen.setAttribute('class', 'hidden')
