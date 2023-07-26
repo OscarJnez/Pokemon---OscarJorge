@@ -276,7 +276,7 @@ function checkPokeEvent() {
 
             transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
             enemy = enemiesArr[randomPokeEvent]               //le asignamos a la variable "enemy" el valor de un elemento al azar del array "enemiesArr"...
-            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/Fondo.jpeg)"  //cambiamos el fondo a Zona1 (fondo "hierba"):
+            combatBackGround.style.backgroundImage = "url(./IMG/OTROS/Fondo.jpeg)"  //cambiamos el fondo a Zona1 (fondo "hierba"):
             
             fightScreenON()  //INICIAMOS LA BATALLA CON ESE POKEMON....
 
@@ -296,7 +296,7 @@ function checkPokeEvent() {
 
             transitionScreen.setAttribute('class', 'hidden')
             enemy = enemySquirtle    //Pero aquí pelearemos únicamente con "enemySquirtle".
-            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/waterBackGround.jpg)"
+            combatBackGround.style.backgroundImage = "url(./IMG/OTROS/waterBackGround.jpg)"
             
             fightScreenON()
             
@@ -383,7 +383,7 @@ function fightScreenON() {
     restoreEnemyHealth();
     
     //Asignamos valores al "enemyStatus":
-    enemyImg.style.backgroundImage = `url(../IMG/ENEMY/${enemy.name}Enemy.gif)`
+    enemyImg.style.backgroundImage = `url(./IMG/ENEMY/${enemy.name}Enemy.gif)`
     enemyName.innerText = enemy.name
     enemyLevel.innerText = "Lv. " + enemy.level
     enemyHealth.innerText = enemy.health
