@@ -125,9 +125,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
 
     }
     //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
+    
     this.checkPokemonCollisionY = function (newY) {
-
-        //let randomIndex = Math.floor(Math.random() * pokeEvents.length)   --- esto elegiria aleatoriamente el pokemon que nos aparece. 
 
         let randomNum = Math.floor(Math.random() * 50)
         if
