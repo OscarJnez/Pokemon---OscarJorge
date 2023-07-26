@@ -8,7 +8,7 @@ import { obstaclesArr } from "./mapGenerator.js"
 //AUDIOS:
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/map1Song.mp3")
-let transitionFightScreenAudio = new Audio("AUDIO/audioTransCombat.mp3")
+let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
 
 
 //DOM principales SCREENS:
@@ -69,7 +69,7 @@ let fightScreen = document.getElementById("fight-screen")
     //Función que traslada a newPlayer a la posición inicial:
     function initialPosition() {
         newPlayer.insertPlayer(560, 670, mapScreen)
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)';  //mirando hacia arriba
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerUp.png)';  //mirando hacia arriba
     }
 
     //Timer ids del movimiento del Player por el MAP:
@@ -87,7 +87,7 @@ let fightScreen = document.getElementById("fight-screen")
                     keyIsPressed = true
                     newPlayer.directionX = -1
                     // newPlayer.sprite.style.backgroundColor = "green"
-                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerLeft.png)'
+                    newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerLeft.png)'
                     playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                     checkPokeEvent()
                 }
@@ -97,7 +97,7 @@ let fightScreen = document.getElementById("fight-screen")
                     keyIsPressed = true
                     newPlayer.directionX = 1
                     // newPlayer.sprite.style.backgroundColor = "green"
-                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerRight.png)'
+                    newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerRight.png)'
                     playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                     checkPokeEvent()
                 }
@@ -107,7 +107,7 @@ let fightScreen = document.getElementById("fight-screen")
                     keyIsPressed = true
                     newPlayer.directionY = -1
                     // newPlayer.sprite.style.backgroundColor = "green"
-                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)'
+                    newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerUp.png)'
                     playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                     checkPokeEvent()
                 }
@@ -117,7 +117,7 @@ let fightScreen = document.getElementById("fight-screen")
                     keyIsPressed = true
                     newPlayer.directionY = 1
                     // newPlayer.sprite.style.backgroundColor = "green"
-                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerDown.png)'
+                    newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerDown.png)'
                     playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                     checkPokeEvent()
                 }
