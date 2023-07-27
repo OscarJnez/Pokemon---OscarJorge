@@ -97,7 +97,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
     this.checkPokemonCollisionX = function (newX) {
 
         let randomNum = Math.floor(Math.random() * 50)
-        console.log(self.collisionSwitch)
         if
             (randomNum === 5 &&
             self.y + self.height >= pokeEvents[0].y &&
