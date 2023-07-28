@@ -9,7 +9,7 @@ import { obstaclesArr } from "./mapGenerator.js"
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/map1Song.mp3")
 let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
-
+let gameOverAudio = new Audio("./AUDIO/gameOverAudio.mp3")
 
 //DOM principales SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
@@ -263,7 +263,7 @@ function checkPokeEvent() {
 
     randomPokeEvent = Math.floor(Math.random() * enemiesArr.length)
 
-    if (newPlayer.collisionSwitchZone1 === true) {   //Si nos encontramos con un Pokemon en la Zona1 ("leafZone")...
+    if (newPlayer.collisionSwitchZone1 === true && enemiesArr.length > 0) {   //Si nos encontramos con un Pokemon en la Zona1 ("leafZone")...
         //Audios:
         mapScreenAudio.pause()  
         transitionFightScreenAudio.load()  
@@ -283,7 +283,7 @@ function checkPokeEvent() {
             newPlayer.collisionSwitchZone1 = false  //y desactivamos el "collisionSwitchZone1" para evitar volver a colisionar al terminar la batalla.
 
         }, 5000)
-    } else if (newPlayer.collisionSwitchZone2 === true) {   //Lo mismo para la Zona2 ("waterZone")....
+    } else if (newPlayer.collisionSwitchZone2 === true && enemySquirtle.health > 0) {   //Lo mismo para la Zona2 ("waterZone")....
         //Audios:
         mapScreenAudio.pause()  
         transitionFightScreenAudio.load()  
@@ -411,30 +411,34 @@ function checkBattleStatus() {
             
             gameOverScreen.removeAttribute("class")
             fightScreen.setAttribute("class", "hidden")
+            //Audios:
+            transitionFightScreenAudio.pause()
+            gameOverAudio.volume = 0.08
+            gameOverAudio.play()
 
-        }, 2000)
+        }, 5000)
 
         
-        setTimeout(function () {    //y 6 segundos después (8000-2000), aparecerá nuevamente "fightScreen" con el mensaje "GAME-OVER....":
-           
+        setTimeout(function () {    //y 10 segundos después (15000-5000), aparecerá nuevamente "fightScreen" con el mensaje "GAME-OVER....":
+            gameOverAudio.pause()
             gameOverScreen.setAttribute("class", "hidden")    //Escondemos la pantalla "GAME-OVER"....
             fightScreen.removeAttribute("class")                //y mostramos la pantalla "fightScreen" con el siguiente mensaje:
             newMessage.innerText = "GAME OVER \n *" + enemy.name + "* te ha derrotado...\n ¿Qué quieres hacer?"
             gameOverOptionMenu.setAttribute("class", "emergent-menu")     //Se muestra el menú GAME-OVER
 
-        }, 8000)
+        }, 15000)
 
     } else if (enemy.health <= 0) {    //Si ganamos....
 
         clearTimeout(timerEnemyAttack)  //"enemy" no nos devuelve el ataque (paramos el timerID que contrla su ataque).
         
-        setTimeout(function () {     //y 3 segundos después....
+        setTimeout(function () {     //y 5 segundos después....
             
             newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"    //Mostramos este mensaje.
             winOptionMenu.setAttribute("class", "emergent-menu")       //Mostramos el menú "WIN"
             enemiesArr.splice(randomPokeEvent, 1)        //Y eliminamos el Pokemon que hemos derrotado del array de enemigos (para no volver a encontrarlo)
 
-        }, 3000)
+        }, 5000)
 
     }
 
@@ -451,7 +455,7 @@ function battleAttack(attackIndex) {
         enemy.checkHealth()                                         //Se chequea la salud del "enemy" para que nunca pueda < 0...
         enemyHealth.innerText = enemy.health                        //y se actualiza el valor la salud del "enemy" mostrado en pantalla. /////////////////////////////
        
-        timerEnemyAttack = setTimeout(function () {        //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
+        timerEnemyAttack = setTimeout(function () {        //Luego, pasados 5 segundos (5000 msg.) se ejecuta el ataque del "enemy":
             enemy.attackRandom(player)                     //"enemy" ataca a "player", usando un ataque random.
             newMessage.innerText = enemy.attackInfo        //se muestra en pantalla el ataque elegido,
             enemyPP.innerText = enemy.pp                   //y se actualiza el valor de "enemyPP" en pantalla. 
@@ -460,15 +464,15 @@ function battleAttack(attackIndex) {
             
             checkBattleStatus()                         //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
             
-            setTimeout(function () {                    //y después de 3 segundos (lo que dura el ataque del "enemy")  
+            setTimeout(function () {                    //y después de 5 segundos (lo que dura el ataque del "enemy")  
 
                 if (player.health > 0) {                //si "player" aún sigue con vida,
 
                     newMessage.innerText = "Es tu turno. \n Puedes volver a atacar!!!"
                     showAttackButtons()                 //se vuelven a habilitar los botones de ataque:
                 }
-            }, 3000)
-        }, 3000)
+            }, 5000)
+        }, 5000)
 
     } else {          //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP":
         newMessage.innerText = "No tienes suficiente PP \n para lanzar el ataque \n *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
