@@ -437,7 +437,7 @@ function checkBattleStatus() {
             newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"    //Mostramos este mensaje.
             winOptionMenu.setAttribute("class", "emergent-menu")       //Mostramos el menú "WIN"
             enemiesArr.splice(randomPokeEvent, 1)        //Y eliminamos el Pokemon que hemos derrotado del array de enemigos (para no volver a encontrarlo)
-
+    
         }, 5000)
 
     }
