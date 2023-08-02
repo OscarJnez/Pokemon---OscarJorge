@@ -210,6 +210,7 @@ button:hover {
 
 /*FIGHT SCREEN CSS*/
 #fight-screen {
+    border: 2px solid black;
     margin: 0 auto;
     position: relative;
     height: 700px;
@@ -230,7 +231,7 @@ button:hover {
 #enemy-img {
     position: absolute;
     right: 100px;
-    top: 50px;
+    top: 100px;
     height: 200px;
     width: 200px;
     background-size: contain;
@@ -241,10 +242,10 @@ button:hover {
 #enemy-background-img {
     position: absolute;
     right: 100px;
-    top: 50px;
+    top: 100px;
     height: 200px;
     width: 200px;
-    background-size: contain;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -300,8 +301,8 @@ button:hover {
 
 #player-img {
     position: absolute;
-    left: 100px;
-    bottom: 50px;
+    left: 150px;
+    bottom: 40px;
     height: 200px;
     width: 200px;
     background-size: contain;
@@ -311,11 +312,11 @@ button:hover {
 
 #player-background-img {
     position: absolute;
-    left: 100px;
-    bottom: 50px;
+    left: 150px;
+    bottom: 40px;
     height: 200px;
     width: 200px;
-    background-size: contain;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -377,7 +378,7 @@ button:hover {
     height: 250px;
     width: 450px;
     background-image: url("../IMG/OTROS/MessageBoxBackGround.png");
-    background-size: contain;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgb(255, 217, 0);
@@ -424,6 +425,10 @@ button:hover {
     right: 0;
     height: 250px;
     width: 450px;
+    background-image: url("../IMG/OTROS/MessageBoxBackGround.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: rgb(255, 217, 0);
 }
 

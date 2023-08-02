@@ -8,7 +8,7 @@ import { obstaclesArr } from "./mapGenerator.js"
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
-let mapScreenAudio = new Audio("./AUDIO/walkingMainAudio.mp3")
+let mapScreenAudio = new Audio("./AUDIO/map1Song.mp3")
 let transitionFightScreenAudio = new Audio("AUDIO/audioTransCombat.mp3")
 
 
@@ -76,11 +76,11 @@ let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array 
 let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
-//Función que traslada a newPlayer a la posición inicial:
-function initialPosition() {
-    newPlayer.insertPlayer(560, 670, mapScreen)
-    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)';  //mirando hacia arriba
-}
+    //Función que traslada a newPlayer a la posición inicial:
+    function initialPosition() {
+        newPlayer.insertPlayer(560, 670, mapScreen)
+        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)';  //mirando hacia arriba
+    }
 
 //Timer ids del movimiento del Player por el MAP:
 let playerTimerY;
@@ -244,51 +244,51 @@ function animatedMoveRight() {
 //Necesario crear este boolean para evitar el delay de las teclas cuando se dejan pulsadas:
 let keyIsPressed = false
 
-//Movimiento del personaje (ArrowKeys):
-window.addEventListener("keydown", function (event) {
-    switch (event.key) {
-        case "ArrowLeft":
-            if (!keyIsPressed) {
-                animatedMoveLeft();
-                keyIsPressed = true;
-                newPlayer.directionX = -1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft.png)'
-                playerTimerX = setInterval(newPlayer.movePlayerX, 50)
-                checkPokeEvent()
-            }
-            break
-        case "ArrowRight":
-            if (!keyIsPressed) {
-                animatedMoveRight();
-                keyIsPressed = true;
-                newPlayer.directionX = 1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight.png)'
-                playerTimerX = setInterval(newPlayer.movePlayerX, 50)
-                checkPokeEvent()
-            }
-            break
-        case "ArrowUp":
-            if (!keyIsPressed) {
-                animatedMoveUp();
-                keyIsPressed = true
-                newPlayer.directionY = -1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)'
-                playerTimerY = setInterval(newPlayer.movePlayerY, 50)
-                checkPokeEvent()
-            }
-            break
-        case "ArrowDown":
-            if (!keyIsPressed) {
-                animatedMoveDown();
-                keyIsPressed = true
-                newPlayer.directionY = 1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown.png)'
-                playerTimerY = setInterval(newPlayer.movePlayerY, 50)
-                checkPokeEvent()
-            }
-            break
-    }
-})
+    //Movimiento del personaje (ArrowKeys):
+    window.addEventListener("keydown", function (event) {
+        switch (event.key) {
+            case "ArrowLeft":
+                if (!keyIsPressed) {
+                    keyIsPressed = true
+                    newPlayer.directionX = -1
+                    // newPlayer.sprite.style.backgroundColor = "green"
+                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerLeft.png)'
+                    playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+                    checkPokeEvent()
+                }
+                break
+            case "ArrowRight":
+                if (!keyIsPressed) {
+                    keyIsPressed = true
+                    newPlayer.directionX = 1
+                    // newPlayer.sprite.style.backgroundColor = "green"
+                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerRight.png)'
+                    playerTimerX = setInterval(newPlayer.movePlayerX, 50)
+                    checkPokeEvent()
+                }
+                break
+            case "ArrowUp":
+                if (!keyIsPressed) {
+                    keyIsPressed = true
+                    newPlayer.directionY = -1
+                    // newPlayer.sprite.style.backgroundColor = "green"
+                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerUp.png)'
+                    playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+                    checkPokeEvent()
+                }
+                break
+            case "ArrowDown":
+                if (!keyIsPressed) {
+                    keyIsPressed = true
+                    newPlayer.directionY = 1
+                    // newPlayer.sprite.style.backgroundColor = "green"
+                    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerDown.png)'
+                    playerTimerY = setInterval(newPlayer.movePlayerY, 50)
+                    checkPokeEvent()
+                }
+                break
+        }
+    })
 
 window.addEventListener("keyup", function (event) {
     switch (event.key) {
@@ -429,7 +429,7 @@ function checkPokeEvent() {
 
     randomPokeEvent = Math.floor(Math.random() * enemiesArr.length)
 
-    if (newPlayer.collisionSwitchZone1 === true) {   //Si nos encontramos con un Pokemon en la Zona1 ("leafZone")...
+    if (newPlayer.collisionSwitchZone1 === true && enemiesArr.length > 0) {   //Si nos encontramos con un Pokemon en la Zona1 ("leafZone")...
         //Audios:
         mapScreenAudio.pause()
         transitionFightScreenAudio.load()
@@ -444,13 +444,13 @@ function checkPokeEvent() {
             transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
             enemy = enemiesArr[randomPokeEvent]               //le asignamos a la variable "enemy" el valor de un elemento al azar del array "enemiesArr"...
             combatBackGround.style.backgroundImage = "url(../IMG/OTROS/Fondo.jpeg)"  //cambiamos el fondo a Zona1 (fondo "hierba"):
-
+            
             fightScreenON()  //INICIAMOS LA BATALLA CON ESE POKEMON....
 
             newPlayer.collisionSwitchZone1 = false  //y desactivamos el "collisionSwitchZone1" para evitar volver a colisionar al terminar la batalla.
 
         }, 5000)
-    } else if (newPlayer.collisionSwitchZone2 === true) {   //Lo mismo para la Zona2 ("waterZone")....
+    } else if (newPlayer.collisionSwitchZone2 === true && enemySquirtle.health > 0) {   //Lo mismo para la Zona2 ("waterZone")....
         //Audios:
         mapScreenAudio.pause()
         transitionFightScreenAudio.load()
@@ -464,8 +464,8 @@ function checkPokeEvent() {
 
             transitionScreen.setAttribute('class', 'hidden')
             enemy = enemySquirtle    //Pero aquí pelearemos únicamente con "enemySquirtle".
-            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/waterBackground2.png)"
-
+            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/waterBackGround.jpg)"
+            
             fightScreenON()
 
             newPlayer.collisionSwitchZone2 = false
@@ -551,7 +551,7 @@ function fightScreenON() {
     restoreEnemyHealth();
 
     //Asignamos valores al "enemyStatus":
-    enemyImg.style.backgroundImage = `url(../IMG/ENEMY/${enemy.name}Enemy.gif)`
+    enemyImg.style.backgroundImage = `url(./IMG/ENEMY/${enemy.name}Enemy.gif)`
     enemyName.innerText = enemy.name
     enemyLevel.innerText = "Lv. " + enemy.level
     enemyHealth.innerText = enemy.health
@@ -578,30 +578,34 @@ function checkBattleStatus() {
 
             gameOverScreen.removeAttribute("class")
             fightScreen.setAttribute("class", "hidden")
+            //Audios:
+            transitionFightScreenAudio.pause()
+            gameOverAudio.volume = 0.08
+            gameOverAudio.play()
 
-        }, 2000)
+        }, 5000)
 
-
+        
         setTimeout(function () {    //y 6 segundos después (8000-2000), aparecerá nuevamente "fightScreen" con el mensaje "GAME-OVER....":
-
+           
             gameOverScreen.setAttribute("class", "hidden")    //Escondemos la pantalla "GAME-OVER"....
             fightScreen.removeAttribute("class")                //y mostramos la pantalla "fightScreen" con el siguiente mensaje:
             newMessage.innerText = "GAME OVER \n *" + enemy.name + "* te ha derrotado...\n ¿Qué quieres hacer?"
             gameOverOptionMenu.setAttribute("class", "emergent-menu")     //Se muestra el menú GAME-OVER
 
-        }, 8000)
+        }, 15000)
 
     } else if (enemy.health <= 0) {    //Si ganamos....
 
         clearTimeout(timerEnemyAttack)  //"enemy" no nos devuelve el ataque (paramos el timerID que contrla su ataque).
-
+        
         setTimeout(function () {     //y 3 segundos después....
-
+            
             newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"    //Mostramos este mensaje.
             winOptionMenu.setAttribute("class", "emergent-menu")       //Mostramos el menú "WIN"
             enemiesArr.splice(randomPokeEvent, 1)        //Y eliminamos el Pokemon que hemos derrotado del array de enemigos (para no volver a encontrarlo)
-
-        }, 3000)
+    
+        }, 5000)
 
     }
 
@@ -617,7 +621,7 @@ function battleAttack(attackIndex) {
         hideAttackButtons()                                         //Se esconden los botones de ataque justo después de atacar. 
         enemy.checkHealth()                                         //Se chequea la salud del "enemy" para que nunca pueda < 0...
         enemyHealth.innerText = enemy.health                        //y se actualiza el valor la salud del "enemy" mostrado en pantalla. /////////////////////////////
-
+       
         timerEnemyAttack = setTimeout(function () {        //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
             enemy.attackRandom(player)                     //"enemy" ataca a "player", usando un ataque random.
             newMessage.innerText = enemy.attackInfo        //se muestra en pantalla el ataque elegido,
@@ -626,7 +630,7 @@ function battleAttack(attackIndex) {
             playerHealth.innerText = player.health         //y se actualiza el valor la salud del "player" mostrado en pantalla. 
 
             checkBattleStatus()                         //Al final del ataque de "enemy", se chequea el estado de la batalla para ver si alguno ha ganado. 
-
+            
             setTimeout(function () {                    //y después de 3 segundos (lo que dura el ataque del "enemy")  
 
                 if (player.health > 0) {                //si "player" aún sigue con vida,
@@ -634,8 +638,8 @@ function battleAttack(attackIndex) {
                     newMessage.innerText = "Es tu turno. \n Puedes volver a atacar!!!"
                     showAttackButtons()                 //se vuelven a habilitar los botones de ataque:
                 }
-            }, 3000)
-        }, 3000)
+            }, 5000)
+        }, 5000)
 
     } else {          //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP":
         newMessage.innerText = "No tienes suficiente PP \n para lanzar el ataque \n *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"

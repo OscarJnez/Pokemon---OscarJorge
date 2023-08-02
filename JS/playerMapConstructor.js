@@ -15,7 +15,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
     this.sprite.setAttribute("id", "player");
     this.sprite.style.height = this.height + "px";
     this.sprite.style.width = this.width + "px";
-    this.sprite.style.backgroundImage = "url(../IMG/MAP/playerUp.png)"
+    this.sprite.style.backgroundImage = "url(./IMG/MAP/playerUp.png)"
     this.sprite.style.backgroundSize = "80%";
     this.sprite.style.backgroundRepeat = "no-repeat";
     // this.sprite.style.backgroundColor = "blue";
@@ -97,7 +97,6 @@ function PlayerMap(name, obstacle, pokeEvents) {
     this.checkPokemonCollisionX = function (newX) {
 
         let randomNum = Math.floor(Math.random() * 50)
-        console.log(self.collisionSwitch)
         if
             (randomNum === 5 &&
             self.y + self.height >= pokeEvents[0].y &&

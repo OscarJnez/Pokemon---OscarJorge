@@ -16,16 +16,16 @@ function Player(name, type, level) {
     //Le asignamos una imagen según el nombre del Pokemon:
     switch (this.name) {
         case "Pikachu":
-            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/PikachuPlayerGif.gif)"
+            this.playerImg.style.backgroundImage = "url(./IMG/PLAYER/PikachuPlayerGif.gif)"
             break;
         case "Charmander":
-            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/CharmanderGif.gif)"
+            this.playerImg.style.backgroundImage = "url(./IMG/PLAYER/CharmanderGif.gif)"
             break;
         case "Bulbasaur":
-            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/BulbasaurPlayerGif.gif)"
+            this.playerImg.style.backgroundImage = "url(./IMG/PLAYER/BulbasaurPlayerGif.gif)"
             break;
         case "Squirtle":
-            this.playerImg.style.backgroundImage = "url(../IMG/PLAYER/SquirtlePlayerGif.gif)"
+            this.playerImg.style.backgroundImage = "url(./IMG/PLAYER/SquirtlePlayerGif.gif)"
             break;
 
     }
