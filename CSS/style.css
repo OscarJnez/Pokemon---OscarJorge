@@ -174,20 +174,39 @@ button:hover {
 
 }
 
+/*INSIDE POKE CENTER CSS*/
+
+
+
+/*!!! INSIDE POKE CENTER CSS*/
+
+
+/*!!MAP SCREEN CSS*/
+
 /*TRANSITION SCREEN*/
 #transition-screen {
     height: 700px;
     width: 900px;
     margin: 0 auto;
-    background-image: url("../IMG/OTROS/transition2.gif");
-    background-size: contain;
-    background-repeat: no-repeat;
     border: 2px solid red;
     border-radius: 3px;
     background-color: black;
+    background-size: auto;
+    position:relative;
 
 }
 
+#transition-image {
+
+    position: absolute;
+    top: 100px; 
+    height: 700px;
+    width: 900px;
+    background-image: url("../IMG/OTROS/transition3.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
 
 /*FIGHT SCREEN CSS*/
 #fight-screen {
