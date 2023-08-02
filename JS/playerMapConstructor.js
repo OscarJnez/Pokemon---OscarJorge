@@ -21,6 +21,8 @@ function PlayerMap(name, obstacle, pokeEvents) {
     // this.sprite.style.backgroundColor = "blue";
     this.sprite.style.backgroundImage
 
+    this.sucesoSnorlax = false;
+
     //Atributo para rastrear colisiones:
     this.movementSwitch = true;
 
@@ -71,6 +73,17 @@ function PlayerMap(name, obstacle, pokeEvents) {
 
                 return true;
             }
+
+            else if (self.y + self.height >= obstacle[50].y &&
+                self.y <= obstacle[50].y + obstacle[50].height &&
+                newX + self.width >= obstacle[50].x &&
+                newX <= obstacle[50].x + obstacle[50].width) {
+
+                console.log("un snorlax!!!")
+                this.sucesoSnorlax = true;
+
+            }
+
         }
 
     }
@@ -88,6 +101,17 @@ function PlayerMap(name, obstacle, pokeEvents) {
                 return true;
 
             }
+            else if (self.y + self.height >= obstacle[50].y &&
+                self.y <= obstacle[50].y + obstacle[50].height &&
+                newY + self.width >= obstacle[50].x &&
+                newY <= obstacle[50].x + obstacle[50].width) {
+
+                console.log("un snorlax!!!")
+                this.sucesoSnorlax = true;
+
+            }
+
+            
 
         }
 
@@ -112,7 +136,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
         // cada Zona. Aunque tal y como lo tenemos hecho ahora, habría que pasarle un constructor 
         // nuevo con otro array de otra zona, o anidar los arrays de los tipos de zonas en el array 
         // generico 'pokeEvents'. 
-        
+
         else if
             (randomNum === 5 &&
             self.y + self.height >= pokeEvents[1].y &&
@@ -124,7 +148,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
 
     }
     //////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
-    
+
     this.checkPokemonCollisionY = function (newY) {
 
         let randomNum = Math.floor(Math.random() * 50)
@@ -144,7 +168,7 @@ function PlayerMap(name, obstacle, pokeEvents) {
             newY <= pokeEvents[1].y + pokeEvents[1].height &&
             self.x + self.width >= pokeEvents[1].x &&
             self.x <= pokeEvents[1].x + pokeEvents[1].width) {
-            
+
             self.collisionSwitchZone2 = true;
         }
 

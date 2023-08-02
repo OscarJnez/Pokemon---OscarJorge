@@ -4,24 +4,26 @@ import { Enemy } from "./enemyConstructor.js"
 import { MapElement } from "./mapConstructor.js"
 import { PlayerMap } from "./playerMapConstructor.js"
 import { obstaclesArr } from "./mapGenerator.js"
+import { pokeEvents } from "./mapGenerator.js"
 
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/walkingMainAudio.mp3")
-let transitionFightScreenAudio = new Audio("AUDIO/audioTransCombat.mp3")
-
+let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
+let chatBoxClickAudio = new Audio("./AUDIO/conversationClick.mp3")
 
 //DOM principales SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
 let mapScreen = document.getElementById("map-screen")
 let fightScreen = document.getElementById("fight-screen")
 
+//DOM Elementos eventos del Mapa:
+let snorlaxEvent = document.getElementById("snorlax-event")
 
 //DOM Elementos de "startGameScreen":
 let startGameButton = document.getElementById("start-game-button")
 let startGameAudioButton = document.getElementById("start-game-audio-button")
-
 
 //Botón play para la música de startGameScreen:
 startGameAudioButton.addEventListener("click", function () {
@@ -51,24 +53,8 @@ startGameButton.addEventListener("click", function () {
 
 })
 
-//DOM Elementos de "mapScreen":
-//Zonas que contrendrán los eventos de aparición de los Pokemon:
-//Zona1:
-let leafZone = new MapElement("Zona1")
-leafZone.insertMapElement(150, 500, mapScreen);
-leafZone.height = 100;
-leafZone.width = 200;
-
 //Variable random que elegirá un Pokemon al azar del "enemiesArr" en la Zona1:
 let randomPokeEvent;
-
-//Zona2:
-let waterZone = new MapElement("Zona2")
-waterZone.insertMapElement(797, 303, mapScreen);
-waterZone.height = 100;
-waterZone.width = 100;
-
-let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array (que usará el constructor de "PlayerMap")
 
 //Creación e inserción del objeto "newPlayer" en el mapScreen:
 let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
@@ -103,26 +89,26 @@ function animationUp() {
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp1.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp1.png)'
 
     }, 0)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp.png)'
 
     }, 100)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp2.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp2.png)'
 
     }, 200)
 
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp.png)'
 
     }, 300)
 
@@ -139,25 +125,25 @@ function animationDown() {
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown1.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown1.png)'
 
     }, 0)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown.png)'
 
     }, 100)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown2.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown2.png)'
 
     }, 200)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown.png)'
 
     }, 300)
 
@@ -174,25 +160,25 @@ function animatedLeft() {
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft1.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashLeft1.png)'
 
     }, 0)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashLeft.png)'
 
     }, 100)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft2.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashLeft2.png)'
 
     }, 200)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashLeft.png)'
 
     }, 300)
 }
@@ -208,25 +194,25 @@ function animatedRight() {
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight1.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashRight1.png)'
 
     }, 0)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashRight.png)'
 
     }, 100)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight2.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashRight2.png)'
 
     }, 200)
 
     setTimeout(function () {
 
-        newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight.png)'
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashRight.png)'
 
     }, 300)
 }
@@ -253,6 +239,7 @@ window.addEventListener("keydown", function (event) {
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                 checkPokeEvent()
+                checkGeneralEvent()
             }
             break
         case "ArrowRight":
@@ -263,6 +250,7 @@ window.addEventListener("keydown", function (event) {
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                 checkPokeEvent()
+                checkGeneralEvent()
             }
             break
         case "ArrowUp":
@@ -273,6 +261,7 @@ window.addEventListener("keydown", function (event) {
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                 checkPokeEvent()
+                checkGeneralEvent()
             }
             break
         case "ArrowDown":
@@ -283,6 +272,7 @@ window.addEventListener("keydown", function (event) {
                 newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                 checkPokeEvent()
+                checkGeneralEvent()
             }
             break
     }
@@ -320,7 +310,6 @@ window.addEventListener("keyup", function (event) {
             break
     }
 })
-
 
 //DOM Elementos de "transitionScreen": 
 let loadingImgStartScreen = document.getElementById("loading-animation-start-screen")
@@ -393,7 +382,6 @@ let playerStatus = document.getElementById("player-status")
 //Timer id para el ataque de "enemy":
 let timerEnemyAttack;
 
-
 //FUNCIONES:
 //Mostrar "startGameScreen":
 function startGameScreenON() {
@@ -422,6 +410,28 @@ function mapScreenON() {
     fightScreen.setAttribute("class", "hidden")
 }
 
+function checkGeneralEvent() {
+
+
+    ///////Si hay colisión con Snorlax, nos aparece un chatBox tipo bocadillo. 
+    if (newPlayer.sucesoSnorlax === true) {
+
+        snorlaxEvent.removeAttribute("class")
+        chatBoxClickAudio.load();
+        chatBoxClickAudio.play();
+        newPlayer.sucesoSnorlax = false
+
+        setTimeout(function () {
+
+            snorlaxEvent.setAttribute("class", "hidden");
+
+        }, 5000)
+
+    }
+
+
+
+}
 //Checkear si "newPlayer" se encuentra con un Pokemon en Zona1 o Zona2 e iniciar la fightScreen:
 function checkPokeEvent() {
 
@@ -462,7 +472,7 @@ function checkPokeEvent() {
 
             transitionScreen.setAttribute('class', 'hidden')
             enemy = enemySquirtle    //Pero aquí pelearemos únicamente con "enemySquirtle".
-            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/waterBackground2.png)"
+            combatBackGround.style.backgroundImage = "url(./IMG/OTROS/waterBackground2.png)"
             fightScreenON()
             newPlayer.collisionSwitchZone2 = false
 
@@ -513,12 +523,27 @@ runOptionButton.addEventListener("click", function () {
 
 })
 
+//Reiniciar "health" y "pp" de "enemy" a los valores originales al empezar una nueva pelea.
+function restoreEnemyHealth() {
+
+    enemy.health = enemy.level * 10;
+    enemy.pp = enemy.level * 4;
+
+}
+
+//Reiniciar "health" y "pp" de "player" a los valores originales si se cumple condición "GAME-OVER" y reiniciamos el juego:
+function restorePlayerHealth() {
+
+    player.health = player.level * 10;
+    player.pp = player.level * 4;
+
+}
+
 //Mostrar "fightScreen":
 function fightScreenON() {
     //Audios:
     openingAudio.pause()
     startGameAudio.pause()
-
 
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
     mapScreen.setAttribute("class", "hidden")
@@ -526,22 +551,6 @@ function fightScreenON() {
 
     //Primer mensaje que se ve en el div "newMessage"
     newMessage.innerText = "Has encontrado un " + enemy.name + "...\n ¿Qué quieres hacer?"
-
-    //Reiniciar "health" y "pp" de "enemy" a los valores originales al empezar una nueva pelea.
-    function restoreEnemyHealth() {
-
-        enemy.health = enemy.level * 10;
-        enemy.pp = enemy.level * 4;
-
-    }
-
-    //Reiniciar "health" y "pp" de "player" a los valores originales si se cumple condición "GAME-OVER" y reiniciamos el juego:
-    function restorePlayerHealth() {
-
-        player.health = player.level * 10;
-        player.pp = player.level * 4;
-
-    }
 
     //Restauramos "health" y "pp " de "enemy":
     restoreEnemyHealth();

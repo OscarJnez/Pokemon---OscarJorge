@@ -264,6 +264,24 @@ person.width = 30;
 let snorlax = new MapElement("Snorlax")
 snorlax.insertMapElement(0, 370, mapScreen)
 
+//ZONAS DE EVENTO POKEMON 
+
+//Zonas que contrendrán los eventos de aparición de los Pokemon:
+//Zona1:
+let leafZone = new MapElement("Zona1")
+leafZone.insertMapElement(150, 500, mapScreen);
+leafZone.height = 100;
+leafZone.width = 200;
+
+//Zona2:
+let waterZone = new MapElement("Zona2")
+waterZone.insertMapElement(797, 303, mapScreen);
+waterZone.height = 100;
+waterZone.width = 100;
+
+let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array (que usará el constructor de "PlayerMap")
+
+
 //ARRAY DE TODOS LOS OBSTACULOS 
 let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
     arbol7, arbol8, arbol9, arbol10, arbol11, arbol12, arbol13, arbol14,
@@ -281,3 +299,4 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 ]
 
 export {obstaclesArr}
+export {pokeEvents}
