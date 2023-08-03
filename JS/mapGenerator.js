@@ -93,7 +93,7 @@ house1.height = 110;
 house1.width = 130;
 let house2 = new MapElement("PokeBakery")
 house2.insertMapElement(300, 300, mapScreen)
-house2.height = 90;
+house2.height = 80;
 house2.width = 110;
 
 let house4 = new MapElement("SideHouse")
@@ -281,6 +281,14 @@ waterZone.width = 100;
 
 let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array (que usará el constructor de "PlayerMap")
 
+//Puertas colisionables que desencadenan un evento: 
+let puertaInvisible1 = new MapElement("PuertaInv")
+puertaInvisible1.insertMapElement(362,371, mapScreen);
+puertaInvisible1.width = 0.01;
+puertaInvisible1.height = 10;
+
+let obstacleEvents = [puertaInvisible1]
+
 
 //ARRAY DE TODOS LOS OBSTACULOS 
 let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
@@ -298,5 +306,6 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 
 ]
 
+export {obstacleEvents}
 export {obstaclesArr}
 export {pokeEvents}

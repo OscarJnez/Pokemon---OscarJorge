@@ -5,6 +5,7 @@ import { MapElement } from "./mapConstructor.js"
 import { PlayerMap } from "./playerMapConstructor.js"
 import { obstaclesArr } from "./mapGenerator.js"
 import { pokeEvents } from "./mapGenerator.js"
+import { obstacleEvents } from "./mapGenerator.js"
 
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
@@ -12,11 +13,16 @@ let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/walkingMainAudio.mp3")
 let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
 let chatBoxClickAudio = new Audio("./AUDIO/conversationClick.mp3")
+let pokeCenterAudio = new Audio("./AUDIO/pokeCenter.mp3")
 
 //DOM principales SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
 let mapScreen = document.getElementById("map-screen")
 let fightScreen = document.getElementById("fight-screen")
+
+//DOM secondary SCREENS: 
+
+let pokeCenterScreen = document.getElementById("poke-center-screen")
 
 //DOM Elementos eventos del Mapa:
 let snorlaxEvent = document.getElementById("snorlax-event")
@@ -57,7 +63,7 @@ startGameButton.addEventListener("click", function () {
 let randomPokeEvent;
 
 //Creación e inserción del objeto "newPlayer" en el mapScreen:
-let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
+let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents, obstacleEvents)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
 //Función que traslada a newPlayer a la posición inicial:
@@ -429,7 +435,26 @@ function checkGeneralEvent() {
 
     }
 
+    ////// Acceso a pantalla de PokeCenter
 
+    if (newPlayer.sucesoPuerta1 === true) {
+
+        console.log("también funciona la función de activación!");
+        newPlayer.activateGeneralCollisions = false;
+        newPlayer.sucesoPuerta1 = false;
+        mapScreenAudio.pause();
+        mapScreen.setAttribute("class", "hidden");
+
+        pokeCenterAudio.play();
+        pokeCenterAudio.volume = 0.08
+        pokeCenterAudio.loop = true;
+        pokeCenterScreen.removeAttribute("class");
+        newPlayer.insertPlayer(177, 202, pokeCenterScreen)
+
+        newPlayer.sprite.style.height = "50px";
+        newPlayer.sprite.style.width = "50px";
+        
+    }
 
 }
 //Checkear si "newPlayer" se encuentra con un Pokemon en Zona1 o Zona2 e iniciar la fightScreen:

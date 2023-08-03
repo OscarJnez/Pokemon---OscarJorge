@@ -171,9 +171,7 @@ button:hover {
     background-size: 100%;
     background-repeat: repeat;
 
-
 }
-
 
 #snorlax-event {
     position: absolute;
@@ -199,11 +197,24 @@ button:hover {
 
 /*INSIDE POKE CENTER CSS*/
 
+#poke-center-screen{
 
-/*!!! INSIDE POKE CENTER CSS*/
+position: absolute;
+height: 250px;
+width: 460px;
+top: 240px;
+left: 400px;
+background-image: url("../IMG/MAP/insideHouses/pokeCenter.png");
+background-size: contain;
+background-repeat: no-repeat;
+/* border: black 1px solid; */
+
+}
+
+/*! INSIDE POKE CENTER CSS*/
 
 
-/*!!MAP SCREEN CSS*/
+/*//// !!!MAP SCREEN CSS*/
 
 
 

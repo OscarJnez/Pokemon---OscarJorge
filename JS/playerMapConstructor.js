@@ -1,13 +1,14 @@
 import { MapElement } from "./mapConstructor.js";
 
 //Función constructora de "Player":
-function PlayerMap(name, obstacle, pokeEvents) {
+function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
+
 
     let self = this;
     this.collisionSwitch = false;
     this.name = name;
-    this.height = 30;
-    this.width = 30;
+    this.height = 22;
+    this.width = 22;
     this.directionX = 0;
     this.directionY = 0;
     this.speed = 5;
@@ -16,12 +17,20 @@ function PlayerMap(name, obstacle, pokeEvents) {
     this.sprite.style.height = this.height + "px";
     this.sprite.style.width = this.width + "px";
     this.sprite.style.backgroundImage = "url(./IMG/MAP/playerUp.png)"
-    this.sprite.style.backgroundSize = "80%";
+    this.sprite.style.backgroundPosition = "center center";
+    this.sprite.style.backgroundSize = "100%";
     this.sprite.style.backgroundRepeat = "no-repeat";
     // this.sprite.style.backgroundColor = "blue";
-    this.sprite.style.backgroundImage
+    this.sprite.style.backgroundImage;
+    // this.sprite.style.border = "1px solid black";
+
+    this.activateGeneralCollisions = true;
+
+
+    // variables switch activadoras de eventos. 
 
     this.sucesoSnorlax = false;
+    this.sucesoPuerta1 = false;
 
     //Atributo para rastrear colisiones:
     this.movementSwitch = true;
@@ -62,25 +71,29 @@ function PlayerMap(name, obstacle, pokeEvents) {
     }
 
     this.checkCollisionX = function (newX) {
+        if (this.activateGeneralCollisions === true) {
 
-        for (let i = 0; i < obstacle.length; i++) {
+            for (let i = 0; i < obstacle.length; i++) {
 
-            if (
-                self.y + self.height >= obstacle[i].y &&
-                self.y <= obstacle[i].y + obstacle[i].height &&
-                newX + self.width >= obstacle[i].x &&
-                newX <= obstacle[i].x + obstacle[i].width) {
+                if (
+                    self.y + self.height >= obstacle[i].y &&
+                    self.y <= obstacle[i].y + obstacle[i].height &&
+                    newX + self.width >= obstacle[i].x &&
+                    newX <= obstacle[i].x + obstacle[i].width) {
 
-                return true;
-            }
+                    return true;
+                }
+                else if (
 
-            else if (self.y + self.height >= obstacle[50].y &&
-                self.y <= obstacle[50].y + obstacle[50].height &&
-                newX + self.width >= obstacle[50].x &&
-                newX <= obstacle[50].x + obstacle[50].width) {
+                    self.y + self.height >= obstacle[50].y &&
+                    self.y <= obstacle[50].y + obstacle[50].height &&
+                    newX + self.width >= obstacle[50].x &&
+                    newX <= obstacle[50].x + obstacle[50].width) {
 
-                console.log("un snorlax!!!")
-                this.sucesoSnorlax = true;
+                    console.log("un snorlax!!!")
+                    self.sucesoSnorlax = true;
+
+                }
 
             }
 
@@ -89,30 +102,43 @@ function PlayerMap(name, obstacle, pokeEvents) {
     }
 
     this.checkCollisionY = function (newY) {
-
-        for (let i = 0; i < obstacle.length; i++) {
-
-            if (
-                newY + self.height >= obstacle[i].y &&
-                newY <= obstacle[i].y + obstacle[i].height &&
-                self.x + self.width >= obstacle[i].x &&
-                self.x <= obstacle[i].x + obstacle[i].width) {
-
-                return true;
-
-            }
-            else if (self.y + self.height >= obstacle[50].y &&
-                self.y <= obstacle[50].y + obstacle[50].height &&
-                newY + self.width >= obstacle[50].x &&
-                newY <= obstacle[50].x + obstacle[50].width) {
-
-                console.log("un snorlax!!!")
-                this.sucesoSnorlax = true;
-
-            }
-
+        if (this.activateGeneralCollisions === true) {
             
+            for (let i = 0; i < obstacle.length; i++) {
 
+                if (
+                    newY + self.height >= obstacle[i].y &&
+                    newY <= obstacle[i].y + obstacle[i].height &&
+                    self.x + self.width >= obstacle[i].x &&
+                    self.x <= obstacle[i].x + obstacle[i].width) {
+
+                    return true;
+
+                }
+                else if (
+
+                    newY + self.height >= obstacle[50].y &&
+                    newY <= obstacle[50].y + obstacle[50].height &&
+                    self.x + self.width >= obstacle[50].x &&
+                    self.x <= obstacle[50].x + obstacle[50].width) {
+
+                    console.log("un snorlax!!!")
+                    this.sucesoSnorlax = true;
+
+                }
+                else if (
+
+                    newY + self.height >= obstacleGen[0].y &&
+                    newY <= obstacleGen[0].y + obstacleGen[0].height &&
+                    self.x + self.width >= obstacleGen[0].x &&
+                    self.x <= obstacleGen[0].x + obstacleGen[0].width) {
+
+                    console.log("colision con Puerta PokeCenter")
+                    this.sucesoPuerta1 = true;
+
+                }
+
+            }
         }
 
     }

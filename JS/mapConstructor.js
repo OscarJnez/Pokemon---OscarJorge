@@ -163,6 +163,10 @@ function MapElement(elementType) {
             this.mapElementSprite.style.border = '1px solid blue'
             break;
 
+        case "PuertaInv":
+            // // this.mapElementSprite.style.border = '1px solid blue'
+            // this.mapElementSprite.style.height = '20px';
+            // this.mapElementSprite.style.width = '13px';
     }
 
 }
