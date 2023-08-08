@@ -26,7 +26,6 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
 
     this.activateGeneralCollisions = true;
 
-
     // variables switch activadoras de eventos. 
 
     this.sucesoSnorlax = false;
