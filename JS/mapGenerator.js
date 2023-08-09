@@ -283,7 +283,7 @@ let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array 
 
 //Puertas colisionables que desencadenan un evento: 
 let puertaInvisible1 = new MapElement("PuertaInv")
-puertaInvisible1.insertMapElement(362,371, mapScreen);
+puertaInvisible1.insertMapElement(362, 371, mapScreen);
 puertaInvisible1.width = 0.01;
 puertaInvisible1.height = 10;
 
@@ -302,10 +302,10 @@ let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
 
     rock1, rock5, rock6, rock7, rock8, rock9, rock10, rock11, rock12,
     rock13, rock14, rock15, rock16, rock17, rock18, rock19, rock20, rock21, rock22, rock23,
-    rock24, rock25
+    rock24, rock25]
 
-]
 
-export {obstacleEvents}
-export {obstaclesArr}
-export {pokeEvents}
+
+export { obstacleEvents }
+export { obstaclesArr }
+export { pokeEvents }

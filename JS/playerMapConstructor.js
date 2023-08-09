@@ -3,7 +3,6 @@ import { MapElement } from "./mapConstructor.js";
 //Función constructora de "Player":
 function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
 
-
     let self = this;
     this.collisionSwitch = false;
     this.name = name;
@@ -20,11 +19,12 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
     this.sprite.style.backgroundPosition = "center center";
     this.sprite.style.backgroundSize = "100%";
     this.sprite.style.backgroundRepeat = "no-repeat";
-    // this.sprite.style.backgroundColor = "blue";
     this.sprite.style.backgroundImage;
     // this.sprite.style.border = "1px solid black";
 
+    // variables switch para activación de colisiones según pantallas.
     this.activateGeneralCollisions = true;
+    this.activatePokeCenterCollisions = false;
 
     // variables switch activadoras de eventos. 
 
@@ -98,11 +98,17 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
 
         }
 
+        else if (this.activatePokeCenterCollisions === true) {
+
+
+
+        }
+
     }
 
     this.checkCollisionY = function (newY) {
         if (this.activateGeneralCollisions === true) {
-            
+
             for (let i = 0; i < obstacle.length; i++) {
 
                 if (
@@ -136,10 +142,13 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
                     this.sucesoPuerta1 = true;
 
                 }
-
             }
         }
+        else if (this.activatePokeCenterCollisions === true) {
 
+            
+
+        }
     }
 
     ////// Método para comprobar la colisión del "PlayerMap" con "MapElement" tipo Pokemon (EjeX):
@@ -154,13 +163,6 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
             newX <= pokeEvents[0].x + pokeEvents[0].width) {
             self.collisionSwitchZone1 = true;
         }
-
-        // Para hacerlo escalable podemos crear otro 'RandomNum para que se eligan los pokemon que 
-        // en cada zona, de forma aleatoria. Este random num sería el 'indice' de posición en cada pokeEvents
-        // En lugar de pokeEvents Generico podemos poner un tipo de evento por
-        // cada Zona. Aunque tal y como lo tenemos hecho ahora, habría que pasarle un constructor 
-        // nuevo con otro array de otra zona, o anidar los arrays de los tipos de zonas en el array 
-        // generico 'pokeEvents'. 
 
         else if
             (randomNum === 5 &&
@@ -198,7 +200,6 @@ function PlayerMap(name, obstacle, pokeEvents, obstacleGen) {
         }
 
     }
-
 
 }
 

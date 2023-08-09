@@ -418,7 +418,6 @@ function mapScreenON() {
 
 function checkGeneralEvent() {
 
-
     ///////Si hay colisión con Snorlax, nos aparece un chatBox tipo bocadillo. 
     if (newPlayer.sucesoSnorlax === true) {
 
@@ -453,7 +452,7 @@ function checkGeneralEvent() {
 
         newPlayer.sprite.style.height = "50px";
         newPlayer.sprite.style.width = "50px";
-        
+
     }
 
 }
@@ -483,7 +482,9 @@ function checkPokeEvent() {
             newPlayer.collisionSwitchZone1 = false  //y desactivamos el "collisionSwitchZone1" para evitar volver a colisionar al terminar la batalla.
 
         }, 5000)
-    } else if (newPlayer.collisionSwitchZone2 === true && enemySquirtle.health > 0) {   //Lo mismo para la Zona2 ("waterZone")....
+    }
+
+    else if (newPlayer.collisionSwitchZone2 === true && enemySquirtle.health > 0) {   //Lo mismo para la Zona2 ("waterZone")....
         //Audios:
         mapScreenAudio.pause()
         transitionFightScreenAudio.load()
