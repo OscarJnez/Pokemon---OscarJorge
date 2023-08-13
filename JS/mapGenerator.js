@@ -1,5 +1,6 @@
 import { MapElement } from "./mapConstructor.js"
 let mapScreen = document.getElementById("map-screen")
+let pokeCenterScreen = document.getElementById("poke-center-screen")
 
 //ELEMENTOS INSERTADOS EN EL MAPA 
 //ARBOLES
@@ -282,30 +283,72 @@ waterZone.width = 100;
 let pokeEvents = [leafZone, waterZone] //Metemos ambas zonas dentro de un array (que usará el constructor de "PlayerMap")
 
 //Puertas colisionables que desencadenan un evento: 
-let puertaInvisible1 = new MapElement("PuertaInv")
-puertaInvisible1.insertMapElement(362, 371, mapScreen);
-puertaInvisible1.width = 0.01;
-puertaInvisible1.height = 10;
+let puertaEntradaPokeCenter1 = new MapElement("PuertaEntradaPokeCenter1")
+puertaEntradaPokeCenter1.insertMapElement(362, 371, mapScreen);
+puertaEntradaPokeCenter1.width = 0.01;
+puertaEntradaPokeCenter1.height = 10;
 
-let obstacleEvents = [puertaInvisible1]
+//Colisiones dentro del Centro Pokemon
+
+let nursePokeCenterPPaleta = new MapElement("pokeCenterNurseColission")
+nursePokeCenterPPaleta.insertMapElement(190, 50, pokeCenterScreen)
+nursePokeCenterPPaleta.width = 20;
+nursePokeCenterPPaleta.height = 20;
+
+let puertaSalidaPokeCenter1 = new MapElement("puertaSalidaPokeCenter1");
+puertaSalidaPokeCenter1.insertMapElement(190, 215, pokeCenterScreen);
+puertaSalidaPokeCenter1.width = 20;
+puertaSalidaPokeCenter1.height = 20;
+
+let pokeCenterColission1 = new MapElement("pokeCenterColission1")
+pokeCenterColission1.insertMapElement(0, 220, pokeCenterScreen)
+pokeCenterColission1.height = 20;
+pokeCenterColission1.width = 400;
+
+let pokeCenterColission2 = new MapElement("pokeCenterColission2")
+pokeCenterColission2.insertMapElement(285, 40, pokeCenterScreen)
+pokeCenterColission2.height = 200;
+pokeCenterColission2.width = 20;
+
+let pokeCenterColission3 = new MapElement("pokeCenterColission3")
+pokeCenterColission3.insertMapElement(30, 40, pokeCenterScreen)
+pokeCenterColission3.height = 200;
+pokeCenterColission3.width = 20;
+
+let pokeCenterColission4 = new MapElement("pokeCenterColission4")
+pokeCenterColission4.insertMapElement(70, 0, pokeCenterScreen)
+pokeCenterColission4.height = 70;
+pokeCenterColission4.width = 220;
 
 
 //ARRAY DE TODOS LOS OBSTACULOS 
-let obstaclesArr = [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
-    arbol7, arbol8, arbol9, arbol10, arbol11, arbol12, arbol13, arbol14,
-    arbol15, arbol16, arbol16, arbol17, arbol18, arbol19, arbol20, arbol21, arbol22,
-    arbol23, arbol24, arbol25, arbol26, arbol27, arbol28, arbol29, arbol31,
-    arbol32, arbol33, arbol34, arbol35, arbol36, arbol37, arbol38, arbol39, arbol40, arbol41,
+let obstaclesArr = {
 
-    house1, house2, house3, house4, house5,
-    water1, water2, fountain, person, snorlax,
+    obstaclesGenPuebloPaleta: [arbol1, arbol2, arbol3, arbol4, arbol5, arbol6,
+        arbol7, arbol8, arbol9, arbol10, arbol11, arbol12, arbol13, arbol14,
+        arbol15, arbol16, arbol16, arbol17, arbol18, arbol19, arbol20, arbol21, arbol22,
+        arbol23, arbol24, arbol25, arbol26, arbol27, arbol28, arbol29, arbol31,
+        arbol32, arbol33, arbol34, arbol35, arbol36, arbol37, arbol38, arbol39, arbol40, arbol41,
 
-    rock1, rock5, rock6, rock7, rock8, rock9, rock10, rock11, rock12,
-    rock13, rock14, rock15, rock16, rock17, rock18, rock19, rock20, rock21, rock22, rock23,
-    rock24, rock25]
+        house1, house2, house3, house4, house5,
+        water1, water2, fountain, person, snorlax,
+
+        rock1, rock5, rock6, rock7, rock8, rock9, rock10, rock11, rock12,
+        rock13, rock14, rock15, rock16, rock17, rock18, rock19, rock20, rock21, rock22, rock23,
+        rock24, rock25],
+
+    obstaclesEventsPuebloPaleta: [puertaEntradaPokeCenter1],
+
+    obstaclesPokeCenterPuebloPaleta: [pokeCenterColission1, pokeCenterColission2, pokeCenterColission3,
+        pokeCenterColission4],
+
+    obstaclesSalidaPokeCenterPuebloPaleta: [puertaSalidaPokeCenter1],
+
+    obstacleEventoPokeCenterPuebloPaleta: [nursePokeCenterPPaleta]
+
+};
 
 
 
-export { obstacleEvents }
 export { obstaclesArr }
 export { pokeEvents }

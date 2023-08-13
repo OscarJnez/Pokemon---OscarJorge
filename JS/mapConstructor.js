@@ -163,50 +163,53 @@ function MapElement(elementType) {
             this.mapElementSprite.style.border = '1px solid blue'
             break;
 
-        case "PuertaInv":
-        // // this.mapElementSprite.style.border = '1px solid blue'
-        // this.mapElementSprite.style.height = '20px';
-        // this.mapElementSprite.style.width = '13px';
+        case "PuertaEntradaPokeCenter1":
+            // this.mapElementSprite.style.border = '1px solid blue'
+            // this.mapElementSprite.style.height = '20px';
+            // this.mapElementSprite.style.width = '13px';
+            break;
     }
 
     // elementos para el pokeCenter.
     switch (this.elementType) {
 
         case "pokeCenterColission1":
-            this.mapElementSprite.style.height = '100px';
-            this.mapElementSprite.style.width = '200px';
-            this.mapElementSprite.style.border = '1px solid blue'
+            this.mapElementSprite.style.height = '20px';
+            this.mapElementSprite.style.width = '400px';
+            // this.mapElementSprite.style.border = '2px solid orange'
             break;
 
         case "pokeCenterColission2":
-            this.mapElementSprite.style.height = '100px';
-            this.mapElementSprite.style.width = '200px';
-            this.mapElementSprite.style.border = '1px solid blue'
+            this.mapElementSprite.style.height = '200px';
+            this.mapElementSprite.style.width = '20px';
+            // this.mapElementSprite.style.border = '2px solid blue'
             break;
 
         case "pokeCenterColission3":
-            this.mapElementSprite.style.height = '100px';
-            this.mapElementSprite.style.width = '200px';
-            this.mapElementSprite.style.border = '1px solid blue'
+            this.mapElementSprite.style.height = '200px';
+            this.mapElementSprite.style.width = '20px';
+            // this.mapElementSprite.style.border = '2px solid green'
             break;
 
-
         case "pokeCenterColission4":
-            this.mapElementSprite.style.height = '100px';
-            this.mapElementSprite.style.width = '200px';
-            this.mapElementSprite.style.border = '1px solid blue'
+            this.mapElementSprite.style.height = '70px';
+            this.mapElementSprite.style.width = '220px';
+            // this.mapElementSprite.style.border = '2px solid red'
             break;
 
         case "pokeCenterNurseColission":
-            this.mapElementSprite.style.height = '100px';
-            this.mapElementSprite.style.width = '200px';
-            this.mapElementSprite.style.border = '1px solid blue'
+            this.mapElementSprite.style.height = '20px';
+            this.mapElementSprite.style.width = '20px';
+            this.mapElementSprite.style.border = '4px solid blue'
             break;
 
-
+        case "puertaSalidaPokeCenter1":
+            this.mapElementSprite.style.height = '20px';
+            this.mapElementSprite.style.width = '20px';
+            // this.mapElementSprite.style.border = '4px solid red'
+            break;
 
     }
-
 
 }
 

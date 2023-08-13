@@ -5,7 +5,7 @@ import { MapElement } from "./mapConstructor.js"
 import { PlayerMap } from "./playerMapConstructor.js"
 import { obstaclesArr } from "./mapGenerator.js"
 import { pokeEvents } from "./mapGenerator.js"
-import { obstacleEvents } from "./mapGenerator.js"
+
 
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
@@ -14,6 +14,7 @@ let mapScreenAudio = new Audio("./AUDIO/walkingMainAudio.mp3")
 let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
 let chatBoxClickAudio = new Audio("./AUDIO/conversationClick.mp3")
 let pokeCenterAudio = new Audio("./AUDIO/pokeCenter.mp3")
+let doorOpeningSound = new Audio("./AUDIO/doorSound.mp3")
 
 //DOM principales SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
@@ -63,7 +64,7 @@ startGameButton.addEventListener("click", function () {
 let randomPokeEvent;
 
 //Creación e inserción del objeto "newPlayer" en el mapScreen:
-let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents, obstacleEvents)
+let newPlayer = new PlayerMap("Player", obstaclesArr, pokeEvents)
 newPlayer.insertPlayer(560, 670, mapScreen)
 
 //Función que traslada a newPlayer a la posición inicial:
@@ -407,13 +408,26 @@ function mapScreenON() {
     openingAudio.pause()
     startGameAudio.pause()
     transitionFightScreenAudio.pause()
+    pokeCenterAudio.pause()
     mapScreenAudio.play()
     mapScreenAudio.volume = 0.08;
     mapScreenAudio.loop = true;
 
+    newPlayer.activatePPaletaCollisions = true;
+
+    newPlayer.sprite.style.height = "22px";
+    newPlayer.sprite.style.width = "22px";
+
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
+}
+
+function doorSoundON() {
+
+    doorOpeningSound.volume = 0.08
+    doorOpeningSound.play();
+
 }
 
 function checkGeneralEvent() {
@@ -433,13 +447,11 @@ function checkGeneralEvent() {
         }, 5000)
 
     }
-
-    ////// Acceso a pantalla de PokeCenter
-
+    ////// Acceso a pantalla de PokeCenter a través de colisión con la puerta
     if (newPlayer.sucesoPuerta1 === true) {
 
-        console.log("también funciona la función de activación!");
-        newPlayer.activateGeneralCollisions = false;
+        doorSoundON();
+        newPlayer.activatePPaletaCollisions = false;
         newPlayer.sucesoPuerta1 = false;
         mapScreenAudio.pause();
         mapScreen.setAttribute("class", "hidden");
@@ -448,10 +460,30 @@ function checkGeneralEvent() {
         pokeCenterAudio.volume = 0.08
         pokeCenterAudio.loop = true;
         pokeCenterScreen.removeAttribute("class");
-        newPlayer.insertPlayer(177, 202, pokeCenterScreen)
+        newPlayer.insertPlayer(177, 196, pokeCenterScreen)
+        newPlayer.activatePokeCenterCollisions = true;
 
         newPlayer.sprite.style.height = "50px";
         newPlayer.sprite.style.width = "50px";
+
+    }
+    ////// Salida del pokeCenter 
+    if (newPlayer.sucesoPuerta1Exit === true) {
+
+        console.log("funciona el método también");
+
+        doorSoundON();
+        pokeCenterScreen.setAttribute("class", "hidden");
+        mapScreenON();
+        newPlayer.insertPlayer(354, 380, mapScreen)
+        newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown.png)'
+        newPlayer.sucesoPuerta1Exit = false;
+        newPlayer.activatePokeCenterCollisions = false;
+    }
+    if (newPlayer.nurseCollision === true){
+    
+        newPlayer.nurseCollision = false; 
+        
 
     }
 
@@ -715,7 +747,6 @@ restartGameOverOptionButton.addEventListener("click", function () {
     gameOverOptionMenu.setAttribute("class", "hidden");
     restorePlayerHealth()  //iniciamos la "health" y "pp" de "player" a los valores iniciales.
 })
-
 
 //Encendemos pantalla "START-GAME" (Comienza el juego):
 startGameScreenON()
