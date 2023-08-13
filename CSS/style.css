@@ -197,17 +197,60 @@ button:hover {
 
 /*INSIDE POKE CENTER CSS*/
 
-#poke-center-screen{
+#poke-center-screen {
 
-position: absolute;
-height: 250px;
-width: 460px;
-top: 240px;
-left: 400px;
-background-image: url("../IMG/MAP/insideHouses/pokeCenter.png");
-background-size: contain;
-background-repeat: no-repeat;
-/* border: black 1px solid; */
+    height: 250px;
+    width: 460px;
+    position: absolute;
+    top: 240px;
+    left: 600px;
+    background-image: url("../IMG/MAP/insideHouses/pokeCenter.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* border: black 1px solid; */
+
+}
+
+
+#poke-center-chatBox {
+
+    height: 220px;
+    width: 400px;
+    position: absolute;
+    top: 250px;
+    left: 0px;
+    border: black 1px solid;
+    border-radius: 20px;
+    background-color: beige;
+
+
+}
+
+#texto-pokeNurse {
+
+    position: absolute;
+    padding: 15px;
+
+
+}
+
+#boton-pokeCenter-container {
+
+    position: absolute;
+    top: 80px;
+    height: 125px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+
+    padding: 5px;
+
+}
+
+#boton-pokeCenter-container button {
+    margin: 0 8px;
 
 }
 

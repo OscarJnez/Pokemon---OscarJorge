@@ -15,6 +15,7 @@ let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
 let chatBoxClickAudio = new Audio("./AUDIO/conversationClick.mp3")
 let pokeCenterAudio = new Audio("./AUDIO/pokeCenter.mp3")
 let doorOpeningSound = new Audio("./AUDIO/doorSound.mp3")
+let pokemonRecoveryAudio = new Audio("./AUDIO/pokemon-recovery.mp3")
 
 //DOM principales SCREENS:
 let startGameScreen = document.getElementById("start-game-screen")
@@ -23,7 +24,11 @@ let fightScreen = document.getElementById("fight-screen")
 
 //DOM secondary SCREENS: 
 
-let pokeCenterScreen = document.getElementById("poke-center-screen")
+let pokeCenterScreen = document.getElementById("poke-center-screen");
+let pokeCenterChatBox = document.getElementById("poke-center-chatBox");
+let curarButton = document.getElementById("boton-curar-pokemon");
+let salirButton = document.getElementById("boton-salir-nurse");
+let textoPokeNurse = document.getElementById("texto-pokeNurse");
 
 //DOM Elementos eventos del Mapa:
 let snorlaxEvent = document.getElementById("snorlax-event")
@@ -72,6 +77,25 @@ function initialPosition() {
     newPlayer.insertPlayer(560, 670, mapScreen)
     newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)';  //mirando hacia arriba
 }
+
+//Funciones de curar a pokemon del jugador y pokemon enemigos: 
+
+//Reiniciar "health" y "pp" de "enemy" a los valores originales al empezar una nueva pelea.
+function restoreEnemyHealth() {
+
+    enemy.health = enemy.level * 10;
+    enemy.pp = enemy.level * 4;
+
+}
+
+//Reiniciar "health" y "pp" de "player" a los valores originales si se cumple condición "GAME-OVER" y reiniciamos el juego:
+function restorePlayerHealth() {
+
+    player.health = player.level * 10;
+    player.pp = player.level * 4;
+
+}
+
 
 //Timer ids del movimiento del Player por el MAP:
 let playerTimerY;
@@ -390,7 +414,33 @@ let playerStatus = document.getElementById("player-status")
 let timerEnemyAttack;
 
 //FUNCIONES:
+
+//funciones de sonidos ambientales y de casas basicos: 
+
+function doorSoundON() {
+
+    doorOpeningSound.volume = 0.08
+    doorOpeningSound.play();
+
+}
+
+function clickSound() {
+
+    chatBoxClickAudio.volume = 0.25;
+    chatBoxClickAudio.play();
+
+}
+
+function pokemonRecoverySound() {
+
+    pokemonRecoveryAudio.volume = 0.12;
+    pokemonRecoveryAudio.play();
+
+}
+
+//funciones estructurales: 
 //Mostrar "startGameScreen":
+
 function startGameScreenON() {
     //Audios:
     openingAudio.pause()
@@ -421,13 +471,6 @@ function mapScreenON() {
     startGameScreen.setAttribute("class", "hidden")
     mapScreen.removeAttribute("class")
     fightScreen.setAttribute("class", "hidden")
-}
-
-function doorSoundON() {
-
-    doorOpeningSound.volume = 0.08
-    doorOpeningSound.play();
-
 }
 
 function checkGeneralEvent() {
@@ -480,10 +523,40 @@ function checkGeneralEvent() {
         newPlayer.sucesoPuerta1Exit = false;
         newPlayer.activatePokeCenterCollisions = false;
     }
-    if (newPlayer.nurseCollision === true){
-    
-        newPlayer.nurseCollision = false; 
-        
+    /////// Enfermera Pokemon
+    if (newPlayer.nurseCollision === true) {
+
+        clickSound();
+        pokeCenterChatBox.removeAttribute("class")
+        newPlayer.nurseCollision = false;
+        textoPokeNurse.innerText = "Bienvenido al centro Pokemon de Pueblo Paleta, ¿Que puedo hacer por ti?"
+
+        curarButton.addEventListener("click", function () {
+
+            console.log("boton de curar pulsado")
+            pokeCenterAudio.pause();
+            pokemonRecoverySound();
+            restorePlayerHealth();
+            newPlayer.nurseCollision = false;
+            textoPokeNurse.innerText = "Espere unos segundos..."
+
+            setTimeout(function () {
+                pokeCenterAudio.play();
+                pokeCenterAudio.loop = true;
+                textoPokeNurse.innerText = "Sus Pokemon han sido curados y están listos para luchar. Vuelva pronto!"
+
+            }, 4000)
+
+
+        })
+
+        salirButton.addEventListener("click", function () {
+
+            console.log("boton de salir pulsado")
+            pokeCenterChatBox.setAttribute("class", "hidden")
+            newPlayer.nurseCollision = false;
+
+        })
 
     }
 
@@ -581,21 +654,6 @@ runOptionButton.addEventListener("click", function () {
 
 })
 
-//Reiniciar "health" y "pp" de "enemy" a los valores originales al empezar una nueva pelea.
-function restoreEnemyHealth() {
-
-    enemy.health = enemy.level * 10;
-    enemy.pp = enemy.level * 4;
-
-}
-
-//Reiniciar "health" y "pp" de "player" a los valores originales si se cumple condición "GAME-OVER" y reiniciamos el juego:
-function restorePlayerHealth() {
-
-    player.health = player.level * 10;
-    player.pp = player.level * 4;
-
-}
 
 //Mostrar "fightScreen":
 function fightScreenON() {

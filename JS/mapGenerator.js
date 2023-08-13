@@ -291,7 +291,7 @@ puertaEntradaPokeCenter1.height = 10;
 //Colisiones dentro del Centro Pokemon
 
 let nursePokeCenterPPaleta = new MapElement("pokeCenterNurseColission")
-nursePokeCenterPPaleta.insertMapElement(190, 50, pokeCenterScreen)
+nursePokeCenterPPaleta.insertMapElement(190, 47, pokeCenterScreen)
 nursePokeCenterPPaleta.width = 20;
 nursePokeCenterPPaleta.height = 20;
 
