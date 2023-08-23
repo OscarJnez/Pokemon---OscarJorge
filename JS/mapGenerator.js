@@ -124,8 +124,7 @@ house3.height = 130;
 house3.width = 150;
 
 //CESPED
-let grass1 = new MapElement("Grass")
-grass1.insertMapElement(0, 300, mapScreen)
+
 let grass2 = new MapElement("Grass")
 grass2.insertMapElement(50, 300, mapScreen)
 let grass3 = new MapElement("Grass")
@@ -140,8 +139,6 @@ grass7.insertMapElement(400, 0, mapScreen)
 let grass8 = new MapElement("Grass")
 grass8.insertMapElement(350, 0, mapScreen)
 
-let grass9 = new MapElement("Grass")
-grass9.insertMapElement(0, 500, mapScreen)
 let grass10 = new MapElement("Grass")
 grass10.insertMapElement(50, 500, mapScreen)
 let grass11 = new MapElement("Grass")
@@ -247,6 +244,22 @@ let rock24 = new MapElement("Rock")
 rock24.insertMapElement(445, 657, mapScreen)
 let rock25 = new MapElement("Rock")
 rock25.insertMapElement(610, 657, mapScreen)
+let rock26 = new MapElement("Rock2")
+rock26.insertMapElement(0, 300, mapScreen)
+let rock27 = new MapElement("Rock2")
+rock27.insertMapElement(0, 320, mapScreen)
+let rock28 = new MapElement("Rock2")
+rock28.insertMapElement(0, 340, mapScreen)
+let rock29 = new MapElement("Rock2")
+rock29.insertMapElement(0, 430, mapScreen)
+let rock30 = new MapElement("Rock2")
+rock30.insertMapElement(0, 450, mapScreen)
+let rock31 = new MapElement("Rock2")
+rock31.insertMapElement(0, 470, mapScreen)
+let rock32 = new MapElement("Rock2")
+rock32.insertMapElement(0, 490, mapScreen)
+let rock33 = new MapElement("Rock2")
+rock33.insertMapElement(0, 500, mapScreen)
 
 //FOUNTAIN 
 
@@ -259,8 +272,8 @@ fountain.height = 80;
 
 let person = new MapElement("Person")
 person.insertMapElement(440, 200, mapScreen)
-person.height = 20;
-person.width = 30;
+person.height = 1;
+person.width = 1;
 
 let snorlax = new MapElement("Snorlax")
 snorlax.insertMapElement(0, 370, mapScreen)
@@ -320,7 +333,6 @@ pokeCenterColission4.insertMapElement(70, 0, pokeCenterScreen)
 pokeCenterColission4.height = 70;
 pokeCenterColission4.width = 220;
 
-
 //ARRAY DE TODOS LOS OBSTACULOS 
 let obstaclesArr = {
 
@@ -335,7 +347,7 @@ let obstaclesArr = {
 
         rock1, rock5, rock6, rock7, rock8, rock9, rock10, rock11, rock12,
         rock13, rock14, rock15, rock16, rock17, rock18, rock19, rock20, rock21, rock22, rock23,
-        rock24, rock25],
+        rock24, rock25,rock26,rock27,rock28,rock29,rock30,rock31,rock32,rock33],
 
     obstaclesEventsPuebloPaleta: [puertaEntradaPokeCenter1],
 
@@ -347,8 +359,6 @@ let obstaclesArr = {
     obstacleEventoPokeCenterPuebloPaleta: [nursePokeCenterPPaleta]
 
 };
-
-
 
 export { obstaclesArr }
 export { pokeEvents }

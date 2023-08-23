@@ -6,7 +6,6 @@ import { PlayerMap } from "./playerMapConstructor.js"
 import { obstaclesArr } from "./mapGenerator.js"
 import { pokeEvents } from "./mapGenerator.js"
 
-
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
@@ -32,6 +31,9 @@ let textoPokeNurse = document.getElementById("texto-pokeNurse");
 
 //DOM Elementos eventos del Mapa:
 let snorlaxEvent = document.getElementById("snorlax-event")
+let snorlaxMessageBox = document.getElementById("snorlax-general-messageBox")
+let snorlaxMessageBoxText = document.getElementById("snorlax-messageBox-text")
+let snorlaxMessageBoxButton = document.getElementById("snorlax-messageBox-exitButton")
 
 //DOM Elementos de "startGameScreen":
 let startGameButton = document.getElementById("start-game-button")
@@ -95,7 +97,6 @@ function restorePlayerHealth() {
     player.pp = player.level * 4;
 
 }
-
 
 //Timer ids del movimiento del Player por el MAP:
 let playerTimerY;
@@ -479,15 +480,36 @@ function checkGeneralEvent() {
     if (newPlayer.sucesoSnorlax === true) {
 
         snorlaxEvent.removeAttribute("class")
-        chatBoxClickAudio.load();
-        chatBoxClickAudio.play();
+
+        clickSound();
         newPlayer.sucesoSnorlax = false
 
         setTimeout(function () {
 
             snorlaxEvent.setAttribute("class", "hidden");
+            newPlayer.sucesoSnorlax = false
 
         }, 5000)
+
+        newPlayer.sucesoSnorlax = false
+
+        snorlaxMessageBox.removeAttribute("class")
+        snorlaxMessageBoxText.innerText = "Vaya, no podemos seguir por aqui. Me pregunto donde podremos encontrar una Pokeflauta...";
+
+        snorlaxMessageBoxButton.addEventListener("click", function () {
+
+            snorlaxMessageBox.setAttribute("class", "hidden")
+            newPlayer.sucesoSnorlax = false
+
+        })
+        window.addEventListener("keyup", function (event) {
+            if (event.key === "Escape") {
+
+                snorlaxMessageBox.setAttribute("class", "hidden")
+                newPlayer.sucesoSnorlax = false
+
+            }
+        })
 
     }
     ////// Acceso a pantalla de PokeCenter a través de colisión con la puerta
@@ -552,11 +574,20 @@ function checkGeneralEvent() {
 
         salirButton.addEventListener("click", function () {
 
-            console.log("boton de salir pulsado")
             pokeCenterChatBox.setAttribute("class", "hidden")
             newPlayer.nurseCollision = false;
 
         })
+
+        window.addEventListener("keyup", function (event) {
+            if (event.key === "Escape") {
+
+                pokeCenterChatBox.setAttribute("class", "hidden")
+                newPlayer.nurseCollision = false;
+
+            }
+        })
+
 
     }
 

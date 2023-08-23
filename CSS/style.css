@@ -75,7 +75,7 @@ button:hover {
     position: absolute;
     height: 200px;
     width: 400px;
-    bottom: 60px;
+    bottom: 50px;
     left: 330px;
     background-image: url("../IMG/OTROS/loading3.gif");
     background-size: 70%;
@@ -173,13 +173,15 @@ button:hover {
 
 }
 
+/* Snorlax Event */
+
 #snorlax-event {
     position: absolute;
     width: 150px;
     height: 80px;
     font-size: medium;
     top: 330px;
-    left: 380px;
+    left: 450px;
     /* border: black 1px solid; */
     background-image: url("../IMG/MAP/chatBoxes/chatBoxLeft.png");
     background-repeat: no-repeat;
@@ -191,9 +193,38 @@ button:hover {
 
     width: 150px;
     height: 80px;
-    padding: 5px;
+    padding: 10px;
     margin: 3px;
+    justify-content: center;
+    align-items: center;
+
 }
+
+#snorlax-general-messageBox {
+
+    height: 220px;
+    width: 300px;
+    position: absolute;
+    top: 8px;
+    left: 60px;
+    border: black 1px solid;
+    border-radius: 20px;
+    background-color: beige;
+    padding: 15px;
+    font-size: smaller;
+
+
+}
+
+#snorlax-messageBox-exitButton {
+
+    position: absolute;
+    bottom: 30px;
+    left: 100px;
+
+}
+
+/*!!! Snorlax Event */
 
 /*INSIDE POKE CENTER CSS*/
 
@@ -344,6 +375,7 @@ button:hover {
     height: fit-content;
     width: fit-content;
     /* text-align: center; */
+    font-size: smaller;
 }
 
 #enemy-name {
@@ -351,6 +383,7 @@ button:hover {
     top: 10px;
     left: 10px;
     height: 30px;
+    font-size: smaller;
 }
 
 #enemy-level {
@@ -358,6 +391,7 @@ button:hover {
     top: 10px;
     right: 10px;
     height: 20px;
+    font-size: smaller;
 }
 
 #enemy-health {
@@ -366,6 +400,7 @@ button:hover {
     right: 10px;
     height: 20px;
     width: 200px;
+    font-size: smaller;
 }
 
 #enemy-pp {
@@ -408,14 +443,14 @@ button:hover {
     border: 1px solid black;
     background-color: beige;
     border-radius: 10px;
-
+    font-size: smaller;
 }
 
 #player-status>* {
     border: 1px solid black;
     height: fit-content;
     width: fit-content;
-
+   
 }
 
 #player-name {
@@ -423,6 +458,7 @@ button:hover {
     top: 10px;
     left: 10px;
     height: 30px;
+    font-size: smaller;
 }
 
 #player-level {
@@ -430,6 +466,7 @@ button:hover {
     top: 10px;
     right: 10px;
     height: 20px;
+    font-size: smaller;
 }
 
 #player-health {
@@ -438,6 +475,7 @@ button:hover {
     right: 10px;
     height: 20px;
     width: 200px;
+    font-size: smaller;
 }
 
 #player-pp {
@@ -446,6 +484,7 @@ button:hover {
     right: 10px;
     height: 20px;
     width: 200px;
+    font-size: smaller;
 }
 
 #message-box {

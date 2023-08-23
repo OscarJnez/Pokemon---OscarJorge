@@ -102,10 +102,10 @@ function MapElement(elementType) {
             break;
 
         case "Person":
-            this.mapElementSprite.style.backgroundImage = 'url(./IMG/MAP/entrenadorPokemon.png)'
-            this.mapElementSprite.style.backgroundSize = '160%';
-            this.mapElementSprite.style.height = '50px';
-            this.mapElementSprite.style.width = '50px';
+            // this.mapElementSprite.style.backgroundImage = 'url(./IMG/MAP/entrenadorPokemon.png)'
+            // this.mapElementSprite.style.backgroundSize = '160%';
+            // this.mapElementSprite.style.height = '50px';
+            // this.mapElementSprite.style.width = '50px';
             break;
 
         case "Snorlax":
@@ -200,7 +200,7 @@ function MapElement(elementType) {
         case "pokeCenterNurseColission":
             this.mapElementSprite.style.height = '20px';
             this.mapElementSprite.style.width = '20px';
-            this.mapElementSprite.style.border = '4px solid blue'
+            // this.mapElementSprite.style.border = '4px solid blue'
             break;
 
         case "puertaSalidaPokeCenter1":
