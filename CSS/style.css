@@ -41,9 +41,13 @@ button:hover {
     height: 700px;
     width: 900px;
     background-color: rgb(163, 155, 155);
-    background-image: url("../IMG/OTROS/startScreenPokeBack.gif");
+
+    /* background-image: url("../IMG/OTROS/startScreenPokeBack.gif"); */
+
+    background-image: url("../IMG/OTROS/pokeCover.jpg");
     background-repeat: no-repeat;
-    background-size: 120%;
+    background-size: 150%;
+    /* background-size: cover; */
 
 }
 
@@ -75,12 +79,18 @@ button:hover {
     position: absolute;
     height: 200px;
     width: 400px;
-    bottom: 50px;
-    left: 330px;
-    background-image: url("../IMG/OTROS/loading3.gif");
-    background-size: 70%;
+    top: 550px; 
+    left: 439px;
+    
+    /* background-image: url("../IMG/OTROS/loading3.gif"); */
+    
+    background-image: url("../IMG/OTROS/loadingAnim.gif");
+    background-size: 13%;
     background-repeat: no-repeat;
 }
+
+
+
 
 #start-game-audio-button {
     position: absolute;
@@ -450,7 +460,7 @@ button:hover {
     border: 1px solid black;
     height: fit-content;
     width: fit-content;
-   
+
 }
 
 #player-name {

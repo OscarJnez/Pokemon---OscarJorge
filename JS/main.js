@@ -77,7 +77,7 @@ newPlayer.insertPlayer(560, 670, mapScreen)
 //Función que traslada a newPlayer a la posición inicial:
 function initialPosition() {
     newPlayer.insertPlayer(560, 670, mapScreen)
-    newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)';  //mirando hacia arriba
+    newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp.png)';  //mirando hacia arriba
 }
 
 //Funciones de curar a pokemon del jugador y pokemon enemigos: 
@@ -477,41 +477,41 @@ function mapScreenON() {
 function checkGeneralEvent() {
 
     ///////Si hay colisión con Snorlax, nos aparece un chatBox tipo bocadillo. 
-    if (newPlayer.sucesoSnorlax === true) {
+    // if (newPlayer.sucesoSnorlax === true) {
 
-        snorlaxEvent.removeAttribute("class")
+    //     snorlaxEvent.removeAttribute("class")
 
-        clickSound();
-        newPlayer.sucesoSnorlax = false
+    //     clickSound();
+    //     newPlayer.sucesoSnorlax = false
 
-        setTimeout(function () {
+    //     setTimeout(function () {
 
-            snorlaxEvent.setAttribute("class", "hidden");
-            newPlayer.sucesoSnorlax = false
+    //         snorlaxEvent.setAttribute("class", "hidden");
+    //         newPlayer.sucesoSnorlax = false
 
-        }, 5000)
+    //     }, 5000)
 
-        newPlayer.sucesoSnorlax = false
+    //     newPlayer.sucesoSnorlax = false
 
-        snorlaxMessageBox.removeAttribute("class")
-        snorlaxMessageBoxText.innerText = "Vaya, no podemos seguir por aqui. Me pregunto donde podremos encontrar una Pokeflauta...";
+    //     snorlaxMessageBox.removeAttribute("class")
+    //     snorlaxMessageBoxText.innerText = "Vaya, no podemos seguir por aqui. Me pregunto donde podremos encontrar una Pokeflauta...";
 
-        snorlaxMessageBoxButton.addEventListener("click", function () {
+    //     snorlaxMessageBoxButton.addEventListener("click", function () {
 
-            snorlaxMessageBox.setAttribute("class", "hidden")
-            newPlayer.sucesoSnorlax = false
+    //         snorlaxMessageBox.setAttribute("class", "hidden")
+    //         newPlayer.sucesoSnorlax = false
 
-        })
-        window.addEventListener("keyup", function (event) {
-            if (event.key === "Escape") {
+    //     })
+    //     window.addEventListener("keyup", function (event) {
+    //         if (event.key === "Escape") {
 
-                snorlaxMessageBox.setAttribute("class", "hidden")
-                newPlayer.sucesoSnorlax = false
+    //             snorlaxMessageBox.setAttribute("class", "hidden")
+    //             newPlayer.sucesoSnorlax = false
 
-            }
-        })
+    //         }
+    //     })
 
-    }
+    // }
     ////// Acceso a pantalla de PokeCenter a través de colisión con la puerta
     if (newPlayer.sucesoPuerta1 === true) {
 
