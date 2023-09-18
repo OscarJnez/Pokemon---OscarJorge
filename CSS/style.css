@@ -117,6 +117,10 @@ button:hover {
     background-repeat: no-repeat;
 }
 
+
+
+
+
 #main-menu {
     position: absolute;
     height: fit-content;
@@ -298,7 +302,6 @@ button:hover {
 /*! INSIDE POKE CENTER CSS*/
 
 /*//// !!!MAP SCREEN CSS*/
-
 
 
 /*TRANSITION SCREEN*/
@@ -585,3 +588,5 @@ button:hover {
     width: 150px;
     height: 80px;
 }
+
+

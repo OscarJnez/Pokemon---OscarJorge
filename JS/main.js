@@ -268,7 +268,7 @@ window.addEventListener("keydown", function (event) {
                 animatedMoveLeft();
                 keyIsPressed = true
                 newPlayer.directionX = -1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashLeft.png)'
+                newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashLeft.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                 checkPokeEvent()
                 checkGeneralEvent()
@@ -279,7 +279,7 @@ window.addEventListener("keydown", function (event) {
                 animatedMoveRight();
                 keyIsPressed = true
                 newPlayer.directionX = 1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashRight.png)'
+                newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashRight.png)'
                 playerTimerX = setInterval(newPlayer.movePlayerX, 50)
                 checkPokeEvent()
                 checkGeneralEvent()
@@ -290,7 +290,7 @@ window.addEventListener("keydown", function (event) {
                 animatedMoveUp();
                 keyIsPressed = true
                 newPlayer.directionY = -1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashUp.png)'
+                newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashUp.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                 checkPokeEvent()
                 checkGeneralEvent()
@@ -301,7 +301,7 @@ window.addEventListener("keydown", function (event) {
                 animatedMoveDown();
                 keyIsPressed = true
                 newPlayer.directionY = 1
-                newPlayer.sprite.style.backgroundImage = 'url(../IMG/MAP/playerSprite/ashDown.png)'
+                newPlayer.sprite.style.backgroundImage = 'url(./IMG/MAP/playerSprite/ashDown.png)'
                 playerTimerY = setInterval(newPlayer.movePlayerY, 50)
                 checkPokeEvent()
                 checkGeneralEvent()
