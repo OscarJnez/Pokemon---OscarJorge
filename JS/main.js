@@ -146,10 +146,10 @@ function animationUp() {
 
 }
 function animatedMoveUp() {
-
-    playerSpriteFirstStepUp = setTimeout(animationUp, 0)
-    playerSpriteDirUp = setInterval(animationUp, 300)
-
+    clearTimeout(playerSpriteFirstStepUp); // Limpiar timeout previo si existe
+    clearInterval(playerSpriteDirUp); // Limpiar intervalo previo si existe
+    playerSpriteFirstStepUp = setTimeout(animationUp, 0);
+    playerSpriteDirUp = setInterval(animationUp, 300);
 }
 
 //Movimientos animados del sprite abajo
@@ -186,7 +186,6 @@ function animatedMoveDown() {
     playerSpriteDirDown = setInterval(animationDown, 300)
 
 }
-
 //Movimientos animados del sprite izquierda
 function animatedLeft() {
 
@@ -220,7 +219,6 @@ function animatedMoveLeft() {
     playerSpriteDirLeft = setInterval(animatedLeft, 300)
 
 }
-
 //Movimientos animados del sprite derecha
 function animatedRight() {
 
@@ -411,6 +409,8 @@ let playerPP = document.getElementById("player-pp-text")
 let playerImg = document.getElementById("player-img")
 let playerStatus = document.getElementById("player-status")
 
+var healthBar = document.getElementById('enemy-health-bar');
+
 //Timer id para el ataque de "enemy":
 let timerEnemyAttack;
 
@@ -443,6 +443,8 @@ function pokemonRecoverySound() {
 //Mostrar "startGameScreen":
 
 function startGameScreenON() {
+
+    document.body.style.overflow = 'hidden';
     //Audios:
     openingAudio.pause()
     mapScreenAudio.pause()
@@ -456,6 +458,7 @@ function startGameScreenON() {
 //Mostrar "mapScreen":
 function mapScreenON() {
     //Audios: 
+    restoreEnemyHealthBar()
     openingAudio.pause()
     startGameAudio.pause()
     transitionFightScreenAudio.pause()
@@ -463,7 +466,7 @@ function mapScreenON() {
     mapScreenAudio.play()
     mapScreenAudio.volume = 0.08;
     mapScreenAudio.loop = true;
-
+    
     newPlayer.activatePPaletaCollisions = true;
 
     newPlayer.sprite.style.height = "22px";
@@ -757,10 +760,29 @@ function checkBattleStatus() {
             winOptionMenu.setAttribute("class", "emergent-menu")       //Mostramos el menú "WIN"
             enemiesArr.splice(randomPokeEvent, 1)        //Y eliminamos el Pokemon que hemos derrotado del array de enemigos (para no volver a encontrarlo)
 
+
         }, 5000)
+
+        // setTimeout(function () {
+        //     restoreEnemyHealthBar()
+        // }, 20000)
 
     }
 
+}
+
+function restoreEnemyHealthBar() {
+    healthBar.style.width = '100%';
+}
+
+function updateHealthBar(enemy) {
+    if (enemy.health <= 0) {
+        enemy.health = 0
+
+    }
+    var healthPercentage = (enemy.health / 200) * 100;
+    console.log("healthPercentage: " + healthPercentage)
+    healthBar.style.width = healthPercentage + '%';
 }
 
 //Función de ATAQUE:
@@ -769,7 +791,8 @@ function battleAttack(attackIndex) {
     if (player.pp >= player.attackList[attackIndex].ppMinus) {      //Sólo si el "player" tiene suficientes puntos PP puede atacar...
         player.attack(enemy, attackIndex)                           //"player" ataca a "enemy", seleccionando un ataque u otro en función del "attackButton" clicado, 
         newMessage.innerText = player.attackInfo                    //se muestra en pantalla el ataque elegido, 
-        playerPP.innerText = player.pp                              //y se actualiza el valor de "playerPP" en pantalla. 
+        playerPP.innerText = player.pp
+        updateHealthBar(enemy)                                       //y se actualiza el valor de "playerPP" en pantalla. 
         hideAttackButtons()                                         //Se esconden los botones de ataque justo después de atacar. 
         enemy.checkHealth()                                         //Se chequea la salud del "enemy" para que nunca pueda < 0...
         enemyHealth.innerText = enemy.health                        //y se actualiza el valor la salud del "enemy" mostrado en pantalla. /////////////////////////////
