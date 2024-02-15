@@ -1,11 +1,12 @@
 @import url('https://fonts.cdnfonts.com/css/gameovercre');
 
+
 body {
     font-family: 'gameovercre', sans-serif;
     font-size: 21px;
     color: black;
     line-height: 25px;
-
+    background-color: black;
 }
 
 /* Estilado general para todos los BUTTONS: */
@@ -302,8 +303,8 @@ button:hover {
     height: 700px;
     width: 900px;
     margin: 0 auto;
-    border: 2px solid red;
-    border-radius: 3px;
+    /* border: 2px solid red; */
+    /* border-radius: 3px; */
     background-color: black;
     background-size: auto;
     position: relative;
@@ -345,7 +346,7 @@ button:hover {
 #enemy-img {
     position: absolute;
     right: 100px;
-    top: 100px;
+    top: 80px;
     height: 200px;
     width: 200px;
     background-size: contain;
@@ -356,7 +357,7 @@ button:hover {
 #enemy-background-img {
     position: absolute;
     right: 100px;
-    top: 100px;
+    top: 80px;
     height: 200px;
     width: 200px;
     background-size: 100%;
@@ -443,7 +444,7 @@ button:hover {
 
 #player-img {
     position: absolute;
-    left: 150px;
+    left: 130px;
     bottom: 40px;
     height: 200px;
     width: 200px;
@@ -464,58 +465,85 @@ button:hover {
 }
 
 #player-status {
+    display: none;
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     right: 20px;
-    padding: 5px;
-    height: 100px;
-    width: 350px;
-    border: 1px solid black;
-    background-color: beige;
-    border-radius: 10px;
-    font-size: smaller;
+    padding: 10px;
+    height: 110px;
+    width: 330px;
+    border: 2px solid #333;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: start;
+    font-size: 16px;
 }
 
 #player-status>* {
-    border: 1px solid black;
-    height: fit-content;
-    width: fit-content;
+    border: none;
+    font-size: 0.9em;
+    color: #333;
 
 }
 
-#player-name {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 30px;
-    font-size: smaller;
-}
-
+#player-pp,
+#player-name,
 #player-level {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: 20px;
-    font-size: smaller;
+    position: static;
+    margin: 1px 0;
 }
 
 #player-health {
-    position: absolute;
-    bottom: 40px;
-    right: 10px;
-    height: 20px;
-    width: 200px;
-    font-size: smaller;
+    width: calc(100% - 30px);
+    height: 24px;
+    /* O el valor que sea adecuado para la altura de tu barra de salud */
+    margin: 1px 5px;
+    border: 1px solid #333;
+    background-color: transparent;
+    /* Color de fondo para la barra de salud vacía */
+    border-radius: 8px;
+    overflow: hidden;
+    /* Asegúrate de que la barra de salud no se salga del contenedor */
+    position: relative;
+    /* Posición relativa para el contenedor */
 }
 
-#player-pp {
-    position: absolute;
-    bottom: 15px;
-    right: 10px;
-    height: 20px;
-    width: 200px;
+#player-health-bar {
+    height: 100%;
+    background-color: #2cc905;
+    /* Color verde para la barra de salud llena */
+    border-radius: 5px;
+    /* Radio de borde para la barra de salud */
+    width: 100%;
+    /* Comienza con el ancho completo */
+    transition: width 0.5s ease;
+    /* Transición suave para el cambio de ancho */
+
     font-size: smaller;
+    position: absolute;
+    /* Agrega posición absoluta */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* Asegúrate de que esté detrás del texto */
 }
+
+#player-health-text {
+    padding: 1px;
+    font-size: smaller;
+    position: absolute;
+    /* Agrega posición absoluta */
+    top: 0;
+    left: 10px;
+    /* Ajusta según sea necesario */
+    z-index: 2;
+}
+
+
 
 #message-box {
     position: absolute;

@@ -410,6 +410,8 @@ let playerImg = document.getElementById("player-img")
 let playerStatus = document.getElementById("player-status")
 
 var healthBar = document.getElementById('enemy-health-bar');
+var playerHealthBar = document.getElementById('player-health-bar');
+let playerstatus = document.getElementById('player-status');
 
 //Timer id para el ataque de "enemy":
 let timerEnemyAttack;
@@ -466,7 +468,7 @@ function mapScreenON() {
     mapScreenAudio.play()
     mapScreenAudio.volume = 0.08;
     mapScreenAudio.loop = true;
-    
+
     newPlayer.activatePPaletaCollisions = true;
 
     newPlayer.sprite.style.height = "22px";
@@ -562,6 +564,7 @@ function checkGeneralEvent() {
             pokeCenterAudio.pause();
             pokemonRecoverySound();
             restorePlayerHealth();
+            restorePlayerHealthBar();
             newPlayer.nurseCollision = false;
             textoPokeNurse.innerText = "Espere unos segundos..."
 
@@ -660,6 +663,7 @@ function hideAttackButtons() {
 //Botón "FIGHT":
 fightOptionButton.addEventListener("click", function () {
 
+    playerStatus.style.display = "flex"
     fightRunOptionMenu.setAttribute("class", "hidden")  //Se esconde el menú de "FIGHT-RUN"
     newMessage.innerText = "Has elegido a " + player.name + "!!!"
     playerImg.removeAttribute("class")                  //Se muestra la imagen del "player" (se le elimina la clase "hidden")
@@ -774,6 +778,9 @@ function checkBattleStatus() {
 function restoreEnemyHealthBar() {
     healthBar.style.width = '100%';
 }
+function restorePlayerHealthBar() {
+    playerHealthBar.style.width = '100%';
+}
 
 function updateHealthBar(enemy) {
     if (enemy.health <= 0) {
@@ -784,6 +791,18 @@ function updateHealthBar(enemy) {
     console.log("healthPercentage: " + healthPercentage)
     healthBar.style.width = healthPercentage + '%';
 }
+
+
+function updateHealthBarPlayer(player) {
+    if (player.health <= 0) {
+        player.health = 0
+
+    }
+    var healthPercentage = (player.health / 300) * 100;
+    console.log("healthPercentage: " + healthPercentage)
+    playerHealthBar.style.width = healthPercentage + '%';
+}
+
 
 //Función de ATAQUE:
 function battleAttack(attackIndex) {
@@ -800,7 +819,8 @@ function battleAttack(attackIndex) {
         timerEnemyAttack = setTimeout(function () {        //Luego, pasados 3 segundos (3000 msg.) se ejecuta el ataque del "enemy":
             enemy.attackRandom(player)                     //"enemy" ataca a "player", usando un ataque random.
             newMessage.innerText = enemy.attackInfo        //se muestra en pantalla el ataque elegido,
-            enemyPP.innerText = enemy.pp                   //y se actualiza el valor de "enemyPP" en pantalla. 
+            enemyPP.innerText = enemy.pp
+            updateHealthBarPlayer(player)                   //y se actualiza el valor de "enemyPP" en pantalla. 
             player.checkHealth()                           //Se chequea la salud del "player" para que nunca pueda < 0...
             playerHealth.innerText = player.health         //y se actualiza el valor la salud del "player" mostrado en pantalla. 
 
