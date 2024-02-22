@@ -8,6 +8,7 @@ import { pokeEvents } from "./mapGenerator.js"
 
 //AUDIOS:
 let openingAudio = new Audio("./AUDIO/originalOpening.mp3")
+let pokemonIntro3 = new Audio("./AUDIO/pokemonIntro3.mp3")
 let startGameAudio = new Audio("./AUDIO/pokemon-opening.mp3")
 let mapScreenAudio = new Audio("./AUDIO/walkingMainAudio.mp3")
 let transitionFightScreenAudio = new Audio("./AUDIO/audioTransCombat.mp3")
@@ -41,13 +42,21 @@ let startGameAudioButton = document.getElementById("start-game-audio-button")
 
 //Botón play para la música de startGameScreen:
 startGameAudioButton.addEventListener("click", function () {
-    openingAudio.play()
-    setTimeout(function () {
-        startGameAudio.volume = 0.15;
-        startGameAudio.play();
-        startGameAudio.loop = true;
+    pokemonIntro3.volume = 0.07
+    pokemonIntro3.play()
+    pokemonIntro3.loop = true
+    // openingAudio.play()
 
-    }, 61000)
+    // setTimeout(function () {
+    //     startGameAudio.volume = 0.1;
+    //     startGameAudio.play();
+    //     startGameAudio.loop = true;
+
+    // }, 61000)
+
+    // pokemonItro2.volume = 0.07;
+    // pokemonItro2.play();
+    // pokemonItro2F.loop = true;
 
 })
 
@@ -448,7 +457,8 @@ function startGameScreenON() {
 
     document.body.style.overflow = 'hidden';
     //Audios:
-    openingAudio.pause()
+    // openingAudio.pause()
+    pokemonIntro3.pause()
     mapScreenAudio.pause()
     transitionFightScreenAudio.pause()
 
@@ -462,6 +472,7 @@ function mapScreenON() {
     //Audios: 
     restoreEnemyHealthBar()
     openingAudio.pause()
+    pokemonIntro3.pause()
     startGameAudio.pause()
     transitionFightScreenAudio.pause()
     pokeCenterAudio.pause()
@@ -697,6 +708,7 @@ runOptionButton.addEventListener("click", function () {
 function fightScreenON() {
     //Audios:
     openingAudio.pause()
+    pokemonIntro3.pause()
     startGameAudio.pause()
 
     startGameScreen.setAttribute("class", "hidden")  //Primero, escondemos (le asignamos la clase "hidden") a las pantallas "startGameScreen" y "mapScreen" del DOM.
