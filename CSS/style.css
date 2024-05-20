@@ -414,28 +414,20 @@ button:hover {
 #enemy-health-bar {
     height: 100%;
     background-color: #2cc905;
-    /* Color verde para la barra de salud llena */
     border-radius: 5px;
-    /* Radio de borde para la barra de salud */
     width: 100%;
-    /* Comienza con el ancho completo */
     transition: width 0.5s ease;
-    /* Transición suave para el cambio de ancho */
-
     font-size: smaller;
     position: absolute;
-    /* Agrega posición absoluta */
     top: 0;
     left: 0;
     z-index: 1;
-    /* Asegúrate de que esté detrás del texto */
 }
 
 #enemy-health-text {
-    padding: 1px;
+    /* padding-bottom: "0px"; */
     font-size: smaller;
     position: absolute;
-    /* Agrega posición absoluta */
     top: 0;
     left: 10px;
     /* Ajusta según sea necesario */

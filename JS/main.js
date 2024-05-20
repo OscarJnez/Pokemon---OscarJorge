@@ -567,7 +567,7 @@ function checkGeneralEvent() {
         clickSound();
         pokeCenterChatBox.removeAttribute("class")
         newPlayer.nurseCollision = false;
-        textoPokeNurse.innerText = "Bienvenido al centro Pokemon de Pueblo Paleta, ¿Que puedo hacer por ti?"
+        textoPokeNurse.innerText = "Welcome to the PokeCenter in Pallet Town, what can I do for you?"
 
         curarButton.addEventListener("click", function () {
 
@@ -577,12 +577,12 @@ function checkGeneralEvent() {
             restorePlayerHealth();
             restorePlayerHealthBar();
             newPlayer.nurseCollision = false;
-            textoPokeNurse.innerText = "Espere unos segundos..."
+            textoPokeNurse.innerText = "Please wait a few seconds..."
 
             setTimeout(function () {
                 pokeCenterAudio.play();
                 pokeCenterAudio.loop = true;
-                textoPokeNurse.innerText = "Sus Pokemon han sido curados y están listos para luchar. Vuelva pronto!"
+                textoPokeNurse.innerText = "Your Pokemon have been healed and are ready to battle. Come back soon!"
 
             }, 4000)
 
@@ -628,7 +628,7 @@ function checkPokeEvent() {
 
             transitionScreen.setAttribute('class', 'hidden')  //ocultamos la pantalla de transición...
             enemy = enemiesArr[randomPokeEvent]               //le asignamos a la variable "enemy" el valor de un elemento al azar del array "enemiesArr"...
-            combatBackGround.style.backgroundImage = "url(../IMG/OTROS/Fondo.jpeg)"  //cambiamos el fondo a Zona1 (fondo "hierba"):
+            combatBackGround.style.backgroundImage = "url(./IMG/OTROS/Fondo.jpeg)"  //cambiamos el fondo a Zona1 (fondo "hierba"):
 
             fightScreenON()  //INICIAMOS LA BATALLA CON ESE POKEMON....
 
@@ -676,7 +676,7 @@ fightOptionButton.addEventListener("click", function () {
 
     playerStatus.style.display = "flex"
     fightRunOptionMenu.setAttribute("class", "hidden")  //Se esconde el menú de "FIGHT-RUN"
-    newMessage.innerText = "Has elegido a " + player.name + "!!!"
+    newMessage.innerText = "You chose " + player.name + "!"
     playerImg.removeAttribute("class")                  //Se muestra la imagen del "player" (se le elimina la clase "hidden")
     playerStatus.removeAttribute("class")               //y se muestra el "playerStatus" (se le elimina la clase "hidden")
     //y se añaden los nombres de cada ataque a los "attackButtons":
@@ -687,7 +687,7 @@ fightOptionButton.addEventListener("click", function () {
 
     setTimeout(function () {
 
-        newMessage.innerText = "Empieza la batalla!!!"  //Pasados 2 segundos se meustra este mensaje...
+        newMessage.innerText = "The battle Begins!"  //Pasados 2 segundos se meustra este mensaje...
         showAttackButtons()                             //y se muestran los "AttackButtons".
     }, 2000)
 
@@ -696,7 +696,7 @@ fightOptionButton.addEventListener("click", function () {
 //Botón "RUN"...
 runOptionButton.addEventListener("click", function () {
 
-    newMessage.innerText = "CORRE COBARDEEEEE!!!"       //pasados 2 segundos aparece este mensaje en pantalla...
+    newMessage.innerText = "You fled the battle..."       //pasados 2 segundos aparece este mensaje en pantalla...
     fightRunOptionMenu.setAttribute("class", "hidden")  //y se oculta el menú "FIGHT-RUN"
     setTimeout(
         mapScreenON, 2000)   //pasados 2 segundos mostramos "mapScreen"
@@ -716,7 +716,7 @@ function fightScreenON() {
     fightScreen.removeAttribute("class")            //y mostramos (quitamos clase "hidden") a la pantalla "fightScreen"
 
     //Primer mensaje que se ve en el div "newMessage"
-    newMessage.innerText = "Has encontrado un " + enemy.name + "...\n ¿Qué quieres hacer?"
+    newMessage.innerText = "You found a wild " + enemy.name + "...\n ¿What should we do next?"
 
     //Restauramos "health" y "pp " de "enemy":
     restoreEnemyHealth();
@@ -761,7 +761,7 @@ function checkBattleStatus() {
 
             gameOverScreen.setAttribute("class", "hidden")    //Escondemos la pantalla "GAME-OVER"....
             fightScreen.removeAttribute("class")                //y mostramos la pantalla "fightScreen" con el siguiente mensaje:
-            newMessage.innerText = "GAME OVER \n *" + enemy.name + "* te ha derrotado...\n ¿Qué quieres hacer?"
+            newMessage.innerText = "GAME OVER \n *" + enemy.name + "* has defeated you...\n ¿What should we do next?"
             gameOverOptionMenu.setAttribute("class", "emergent-menu")     //Se muestra el menú GAME-OVER
 
         }, 15000)
@@ -772,10 +772,9 @@ function checkBattleStatus() {
 
         setTimeout(function () {     //y 3 segundos después....
 
-            newMessage.innerText = "Has derrotado a *" + enemy.name + "*! \n ¿Qué quieres hacer?"    //Mostramos este mensaje.
+            newMessage.innerText = "You won the battle! \n What should we do next?"    //Mostramos este mensaje.
             winOptionMenu.setAttribute("class", "emergent-menu")       //Mostramos el menú "WIN"
             enemiesArr.splice(randomPokeEvent, 1)        //Y eliminamos el Pokemon que hemos derrotado del array de enemigos (para no volver a encontrarlo)
-
 
         }, 5000)
 
@@ -842,14 +841,14 @@ function battleAttack(attackIndex) {
 
                 if (player.health > 0) {                //si "player" aún sigue con vida,
 
-                    newMessage.innerText = "Es tu turno. \n Puedes volver a atacar!!!"
+                    newMessage.innerText = "It's your turn to attack."
                     showAttackButtons()                 //se vuelven a habilitar los botones de ataque:
                 }
             }, 5000)
         }, 5000)
 
     } else {          //En caso de que "player" no pueda lanzar un ataque por no tener suficiente "PP":
-        newMessage.innerText = "No tienes suficiente PP \n para lanzar el ataque \n *" + player.attackList[attackIndex].attackName + "*...\n Elige otro ataque!"
+        newMessage.innerText = "You havent got enough PP \n to lauch \n *" + player.attackList[attackIndex].attackName + "*...\n "
     }
 
     checkBattleStatus()  //Y al final de todo el ataque chequeaemos la batalla para comprobar si alguno ha ganado. 

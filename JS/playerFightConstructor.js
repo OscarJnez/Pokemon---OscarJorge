@@ -32,7 +32,7 @@ function Player(name, type, level) {
 
     //DEFINIMOS LOS ATAQUES DE NUESTROS POKEMON EN ARRAY DE OBJETOS
     let fireAttacks = [{
-        attackName: "'Galletassso'",
+        attackName: "'PokePunch'",
         bonusDamage: this.strength,
         ppMinus: 3,
         attackImage: 'url(./IMG/OTROS/SlapPlacaje.gif)'
@@ -180,7 +180,7 @@ function Player(name, type, level) {
         setTimeout(function () {
             Enemy.enemyBackImg.style.backgroundImage = ""
         }, 3000)
-        this.attackInfo = this.name + " lanza ataque \n *" + this.attackList[index].attackName + "* a " + Enemy.name + "\n y le causa -" + this.attackList[index].bonusDamage + " puntos de daño!!!"
+        this.attackInfo = this.name + " launches attack \n *" + this.attackList[index].attackName + "* on " + Enemy.name + "\n and causes " + this.attackList[index].bonusDamage + " damage points!"
 
     }
 

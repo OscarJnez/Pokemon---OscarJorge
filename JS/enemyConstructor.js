@@ -165,7 +165,7 @@ function Enemy(name, type, level) {
             setTimeout(function () {
                 Player.playerBackImg.style.backgroundImage = ""
             }, 3000)
-            this.attackInfo = this.name + " lanza ataque \n *" + this.attackList[randomNum].attackName + "* a " + Player.name + "\n y le causa -" + this.attackList[randomNum].bonusDamage + " puntos de daño!!!"
+            this.attackInfo = this.name + " launches attack \n *" + this.attackList[randomNum].attackName + "* on " + Player.name + "\n and causes " + this.attackList[randomNum].bonusDamage + " damage points!!!"
         }
     }
 }
